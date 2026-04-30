@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#5B21B6"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- BÜYÜTEÇ ÇERÇEVESİ -->
+  <circle cx="200" cy="200" r="160" 
+          fill="none" stroke="url(#ringGrad)" stroke-width="32"/>
+  
+  <!-- BÜYÜTEÇ SAPI -->
+  <line x1="316" y1="316" x2="430" y2="430" 
+        stroke="#5B21B6" stroke-width="50" stroke-linecap="round"/>
+  <line x1="320" y1="312" x2="420" y2="412" 
+        stroke="#7C3AED" stroke-width="38" stroke-linecap="round"
+        opacity="0.55"/>
+  
+  <!-- LENS İÇİ -->
+  <circle cx="200" cy="200" r="144" fill="white"/>
+  
+  <!-- Glass reflection -->
+  <ellipse cx="245" cy="125" rx="42" ry="22" 
+           fill="white" opacity="0.35"
+           transform="rotate(-30 245 125)"/>
+  
+  <!-- Y ekseni -->
+  <line x1="100" y1="100" x2="100" y2="285" 
+        stroke="#5B21B6" stroke-width="3.5" stroke-linecap="round"/>
+  <polyline points="92,108 100,96 108,108"
+            fill="none" stroke="#5B21B6" stroke-width="3.5" 
+            stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- X ekseni -->
+  <line x1="100" y1="285" x2="300" y2="285" 
+        stroke="#5B21B6" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- SOL BÖLGE: SCATTER -->
+  <g fill="#7C3AED">
+    <circle cx="115" cy="270" r="4"/>
+    <circle cx="125" cy="265" r="3.5"/>
+    <circle cx="135" cy="268" r="3"/>
+    <circle cx="145" cy="262" r="4"/>
+    <circle cx="155" cy="270" r="3"/>
+    <circle cx="120" cy="258" r="3"/>
+    <circle cx="132" cy="255" r="3.5"/>
+    <circle cx="142" cy="252" r="3"/>
+    <circle cx="152" cy="258" r="3.5"/>
+    <circle cx="165" cy="252" r="3"/>
+    <circle cx="118" cy="245" r="3.5"/>
+    <circle cx="128" cy="240" r="3"/>
+    <circle cx="138" cy="242" r="2.5"/>
+    <circle cx="148" cy="235" r="3"/>
+    <circle cx="160" cy="240" r="2.5"/>
+    <circle cx="170" cy="235" r="3"/>
+    <circle cx="125" cy="225" r="2.5"/>
+    <circle cx="138" cy="222" r="3"/>
+    <circle cx="155" cy="218" r="2.5"/>
+    <circle cx="148" cy="212" r="2"/>
+    <circle cx="170" cy="208" r="2.5"/>
+  </g>
+  
+  <!-- SAĞ BÖLGE: BAR CHART -->
+  <rect x="190" y="240" width="20" height="45" fill="url(#barGrad)" rx="2"/>
+  <rect x="218" y="200" width="20" height="85" fill="url(#barGrad)" rx="2"/>
+  <rect x="246" y="160" width="20" height="125" fill="url(#barGrad)" rx="2"/>
+  <rect x="274" y="120" width="20" height="165" fill="url(#barGrad)" rx="2"/>
+  
+  <!-- SPLINE -->
+  <path d="M 110 250 Q 150 235, 195 215 Q 235 195, 260 155 Q 280 125, 295 130 Q 305 135, 305 155"
+        fill="none" stroke="#5B21B6" stroke-width="5" stroke-linecap="round"/>
+</svg>
