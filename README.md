@@ -21,7 +21,7 @@
 ![Analyses](https://img.shields.io/badge/analyses-75-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
 
-***«If it was easy, everybody would do it.»***
+
 
 </div>
 
