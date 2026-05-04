@@ -83,7 +83,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 | 🍎 **macOS 12+** | [`MerQur-1.0.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/latest) | Drag to Applications |
 | 🐧 **Linux** | [`MerQur-1.0.0-linux.AppImage`](https://github.com/omerorucu/merqur/releases/latest) | `chmod +x` & run |
 
-**Sample data**: [`MerQur-samples.zip`](https://github.com/omerorucu/merqur/releases/latest) — 5 example datasets to try every analysis category.
+**Sample data**: [`MerQur-samples.zip`](https://github.com/omerorucu/merqur/releases/latest) — 20 example datasets to try every analysis category.
 
 > 💡 Auto-update built in — Help → Check for Updates pulls only changed files.
 
