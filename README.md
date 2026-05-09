@@ -37,7 +37,7 @@ everything in a single tool.
 
 <div align="center">
 
-| **75** | **30** | **5** | **APA 7** |
+| **99** | **30** | **5** | **APA 7** |
 |:---:|:---:|:---:|:---:|
 | Statistical<br>Analyses | Advanced<br>Methods | Spatial<br>Analyses | Report<br>Generator |
 
@@ -60,7 +60,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 
 | Feature | **MerQur** | JASP | jamovi | SPSS | SAS |
 |---|:---:|:---:|:---:|:---:|:---:|
-| Total analyses | **75** | ~25 | ~30 | ~50 | ~80 |
+| Total analyses | **99** | ~25 | ~30 | ~50 | ~80 |
 | Native multilingual UI | **TR · EN · ES** | partial | partial | partial | ✗ |
 | APA 7 report generator | **✓ full** | partial | partial | partial | ✗ |
 | Complex survey | ✓ | ✗ | ✗ | ✓ | ✓ |
@@ -97,7 +97,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 2. **Data tab** — columns are auto-classified:
    - 🔵 Numeric · 🟠 Categorical · 🟢 Geo (lat/lon) · 🟣 Date · 🔴 Binary · ⚪ Text
    - Multi-choice columns (comma/semicolon-separated) auto-highlighted in purple
-3. **Statistics tab** — pick analysis from the sidebar (75 options across 15 categories)
+3. **Statistics tab** — pick analysis from the sidebar (99 options across 15 categories)
 4. **Run** ▶ — results appear as a **card** with Results / Chart / Table / Frequency tabs
 5. **Report tab** — select cards → export to **DOCX / PDF / HTML / Excel** with cover page
 
@@ -331,7 +331,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v1.0** · 75 Analyses · 30 Advanced Methods · Spatial Modeling · APA 7 Reports
+**MerQur v1.0** · 99 Analyses · 30 Advanced Methods · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
