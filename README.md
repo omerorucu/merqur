@@ -7,7 +7,9 @@
 ### *Data · Analysis · Model · Meaning*
 
 **ANALYZE · MODEL · INTERPRET · REPORT**
+
 *İNCELE · MODELLE · YORUMLA · RAPORLA*
+
 *ANALIZA · MODELA · INTERPRETA · REPORTA*
 
 **End-to-End Academic Data Analysis & Reporting Platform**
