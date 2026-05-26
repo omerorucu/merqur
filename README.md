@@ -105,7 +105,20 @@ MerQur is built around five principles for academic data analysis:
 | 🍎 **macOS 12+** | [`MerQur-1.0.4-macos.dmg`](https://github.com/omerorucu/merqur/releases/latest) | Drag to Applications |
 | 🐧 **Linux** | [`MerQur-1.0.0-linux.AppImage`](https://github.com/omerorucu/merqur/releases/latest) | `chmod +x` & run |
 
-**Sample data**: [`MerQur-samples.zip`](https://github.com/omerorucu/merqur/releases/latest) — 20 example datasets to try every analysis category.
+**Sample data packs (v1.0.4)** — 10 discipline packs, each with ~109 datasets matching every MerQur analysis. Each pack includes pre-validated form fields (`OKU.txt`) and SAS PROC equivalents where relevant.
+
+- 🌊 Limnology & Wetland Ecology — [`MerQur_Veri_Limnoloji_Sulak_Alan_Ekolojisi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Limnoloji_Sulak_Alan_Ekolojisi_v1.0.4.zip)
+- 🌲 Forest Genetics — [`MerQur_Veri_Orman_Genetigi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Orman_Genetigi_v1.0.4.zip)
+- 🩺 Medicine — [`MerQur_Veri_Tip_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Tip_v1.0.4.zip)
+- 🌳 Landscape Architecture — [`MerQur_Veri_Peyzaj_Mimarligi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Peyzaj_Mimarligi_v1.0.4.zip)
+- 🔬 Natural Sciences & Mathematics — [`MerQur_Veri_Fen_Bilimleri_Matematik_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Fen_Bilimleri_Matematik_v1.0.4.zip)
+- ⚙ Engineering — [`MerQur_Veri_Muhendislik_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Muhendislik_v1.0.4.zip)
+- 👥 Social, Humanities & Admin Sciences — [`MerQur_Veri_Sosyal_Beseri_Idari_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Sosyal_Beseri_Idari_v1.0.4.zip)
+- 📚 Education Sciences — [`MerQur_Veri_Egitim_Bilimleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Egitim_Bilimleri_v1.0.4.zip)
+- 🌾 Agriculture, Forestry & Aquatic — [`MerQur_Veri_Ziraat_Orman_Su_Urunleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Ziraat_Orman_Su_Urunleri_v1.0.4.zip)
+- 🏃 Sport Sciences — [`MerQur_Veri_Spor_Bilimleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Spor_Bilimleri_v1.0.4.zip)
+
+> Total: **10 packs · ~1,100 datasets · ~12 MB**. Pre-validated against MerQur's `execute()` for zero-error demos.
 
 > 💡 Auto-update built in — Help → Check for Updates pulls only changed files.
 
