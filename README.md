@@ -112,7 +112,7 @@ MerQur is built around five principles for academic data analysis:
 
 **Latest release: v1.0.18** — see the
 [release notes](https://github.com/omerorucu/merqur/releases/tag/v1.0.18) and the
-full [CHANGELOG](CHANGELOG.md).
+full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
