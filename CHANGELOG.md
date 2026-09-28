@@ -2,6 +2,8 @@
 
 **MerQur — Bütünleşik Akademik Veri Analizi ve Raporlama Platformu**
 
+> English: [CHANGELOG.en.md](CHANGELOG.en.md)
+
 ---
 
 ## [1.0.18] — 28 Eylül 2026 · **AI Yorumlayıcı + Çok Dillilik Sertleştirmesi**
