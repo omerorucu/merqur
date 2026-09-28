@@ -17,10 +17,10 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-1.0.4-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0.18-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
-![Analyses](https://img.shields.io/badge/analyses-109-7C3AED?style=flat-square)
+![Analyses](https://img.shields.io/badge/analyses-110-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
 
 
@@ -61,7 +61,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 MerQur is built around five principles for academic data analysis:
 
 ### 🎯 Comprehensive in One Tool
-- **109 statistical analyses** across 15 categories — from descriptive statistics
+- **110 statistical analyses** across 15 categories — from descriptive statistics
   to Bayesian hierarchical models, spatial regression, and structural equation modeling
 - **22 advanced methods**: VARCOMP, Crossed/Nested LMM, Time-Dependent Cox, Tobit/Probit,
   Quantile Regression, LASSO/Ridge/ElasticNet, GAM, Robust Regression, PLS, Multiple Imputation
@@ -84,6 +84,17 @@ MerQur is built around five principles for academic data analysis:
 - **Geotagged photo import** (EXIF + GPS → DataFrame → Map) for fieldwork
 - **Spatial regression** (SAR, Spatial Error, GWR) for ecology, epidemiology, urban studies
 
+### 🤖 AI Interpreter · optional, off by default
+- A language model can write the academic commentary (Findings / Interpretation /
+  Limitations) in your reports — **Claude, NVIDIA NIM or DeepSeek**, with your own API key
+- **Your raw data never leaves the machine.** Only the already-computed statistical
+  summary is sent; rows, cell values, file paths and figures are not
+- **Every number is verified** against the analysis output. A value that is not in the
+  source causes the whole commentary to be rejected in favour of the rule-based text
+- Explicit consent dialog on first use; the key is kept in the OS credential vault
+- ⚠ The AI commentary is offered **only to suggest ideas**. It is not a substitute for
+  scientific assessment or peer review and **must not be accepted without checking**
+
 ### 📊 Modern Statistical Methods
 - **Bayesian**: BEST t-test, Bayes Factor correlation, Bayesian ANOVA, Hierarchical Bayesian
 - **Mixed Models**: LMM, GLMM, Nested LMM, Crossed LMM, VARCOMP (variance components / heritability)
@@ -99,11 +110,16 @@ MerQur is built around five principles for academic data analysis:
 
 > Pre-built binaries — no Python installation required.
 
+**Latest release: v1.0.18** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v1.0.18) and the
+full [CHANGELOG](CHANGELOG.md).
+
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-1.0.4-windows-x64.zip`](https://github.com/omerorucu/merqur/releases/latest) | Extract & run `MerQur.exe` |
-| 🍎 **macOS 12+** | [`MerQur-1.0.4-macos.dmg`](https://github.com/omerorucu/merqur/releases/latest) | Drag to Applications |
-| 🐧 **Linux** | [`MerQur-1.0.0-linux.AppImage`](https://github.com/omerorucu/merqur/releases/latest) | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-1.0.18-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-windows-x64-Setup.exe) · 346 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-1.0.18-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-windows-x64-portable.zip) · 520 MB | Extract & run `MerQur.exe` |
+| 🐧 **Linux** | [`MerQur-1.0.18-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-linux-x86_64.AppImage) · 918 MB | `chmod +x` & run |
+| 🍎 **macOS 12+** | Not published for this version — see [releases](https://github.com/omerorucu/merqur/releases) | The v1.0.17 DMG remains available |
 
 **Sample data packs (v1.0.4)** — 10 discipline packs, each with ~109 datasets matching every MerQur analysis. Each pack includes pre-validated form fields (`OKU.txt`) and SAS PROC equivalents where relevant.
 
