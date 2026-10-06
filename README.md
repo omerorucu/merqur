@@ -17,10 +17,10 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-1.0.18-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0.24-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
-![Analyses](https://img.shields.io/badge/analyses-110-7C3AED?style=flat-square)
+![Analyses](https://img.shields.io/badge/analyses-124-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
 
 
@@ -37,13 +37,13 @@ everything in a single tool.
 
 <div align="center">
 
-| **99** | **30** | **5** | **APA 7** |
+| **124** | **17** | **6** | **APA 7** |
 |:---:|:---:|:---:|:---:|
-| Statistical<br>Analyses | Advanced<br>Methods | Spatial<br>Analyses | Report<br>Generator |
+| Statistical<br>Analyses | Analysis<br>Categories | Map-tab<br>Methods | Report<br>Generator |
 
 </div>
 
-In a single tool: **data import** · **descriptive statistics** · **parametric & non-parametric tests** · **regression** (LASSO, Robust, Quantile, GAM) · **survival analysis** (Cox, KM, Time-Dependent Cox) · **mixed models** (LMM, GLMM, GEE) · **multivariate** (PCA, EFA, CFA, LDA, CCA) · **complex survey design** · **spatial analysis** (KDE, Hexbin, DBSCAN, Hotspot, Moran's I) · **APA 7 reports** in DOCX/PDF/HTML/Excel.
+In a single tool: **data import** · **descriptive statistics** · **parametric & non-parametric tests** · **regression** (LASSO, Robust, Quantile, GAM) · **survival analysis** (Cox, KM, Time-Dependent Cox) · **mixed models** (LMM, GLMM, GEE) · **multivariate** (PCA, EFA, CFA, LDA, CCA) · **complex survey design** · **spatial analysis** (KDE, Hexbin, DBSCAN, Hotspot, Moran's I, kriging) · **meta-analysis** · **SEM & IRT** · **econometrics** (panel, IV, propensity score, DiD) · **time series** (ARIMA, VAR, cointegration, GARCH) · **APA 7 reports** in DOCX/PDF/HTML/Excel.
 
 ---
 
@@ -61,11 +61,11 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 MerQur is built around five principles for academic data analysis:
 
 ### 🎯 Comprehensive in One Tool
-- **110 statistical analyses** across 15 categories — from descriptive statistics
+- **124 statistical analyses** across 17 categories — from descriptive statistics
   to Bayesian hierarchical models, spatial regression, and structural equation modeling
 - **22 advanced methods**: VARCOMP, Crossed/Nested LMM, Time-Dependent Cox, Tobit/Probit,
   Quantile Regression, LASSO/Ridge/ElasticNet, GAM, Robust Regression, PLS, Multiple Imputation
-- **5 spatial analyses** (KDE, Hexbin, DBSCAN, Moran's I, Getis-Ord Gi*) on the Map tab
+- **6 spatial methods** (KDE, Hexbin, DBSCAN, Moran's I, Getis-Ord Gi*, variogram + kriging) on the Map tab
   with interactive Folium output
 
 ### 🌍 Native Multilingual Interface
@@ -110,31 +110,24 @@ MerQur is built around five principles for academic data analysis:
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v1.0.18** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v1.0.18) and the
+**Latest release: v1.0.24** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v1.0.24) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-1.0.18-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-windows-x64-Setup.exe) · 346 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-1.0.18-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-windows-x64-portable.zip) · 520 MB | Extract & run `MerQur.exe` |
-| 🐧 **Linux** | [`MerQur-1.0.18-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v1.0.18/MerQur-1.0.18-linux-x86_64.AppImage) · 918 MB | `chmod +x` & run |
-| 🍎 **macOS 12+** | Not published for this version — see [releases](https://github.com/omerorucu/merqur/releases) | The v1.0.17 DMG remains available |
+| 🪟 **Windows 10/11** | [`MerQur-1.0.24-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-windows-x64-Setup.exe) · 349 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-1.0.24-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-windows-x64-portable.zip) · 524 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS** | [`MerQur-1.0.24-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-macos.dmg) · 554 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
+| 🐧 **Linux** | [`MerQur-1.0.24-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-linux-x86_64.AppImage) · 923 MB | `chmod +x` & run |
 
-**Sample data packs (v1.0.4)** — 10 discipline packs, each with ~109 datasets matching every MerQur analysis. Each pack includes pre-validated form fields (`OKU.txt`) and SAS PROC equivalents where relevant.
+The newest release is always at [releases/latest](https://github.com/omerorucu/merqur/releases/latest).
 
-- 🌊 Limnology & Wetland Ecology — [`MerQur_Veri_Limnoloji_Sulak_Alan_Ekolojisi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Limnoloji_Sulak_Alan_Ekolojisi_v1.0.4.zip)
-- 🌲 Forest Genetics — [`MerQur_Veri_Orman_Genetigi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Orman_Genetigi_v1.0.4.zip)
-- 🩺 Medicine — [`MerQur_Veri_Tip_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Tip_v1.0.4.zip)
-- 🌳 Landscape Architecture — [`MerQur_Veri_Peyzaj_Mimarligi_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Peyzaj_Mimarligi_v1.0.4.zip)
-- 🔬 Natural Sciences & Mathematics — [`MerQur_Veri_Fen_Bilimleri_Matematik_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Fen_Bilimleri_Matematik_v1.0.4.zip)
-- ⚙ Engineering — [`MerQur_Veri_Muhendislik_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Muhendislik_v1.0.4.zip)
-- 👥 Social, Humanities & Admin Sciences — [`MerQur_Veri_Sosyal_Beseri_Idari_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Sosyal_Beseri_Idari_v1.0.4.zip)
-- 📚 Education Sciences — [`MerQur_Veri_Egitim_Bilimleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Egitim_Bilimleri_v1.0.4.zip)
-- 🌾 Agriculture, Forestry & Aquatic — [`MerQur_Veri_Ziraat_Orman_Su_Urunleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Ziraat_Orman_Su_Urunleri_v1.0.4.zip)
-- 🏃 Sport Sciences — [`MerQur_Veri_Spor_Bilimleri_v1.0.4.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.4/MerQur_Veri_Spor_Bilimleri_v1.0.4.zip)
-
-> Total: **10 packs · ~1,100 datasets · ~12 MB**. Pre-validated against MerQur's `execute()` for zero-error demos.
+**Sample data packs** — 15 discipline packs, each with 130+ ready-to-use datasets matching the MerQur analyses
+(Medicine, Anaesthesiology, Dentistry, Infectious Diseases, Education, Psychology & Sociology, Social Sciences,
+Economics & Business, Engineering, Natural Sciences & Mathematics, Landscape Architecture, Limnology,
+Forest Genetics, Agriculture/Forestry/Aquatic, Sport Sciences). Download them from the
+[MerQur download page](https://merqur.sdu.edu.tr/en/download/).
 
 > 💡 Auto-update built in — Help → Check for Updates pulls only changed files.
 
@@ -146,7 +139,7 @@ full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 2. **Data tab** — columns are auto-classified:
    - 🔵 Numeric · 🟠 Categorical · 🟢 Geo (lat/lon) · 🟣 Date · 🔴 Binary · ⚪ Text
    - Multi-choice columns (comma/semicolon-separated) auto-highlighted in purple
-3. **Statistics tab** — pick analysis from the sidebar (99 options across 15 categories)
+3. **Statistics tab** — pick analysis from the sidebar (124 options across 17 categories)
 4. **Run** ▶ — results appear as a **card** with Results / Chart / Table / Frequency tabs
 5. **Report tab** — select cards → export to **DOCX / PDF / HTML / Excel** with cover page
 
@@ -291,6 +284,20 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 
 </details>
 
+<details>
+<summary><b>🆕 Added in v1.0.20 - v1.0.24</b> — 15 analyses + kriging</summary>
+
+- Mixed-design (split-plot) ANOVA · Meta-analysis (fixed/random effects, meta-regression, publication bias)
+- Full SEM (measurement invariance, FIML) · Item Response Theory (Rasch, 2PL/3PL, GRM, PCM)
+- Latent Class Analysis (LCA) · Latent Profile Analysis (LPA)
+- Econometrics: panel data regression · instrumental variables (2SLS) · propensity score analysis · difference-in-differences
+- Time series: VAR · cointegration (Johansen / Engle-Granger) · GARCH
+- Machine learning: decision tree (CART) · neural network (MLP)
+- Map tab: empirical variogram, model fitting and kriging
+- Results validated against R; SPSS and SAS comparisons for the classic analyses
+
+</details>
+
 ---
 
 ## 🌍 Multilingual
@@ -370,7 +377,7 @@ please contact the author directly.
 ## 👤 Author & Contact
 
 **Ömer K. Örücü**
-📧 omerorucu@sdu.edu.tr
+📧 merqur@sdu.edu.tr
 🏛️ Süleyman Demirel University
 
 For bug reports, feature requests, or translation contributions:
@@ -380,7 +387,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v1.0** · 99 Analyses · 30 Advanced Methods · Spatial Modeling · APA 7 Reports
+**MerQur v1.0.24** · 124 Analyses · 17 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
