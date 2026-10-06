@@ -6,6 +6,76 @@
 
 ---
 
+## [1.0.24] — 6 October 2026 · **macOS Startup Fix and New Sample Datasets**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+Fixed MerQur not opening on macOS after the licence agreement was accepted: settings are now
+stored in the user data folder, which also stops settings from being reset after updates on
+Windows. The sample data packs gain 15 field-specific datasets for the newer analyses. Some
+confidence-interval labels in Turkish reports were corrected.
+
+---
+
+## [1.0.23] — 5 October 2026 · **Compact Interface and Accuracy Fixes**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+The interface is more compact: checkboxes, drop-down lists and text are smaller and
+unnecessary scroll bars are gone. Overlapping parameters on the Map tab were fixed.
+ANCOVA now uses Type III sums of squares by default, matching SPSS/SAS. Accuracy fixes
+were made to mixed models, multiple imputation, Mann-Kendall and spatial neighbourhood
+calculations; the chosen significance level is now honoured by more analyses.
+
+---
+
+## [1.0.22] — 5 October 2026 · **IRT, Latent Class, Econometrics and Analysis Scripts**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+New analyses: item response theory and Rasch, latent class and latent profile analysis,
+panel data, instrumental variables, propensity scores and difference-in-differences,
+VAR, cointegration and GARCH, decision trees and neural networks. Analyses can be saved
+as scripts and re-run. The help document was updated in three languages. The new outputs
+were validated against R.
+
+---
+
+## [1.0.21] — 5 October 2026 · **Meta-Analysis, Full SEM and Kriging**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+New analyses: meta-analysis, full structural equation modeling (with measurement
+invariance and FIML) and variogram + kriging. Power analysis was extended to G*Power
+level; error covariance structures were added to mixed models and multi-factor designs
+to repeated-measures ANOVA. The new outputs were validated against R. The default method
+of several analyses now matches SPSS, R and SAS; results of these analyses may differ
+from the previous version, and the former methods remain available as options. The
+upgrade installer was hardened.
+
+---
+
+## [1.0.20] — 5 October 2026 · **Professional Analysis Options Update**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+Many analysis options, assumption checks and outputs available in SPSS, R and SAS
+were added; the new outputs were validated against R. Several calculation errors
+were fixed, the regression crash in the English and Spanish interfaces was resolved,
+and interface stability was improved.
+
+---
+
+## [1.0.19] — 4 October 2026 · **Statistical Accuracy Update**
+
+> Published under the same copyright registration (2026/18517) as v1.0.0.
+
+Analyses were cross-validated against IBM SPSS Statistics 27 and R 4.5, and the
+calculation and reporting differences found were corrected. Maximum-likelihood
+estimation (adaptive Gauss-Hermite) was added to generalized linear mixed models (GLMM).
+
+---
+
 ## [1.0.18] — 28 September 2026 · **AI Interpreter + Multilingual Hardening**
 
 > Published under the same copyright registration (2026/18517) as v1.0.0.
