@@ -6,6 +6,74 @@
 
 ---
 
+## [1.0.24] — 6 Ekim 2026 · **macOS Açılış Düzeltmesi ve Yeni Örnek Veri Setleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+macOS'ta lisans sözleşmesi kabul edildikten sonra programın açılmaması giderildi: ayarlar
+artık kullanıcı veri klasöründe tutuluyor, böylece Windows'ta güncellemeden sonra ayarların
+sıfırlanması da sona erdi. Örnek veri paketlerine yeni analizler için her alana özgü 15 veri
+seti eklendi. Türkçe raporlarda bazı güven aralığı etiketleri düzeltildi.
+
+---
+
+## [1.0.23] — 5 Ekim 2026 · **Daha Sıkı Arayüz ve Doğruluk Düzeltmeleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Arayüz daha sıkı hâle getirildi: seçim kutuları, açılır listeler ve yazılar küçültüldü,
+gereksiz kaydırma çubukları kaldırıldı. Harita sekmesindeki iç içe geçen parametreler
+düzeltildi. ANCOVA artık varsayılan olarak SPSS/SAS ile aynı Type III kareler toplamını
+kullanıyor. Karma modeller, çoklu atama, Mann-Kendall ve mekânsal komşuluk
+hesaplarında doğruluk düzeltmeleri yapıldı; seçilen anlamlılık düzeyi daha fazla
+analizde dikkate alınıyor.
+
+---
+
+## [1.0.22] — 5 Ekim 2026 · **IRT, Gizil Sınıf, Ekonometri ve Analiz Betikleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Yeni analizler: madde tepki kuramı ve Rasch, gizil sınıf ve gizil profil analizi,
+panel veri, araç değişken, eğilim skoru ve fark-içinde-fark, VAR, eşbütünleşme ve GARCH,
+karar ağacı ve yapay sinir ağı. Analizler betik olarak kaydedilip yeniden
+çalıştırılabiliyor. Yardım belgesi üç dilde güncellendi. Yeni çıktılar R ile doğrulandı.
+
+---
+
+## [1.0.21] — 5 Ekim 2026 · **Meta-Analiz, Tam SEM ve Kriging**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Yeni analizler: meta-analiz, tam yapısal eşitlik modeli (ölçme değişmezliği ve FIML ile)
+ve variogram + kriging. Güç analizi G*Power düzeyine genişletildi; karma modellere hata
+kovaryans yapıları, tekrarlı ölçüm ANOVA'ya çok faktörlü desen eklendi. Yeni çıktılar R ile
+doğrulandı. Bazı analizlerin varsayılan yöntemi SPSS, R ve SAS ile aynı olacak şekilde
+güncellendi; bu analizlerde sonuçlar önceki sürümden farklı olabilir, eski yöntemler
+seçenek olarak duruyor. Kurulum güncellemesi sağlamlaştırıldı.
+
+---
+
+## [1.0.20] — 5 Ekim 2026 · **Profesyonel Analiz Seçenekleri Güncellemesi**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+SPSS, R ve SAS'ta bulunan çok sayıda analiz seçeneği, ön kontrol ve çıktı eklendi;
+yeni çıktılar R ile doğrulandı. Bazı hesaplama hataları düzeltildi, İngilizce ve
+İspanyolca arayüzde regresyon analizindeki çökme giderildi, arayüz kararlılığı artırıldı.
+
+---
+
+## [1.0.19] — 4 Ekim 2026 · **İstatistiksel Doğruluk Güncellemesi**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Analizler IBM SPSS Statistics 27 ve R 4.5 ile karşılaştırmalı olarak doğrulandı;
+bulunan hesaplama ve raporlama farkları giderildi. Genelleştirilmiş karma
+modellere (GLMM) en çok olabilirlik (ML, adaptif Gauss-Hermite) tahmini eklendi.
+
+---
+
 ## [1.0.18] — 28 Eylül 2026 · **AI Yorumlayıcı + Çok Dillilik Sertleştirmesi**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
