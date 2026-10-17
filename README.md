@@ -17,11 +17,12 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-1.0.24-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.1.0-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
-![Analyses](https://img.shields.io/badge/analyses-124-7C3AED?style=flat-square)
+![Analyses](https://img.shields.io/badge/analyses-131%20%2B%207%20map-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
+![Validated](https://img.shields.io/badge/validated-R%20%7C%20SPSS%20%7C%20SAS-0F766E?style=flat-square)
 
 
 
@@ -35,9 +36,12 @@
 data analysis. From data ingestion to APA-7 publication-ready reports —
 everything in a single tool.
 
+Every analysis has been **validated option by option against R, SPSS and SAS** on independent,
+publicly available datasets; the validation datasets are attached to each release.
+
 <div align="center">
 
-| **124** | **17** | **6** | **APA 7** |
+| **131** | **17** | **7** | **APA 7** |
 |:---:|:---:|:---:|:---:|
 | Statistical<br>Analyses | Analysis<br>Categories | Map-tab<br>Methods | Report<br>Generator |
 
@@ -61,12 +65,18 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 MerQur is built around five principles for academic data analysis:
 
 ### 🎯 Comprehensive in One Tool
-- **124 statistical analyses** across 17 categories — from descriptive statistics
+- **131 statistical analyses** across 17 categories — from descriptive statistics
   to Bayesian hierarchical models, spatial regression, and structural equation modeling
 - **22 advanced methods**: VARCOMP, Crossed/Nested LMM, Time-Dependent Cox, Tobit/Probit,
   Quantile Regression, LASSO/Ridge/ElasticNet, GAM, Robust Regression, PLS, Multiple Imputation
-- **6 spatial methods** (KDE, Hexbin, DBSCAN, Moran's I, Getis-Ord Gi*, variogram + kriging) on the Map tab
+- **7 spatial methods** (KDE, Hexbin, DBSCAN, Moran's I, Getis-Ord Gi*, variogram + kriging,
+  point pattern analysis) on the Map tab
   with interactive Folium output
+
+### ✔ Validated Against R, SPSS and SAS
+- All analyses recomputed with **independent public datasets** and compared with R, SPSS and SAS
+  for every option; remaining differences are documented as differences in method definitions
+- The validation datasets (with source URL and SHA-256 of every file) are attached to each release
 
 ### 🌍 Native Multilingual Interface
 - **Turkish · English · Spanish** — ~1,300 translated UI strings
@@ -110,16 +120,20 @@ MerQur is built around five principles for academic data analysis:
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v1.0.24** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v1.0.24) and the
+**Latest release: v2.1.0** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.1.0) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-1.0.24-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-windows-x64-Setup.exe) · 349 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-1.0.24-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-windows-x64-portable.zip) · 524 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS** | [`MerQur-1.0.24-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-macos.dmg) · 554 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
-| 🐧 **Linux** | [`MerQur-1.0.24-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v1.0.24/MerQur-1.0.24-linux-x86_64.AppImage) · 923 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.1.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-windows-x64-Setup.exe) · 351 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.1.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-windows-x64-portable.zip) · 525 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS** | [`MerQur-2.1.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-macos.dmg) · 562 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
+| 🐧 **Linux** | [`MerQur-2.1.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-linux-x86_64.AppImage) · 932 MB | `chmod +x` & run |
+
+**Validation datasets** — [`MerQur-2.1.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip) · 40 MB:
+the independent datasets used to validate every analysis against R, SPSS and SAS, organised by
+analysis name, with the source URL and SHA-256 of every file.
 
 The newest release is always at [releases/latest](https://github.com/omerorucu/merqur/releases/latest).
 
@@ -139,7 +153,7 @@ Forest Genetics, Agriculture/Forestry/Aquatic, Sport Sciences). Download them fr
 2. **Data tab** — columns are auto-classified:
    - 🔵 Numeric · 🟠 Categorical · 🟢 Geo (lat/lon) · 🟣 Date · 🔴 Binary · ⚪ Text
    - Multi-choice columns (comma/semicolon-separated) auto-highlighted in purple
-3. **Statistics tab** — pick analysis from the sidebar (124 options across 17 categories)
+3. **Statistics tab** — pick analysis from the sidebar (131 options across 17 categories)
 4. **Run** ▶ — results appear as a **card** with Results / Chart / Table / Frequency tabs
 5. **Report tab** — select cards → export to **DOCX / PDF / HTML / Excel** with cover page
 
@@ -285,6 +299,30 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 </details>
 
 <details>
+<summary><b>🆕 Added in v2.1</b> — 8 new analyses</summary>
+
+- **PLS-SEM** (partial least squares path modeling: reliability, validity, HTMT, bootstrapped indirect effects)
+- **LOESS** local regression · **response surface regression** (canonical and ridge analysis)
+- **k-nearest neighbours (KNN)** · **age standardisation and SMR**
+- **Unobserved components model** (structural time series)
+- **Heckman sample selection** and truncated regression
+- Map tab: **point pattern analysis** (Ripley's K/L, G/F/J, Clark-Evans, CSR envelopes)
+- New options in existing analyses: custom contrasts (L matrix), GLMM/GEE interactions and group × time
+  EMMs, replicate-weight survey variance (jackknife, BRR, Fay, bootstrap), panel unit-root tests, SUR/3SLS,
+  REGWQ, lack-of-fit, Breusch-Pagan/White and Chow tests, spectral windows, CLS/ULS ARIMA and VARX,
+  wide-to-long reshaping and LaTeX table export
+
+</details>
+
+<details>
+<summary><b>✔ v2.0 — validation release</b></summary>
+
+- All analyses validated option by option against R, SPSS and SAS on independent public datasets
+- Validation datasets attached to the release
+
+</details>
+
+<details>
 <summary><b>🆕 Added in v1.0.20 - v1.0.24</b> — 15 analyses + kriging</summary>
 
 - Mixed-design (split-plot) ANOVA · Meta-analysis (fixed/random effects, meta-regression, publication bias)
@@ -338,7 +376,7 @@ contact the author for access.
 ### Artificial Intelligence · Architectural and coding partner
 **Anthropic Claude** — served as a continuous development partner throughout
 MerQur's architecture, code authoring, and testing. Collaborated on the design
-and implementation of 70+ analyses.
+and implementation of 130+ analyses.
 
 > ***«If I have seen further, it is by standing on the shoulders of giants.»***
 > — *Isaac Newton*
@@ -387,7 +425,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v1.0.24** · 124 Analyses · 17 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.1.0** · 131 Analyses · 7 Map Methods · 17 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
