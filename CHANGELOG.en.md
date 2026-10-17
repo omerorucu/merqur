@@ -6,6 +6,52 @@
 
 ---
 
+## [2.1.0] — 17 October 2026 · **Eight New Analyses and SPSS/SAS-Level Options**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+MerQur 2.1 adds the analyses and options that a systematic comparison found in SPSS, SAS and R but missing in MerQur. Every new method was validated against R on independent datasets downloaded from the internet, and against the published examples of SAS and Stata where these exist.
+
+Eight new analyses: PLS-SEM (partial least squares path modeling, with reliability, validity, HTMT and bootstrapped indirect effects), LOESS local regression, response surface regression (canonical and ridge analysis), k-nearest neighbors (KNN), age standardization and SMR, the unobserved components model (structural time series), Heckman sample selection and truncated regression, and point pattern analysis in the Map tab (Ripley's K/L, G/F/J, Clark-Evans and CSR envelopes).
+
+Added to existing analyses: reference level selection, interaction terms in GLMM and GEE, group x time estimated marginal means with group comparisons at each time and a plot in mixed models; custom contrasts (L matrix) in LMM, GLMM, GEE, ANOVA, ANCOVA, logistic, count, IV and survey regression; jackknife, BRR, Fay and bootstrap replicate variance and supplied replicate weights in weighted survey analyses; panel unit root tests, SUR and 3SLS; Van der Waerden, Savage and scale tests; REGWQ, lack-of-fit, Breusch-Pagan/White and Chow tests; spectral windows, cross-spectrum, CLS/ULS estimation in ARIMA and VARX; survival (log-rank) power; monotone imputation and MNAR sensitivity analysis; kNN and kernel discriminant analysis; the parallel reliability model; WLS weight estimation and an overdispersion scale; axis, colour and zoom controls on charts; wide-to-long data reshaping and LaTeX table export.
+
+Important: in weighted survey regression and survey logistic regression, Wald F tests, coefficient t tests and confidence intervals now use the same degrees of freedom as the R survey package (design df + 1 - number of coefficients); p values and confidence intervals in these analyses may differ slightly from the previous version. Elsewhere, the defaults of the new options leave earlier results unchanged.
+
+Fixes: fully empty rows inside the data are now kept as observations when a file is loaded (only trailing empty rows are dropped, as in R) - n may change in multiple-response analyses; in survey bootstrap variance a diverging replicate is excluded and a warning is written; fixed an error in count regression when the offset column is also a predictor, an error when switching templates in path analysis, the "factor=level" syntax for numerically coded levels in custom contrasts, and the one-sided quadrat count test in point pattern analysis; robust regression now shows coefficient confidence intervals; undefined values are shown as "—" instead of "nan", and very small p values as "p < .001" instead of "p = 0.0000"; double rounding in Likert item statistics was removed; the GAM analysis is now named "Generalized Additive Model" (it was easily confused with Non-Linear Regression); points on map cluster maps are outlined and drawn on a light basemap for better visibility; dialog buttons and remaining labels follow the interface language.
+
+The validation data for the new analyses have been added to the data package attached to this release.
+
+---
+
+## [2.0.0] — 12 October 2026 · **Validated Against R, SPSS and SAS**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+MerQur 2.0 is the validation release: all 133 analyses were recomputed with independent datasets downloaded from the internet and compared, option by option, with R, SPSS and SAS. The errors found were fixed, options that had no effect on the result now work, and the small differences that remain between programs are documented as differences in method definitions.
+
+Important: some analyses may give results that differ from v1.0.26. The main ones are varimax/promax rotation in factor analysis (SPSS/SAS definition), the seasonal period of sub-hourly time series (e.g. 48 for 30-minute data), robust standard errors in GARCH models, the log-likelihood of the frailty model and the concordance index of Cox models, weighted survey analyses, REML estimation in mixed models, and STL decomposition. Ridge and Lasso now build the penalty grid from the data and warn when the selected value lies on the edge of the grid. We recommend re-running analyses made with the previous version before reporting them.
+
+The datasets used in the validation are attached to this release, organised by analysis name, with the source URL and SHA-256 of every file: [MerQur-2.1.0-validation-datasets.zip](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip)
+
+---
+
+## [1.0.26] — 10 October 2026 · **New Accuracy and Display Fixes**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+The analyses in the Psychology-Sociology, Landscape Architecture and Forest Genetics sample packs were compared with R, SPSS and SAS, and the differences found were fixed. Log-linear analysis gains a frequency (count) column option. Fixes cover the ICC interval in the Bayesian hierarchical model, confidence intervals of variance components at the boundary, AIC in spatial models, the Kaplan-Meier median, and the parametric survival model with zero-length durations. Multinomial logistic regression now warns about complete separation. Quantile regression shows the intercept, and Moran's I reports the expected value, variance and z. Small coefficients and confidence intervals are printed with more digits. The event column in some sample datasets was corrected.
+
+---
+
+## [1.0.25] — 10 October 2026 · **Accuracy Fixes**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+All 130 analyses in the Medicine sample data pack were checked one by one against R, SPSS and SAS, and the differences found were fixed. Corrections cover the direction of Tukey pairwise comparisons, confidence-interval headings in ANOVA and regression tables, the exact Mann-Whitney p-value with tied data, canonical correlation tests, the Benzécri correction in multiple correspondence analysis, anti-image correlations, Tobit censoring, time ordering in repeated-measures models, the GEE AR(1) correlation, the log-logistic survival model, complex-survey outputs, Holt-Winters forecasts, trend analysis with a year column, propensity-score subclassification and GARCH estimation. Quantile regression now uses the quantiles you enter. The Cox regression sample dataset was replaced with more realistic survival data.
+
+---
+
 ## [1.0.24] — 6 October 2026 · **macOS Startup Fix and New Sample Datasets**
 
 > Published under the same DOI registration as v1.0.0 (2026/18517).
