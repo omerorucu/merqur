@@ -6,6 +6,52 @@
 
 ---
 
+## [2.1.0] — 17 Ekim 2026 · **Sekiz Yeni Analiz ve SPSS/SAS Düzeyinde Seçenekler**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.1, SPSS, SAS ve R'de bulunup MerQur'da eksik olan analiz ve seçeneklerin sistematik bir karşılaştırmayla belirlenip eklendiği sürümdür. Her yeni yöntem, internetten indirilen bağımsız veri setlerinde R ile, bulunduğu yerde SAS ve Stata'nın yayımlanmış örnekleriyle karşılaştırılarak doğrulandı.
+
+Sekiz yeni analiz: PLS-SEM (kısmi en küçük kareler yol modellemesi; güvenirlik, geçerlik, HTMT ve bootstrap ile dolaylı etkiler), LOESS yerel regresyon, yanıt yüzeyi regresyonu (kanonik ve sırt analizi), k-en yakın komşu (KNN), yaş standardizasyonu ve SMR, gözlenemeyen bileşenler modeli (yapısal zaman serisi), Heckman örneklem seçimi ve kesik regresyon, Harita sekmesinde nokta örüntüsü analizi (Ripley K/L, G/F/J, Clark-Evans ve CSR zarfları).
+
+Mevcut analizlere eklenenler: karma modellerde referans düzeyi seçimi, GLMM ve GEE'de etkileşim terimleri, grup x zaman tahmini marjinal ortalamaları ve her zamanda grup karşılaştırması ile grafiği; LMM, GLMM, GEE, ANOVA, ANCOVA, lojistik, sayım, IV ve anket regresyonunda özel kontrast (L matrisi); ağırlıklı anket analizlerinde jackknife, BRR, Fay ve bootstrap replikasyon varyansı ile hazır replikasyon ağırlıkları; panel birim kök testleri, SUR ve 3SLS; Van der Waerden, Savage ve ölçek testleri; REGWQ, uyum eksikliği, Breusch-Pagan/White ve Chow testleri; spektral pencereler, çapraz spektrum, ARIMA'da CLS/ULS ve VARX; sağkalım (log-rank) gücü; monoton atama ve MNAR duyarlılık analizi; kNN ve çekirdek diskriminant; paralel güvenirlik modeli; WLS ağırlık tahmini ve aşırı yayılım ölçeği; grafiklerde eksen, renk ve yakınlaştırma; geniş biçimden uzun biçime veri dönüştürme ve LaTeX tablo dışa aktarımı.
+
+Önemli: Ağırlıklı anket regresyonu ve anket lojistik regresyonunda Wald F testleri, katsayı t testleri ve güven aralıkları artık R survey paketiyle aynı serbestlik derecesini (tasarım df + 1 - katsayı sayısı) kullanıyor; bu analizlerde p değerleri ve güven aralıkları önceki sürümden biraz farklı çıkabilir. Diğer analizlerde yeni seçeneklerin varsayılanları önceki sonuçları değiştirmez.
+
+Düzeltmeler: veri yüklenirken aradaki tamamen boş satırlar artık gözlem olarak tutuluyor (yalnız dosya sonundaki boş satırlar atılıyor; R ile aynı) - çoklu yanıt analizlerinde n değişebilir; anket bootstrap varyansında ıraksayan replikasyon dışlanıp uyarı yazılıyor; sayım regresyonunda offset sütunu aynı zamanda açıklayıcıyken oluşan hata, yol analizinde şablon değiştirirken çıkan hata, özel kontrastta sayısal kodlu düzeylerin "faktör=düzey" yazımı ve nokta örüntüsünde tek yönlü dörtgen sayım testi düzeltildi; robust regresyonda katsayı güven aralıkları gösteriliyor; tanımsız değerler "nan" yerine "—", çok küçük p değerleri "p = 0.0000" yerine "p < .001" olarak yazılıyor; Likert madde istatistiklerindeki çift yuvarlama giderildi; GAM analizinin adı "Genelleştirilmiş Toplamsal Model" oldu (Doğrusal Olmayan Regresyon ile karışıyordu); harita küme haritalarında noktalar konturlu ve soluk altlık üzerinde daha belirgin; pencere düğmeleri ve kalan İngilizce etiketler arayüz dilinde.
+
+Yeni analizlerin doğrulama verileri, bu sürüme eklenen veri paketine katıldı.
+
+---
+
+## [2.0.0] — 12 Ekim 2026 · **R, SPSS ve SAS ile Doğrulanmış Sürüm**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.0, 133 analizin tamamının internetten indirilen bağımsız veri setleriyle R, SPSS ve SAS'ta tüm seçenekleriyle yeniden hesaplanıp karşılaştırıldığı doğrulama sürümüdür. Bulunan hatalar giderildi, sonuca etki etmeyen seçenekler çalışır hâle getirildi, programlar arasında kalan küçük farklar yöntem tanımı farkı olarak belgelendi.
+
+Önemli: Bazı analizlerde sonuçlar v1.0.26'dan farklı çıkabilir. Başlıcaları: faktör analizinde varimax/promax döndürmesi (SPSS/SAS tanımı), alt-saatlik zaman serilerinde mevsim periyodu (ör. 30 dakikalık veride 48), GARCH modellerinde sağlam standart hatalar, kırılganlık modelinde log-olabilirlik ve Cox modellerinde uyum indeksi, ağırlıklı anket analizleri, karma modellerde REML tahmini ve STL ayrıştırması. Ridge ve Lasso'da ceza ızgarası artık veriden hesaplanıyor; seçilen değer ızgara sınırındaysa uyarı veriliyor. Önceki sürümle yaptığınız analizleri raporlamadan önce yeniden çalıştırmanızı öneririz.
+
+Doğrulamada kullanılan veri setleri, analiz adlarıyla ve her dosyanın kaynak URL'si ile SHA-256 değeriyle birlikte bu sürüme eklendi: [MerQur-2.1.0-validation-datasets.zip](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip)
+
+---
+
+## [1.0.26] — 10 Ekim 2026 · **Yeni Doğruluk ve Gösterim Düzeltmeleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Psikoloji-Sosyoloji, Peyzaj Mimarlığı ve Orman Genetiği örnek paketlerindeki analizler R, SPSS ve SAS ile karşılaştırıldı; bulunan farklar giderildi. Log-doğrusal analize frekans (sayım) sütunu seçeneği eklendi. Bayes hiyerarşik modelde ICC aralığı, sınırdaki varyans bileşenlerinin güven aralığı, mekânsal modellerde AIC, Kaplan-Meier medyanı ve süresi sıfır olan kayıtlarla parametrik sağkalım modeli düzeltildi. Çok sınıflı lojistik regresyon tam ayrışmayı uyarıyla bildiriyor. Kantil regresyonda kesişim terimi, Moran's I sonucunda beklenen değer, varyans ve z gösteriliyor. Küçük katsayılar ve güven aralıkları daha fazla basamakla yazılıyor. Bazı örnek veri setlerindeki olay sütunu düzeltildi.
+
+---
+
+## [1.0.25] — 10 Ekim 2026 · **Doğruluk Düzeltmeleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+Tıp örnek veri paketindeki 130 analiz R, SPSS ve SAS sonuçlarıyla tek tek karşılaştırıldı ve bulunan farklar giderildi. Tukey ikili karşılaştırmalarının yönü, ANOVA ve regresyon tablolarında güven aralığı başlıkları, bağlı veride kesin Mann-Whitney p değeri, kanonik korelasyon testleri, çoklu uyum analizinde Benzécri düzeltmesi, anti-imaj korelasyonları, Tobit sansürü, tekrarlı ölçüm modellerinde zaman sıralaması, GEE AR(1) korelasyonu, log-lojistik sağkalım modeli, karmaşık örneklem çıktıları, Holt-Winters tahmini, yıl sütunuyla trend analizi, eğilim skoru tabakalama ve GARCH kestirimi düzeltildi. Kantil regresyonda girilen kantiller artık dikkate alınıyor. Cox regresyonu örnek veri seti daha gerçekçi bir sağkalım verisiyle yenilendi.
+
+---
+
 ## [1.0.24] — 6 Ekim 2026 · **macOS Açılış Düzeltmesi ve Yeni Örnek Veri Setleri**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
