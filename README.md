@@ -37,8 +37,8 @@ data analysis. From data ingestion to APA-7 publication-ready reports —
 everything in a single tool.
 
 Every analysis has been **validated option by option against R, SPSS and SAS** on independent,
-publicly available datasets: over **2.3 million** statistic-by-statistic comparisons, with **no MerQur
-error remaining in the comparisons** (see [Validation](#-validated-against-r-spss-and-sas)).
+publicly available datasets: **140 analysis forms, 686 datasets and 7,180 cases**, with every number in
+the output compared (2.36 million statistics) and **no MerQur error remaining in the comparisons** (see [Validation](#-validated-against-r-spss-and-sas)).
 
 <div align="center">
 
@@ -70,14 +70,18 @@ published values from textbooks, software documentation and NIST reference datas
 
 <div align="center">
 
-| **2,359,810** | **140** | **1,894** | **4** |
+| **140** | **686** | **7,180** | **7,340** |
 |:---:|:---:|:---:|:---:|
-| Statistic-by-statistic<br>comparisons | Analysis forms<br>(incl. Map tab and tools) | Independent<br>data files | References<br>(R · SPSS · SAS · published) |
+| Analysis forms<br>(incl. Map tab and tools) | Independent datasets<br>(1,894 data files) | Validation cases<br>(analysis × dataset × options) | Parameter options<br>tested |
 
 </div>
 
-Each comparison is one statistic (a coefficient, standard error, test statistic, p value, interval
-limit, fit index, cluster label, forecast …) under one option setting. Every comparison was classified:
+Within these cases, **every number in the output** was checked, not only the headline result: each
+coefficient, standard error, test statistic, p value, interval limit, fit index, pairwise comparison,
+cluster label and forecast, against each reference that provides it. This gives **2,359,810 individual
+statistic comparisons**. They measure the *breadth* of the check; they are not 2.36 million independent
+tests (numbers from the same model depend on each other, e.g. a correct standard error largely implies a
+correct confidence interval). Every comparison was classified:
 
 | Class | Comparisons | Share* | Meaning |
 |---|--:|--:|---|
