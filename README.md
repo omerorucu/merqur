@@ -37,7 +37,8 @@ data analysis. From data ingestion to APA-7 publication-ready reports —
 everything in a single tool.
 
 Every analysis has been **validated option by option against R, SPSS and SAS** on independent,
-publicly available datasets; the validation datasets are attached to each release.
+publicly available datasets: over **2.3 million** statistic-by-statistic comparisons, with **no MerQur
+error remaining in the comparisons** (see [Validation](#-validated-against-r-spss-and-sas)).
 
 <div align="center">
 
@@ -60,59 +61,133 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 
 ---
 
-## ⚖️ Why MerQur?
+## ✔ Validated Against R, SPSS and SAS
 
-MerQur is built around five principles for academic data analysis:
+MerQur 2.1.0 is a **validated release**. Every analysis was recomputed on **independent, publicly
+available datasets** downloaded from the internet, and its output was compared **option by option**
+with **R 4.5.3**, **IBM SPSS Statistics 27** and **SAS 9.4 (SAS/STAT 15.4, SAS/ETS 15.4)**, and with
+published values from textbooks, software documentation and NIST reference datasets where they exist.
 
-### 🎯 Comprehensive in One Tool
-- **131 statistical analyses** across 17 categories — from descriptive statistics
-  to Bayesian hierarchical models, spatial regression, and structural equation modeling
-- **22 advanced methods**: VARCOMP, Crossed/Nested LMM, Time-Dependent Cox, Tobit/Probit,
-  Quantile Regression, LASSO/Ridge/ElasticNet, GAM, Robust Regression, PLS, Multiple Imputation
-- **7 spatial methods** (KDE, Hexbin, DBSCAN, Moran's I, Getis-Ord Gi*, variogram + kriging,
-  point pattern analysis) on the Map tab
-  with interactive Folium output
+<div align="center">
 
-### ✔ Validated Against R, SPSS and SAS
-- All analyses recomputed with **independent public datasets** and compared with R, SPSS and SAS
-  for every option; remaining differences are documented as differences in method definitions
-- The validation datasets (with source URL and SHA-256 of every file) are attached to each release
+| **2,359,810** | **140** | **1,894** | **4** |
+|:---:|:---:|:---:|:---:|
+| Statistic-by-statistic<br>comparisons | Analysis forms<br>(incl. Map tab and tools) | Independent<br>data files | References<br>(R · SPSS · SAS · published) |
 
-### 🌍 Native Multilingual Interface
-- **Turkish · English · Spanish** — ~1,300 translated UI strings
-- Hot-swap language without restart
-- All reports (DOCX/PDF/HTML) generated in the active language
+</div>
 
-### 📄 Publication-Ready Reports
-- **APA 7 compliant** report generator — tables, figures, footnotes
-- Export formats: **DOCX · PDF · HTML · Excel**
-- Multi-analysis chained reports (one document with all t-tests, ANOVAs, regressions, plots)
+Each comparison is one statistic (a coefficient, standard error, test statistic, p value, interval
+limit, fit index, cluster label, forecast …) under one option setting. Every comparison was classified:
 
-### 🗺 Spatial Analysis Built In
-- Lat/lon auto-detection from imported data
-- **Vector layer overlay** (SHP / KML / KMZ / GPKG / GeoJSON)
-- **Geotagged photo import** (EXIF + GPS → DataFrame → Map) for fieldwork
-- **Spatial regression** (SAR, Spatial Error, GWR) for ecology, epidemiology, urban studies
+| Class | Comparisons | Share* | Meaning |
+|---|--:|--:|---|
+| **Agree** | 2,072,921 | 94.2% | Same value within the numerical tolerance of the statistic |
+| **Definitional difference** | 68,901 | 3.1% | The programs use a different, documented definition (e.g. SPSS vs. R default for a df, a quantile type, a variance divisor); MerQur offers the alternative as an option where it is in use |
+| **Random variation** | 37,892 | 1.7% | Bootstrap, permutation, cross-validation or MCMC results that differ only by Monte Carlo error |
+| **Reference limitation** | 16,641 | 0.8% | The reference program rounds, truncates or cannot compute the value |
+| **Unexplained** | 4,817 | 0.2% | A small residual difference whose cause could not be pinned down; documented per analysis |
+| **Published-value discrepancy** | 339 | 0.02% | The published reference value itself differs from all programs |
+| **MerQur error** | **0** | **0%** | All errors found during validation were fixed before release |
 
-### 🤖 AI Interpreter · optional, off by default
-- A language model can write the academic commentary (Findings / Interpretation /
-  Limitations) in your reports — **Claude, NVIDIA NIM or DeepSeek**, with your own API key
-- **Your raw data never leaves the machine.** Only the already-computed statistical
-  summary is sent; rows, cell values, file paths and figures are not
-- **Every number is verified** against the analysis output. A value that is not in the
-  source causes the whole commentary to be rejected in favour of the rule-based text
-- Explicit consent dialog on first use; the key is kept in the OS credential vault
-- ⚠ The AI commentary is offered **only to suggest ideas**. It is not a substitute for
-  scientific assessment or peer review and **must not be accepted without checking**
+\* Share of the 2,201,511 comparisons that have a counterpart in the reference (158,299 statistics
+have no equivalent in that program and are not counted).
 
-### 📊 Modern Statistical Methods
-- **Bayesian**: BEST t-test, Bayes Factor correlation, Bayesian ANOVA, Hierarchical Bayesian
-- **Mixed Models**: LMM, GLMM, Nested LMM, Crossed LMM, VARCOMP (variance components / heritability)
-- **Survival**: Kaplan-Meier, Cox PH, Parametric AFT, Competing Risks, Frailty Cox, Time-Dependent Cox
-- **Multivariate**: PCA, EFA, CFA→SEM, MANOVA, LDA, CCA, Correspondence Analysis
+| Reference | Comparisons | Agree* |
+|---|--:|--:|
+| R 4.5.3 | 1,134,135 | 93.9% |
+| SPSS 27 | 569,712 | 94.3% |
+| SAS 9.4 | 584,804 | 94.3% |
+| Published values | 71,159 | 96.7% |
 
-> **Free for academic use** — T.C. Kültür ve Turizm Bakanlığı 2026/18517 sayılı eser tescili ile
-> koruma altında. DOI baseline: `10.53463/merqur.2026001`.
+**What you can check yourself.** The validation datasets are attached to every release
+([`MerQur-2.1.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip)):
+one folder per analysis, the data files used, and an index (`DIZIN.csv`) with the **source URL and
+SHA-256** of every file, so each comparison can be reproduced from the original source.
+
+---
+
+## 🧭 MerQur in Detail
+
+### 1 · Data in, ready to analyse
+- **Open almost anything**: Excel (`.xlsx/.xls`), CSV/TSV, SPSS `.sav`, Stata `.dta`, SAS `.sas7bdat`,
+  R `.rds`, JSON and Parquet (Ctrl+O).
+- **Automatic column typing** with colour codes: 🔵 numeric · 🟠 categorical · 🟢 geographic (lat/lon) ·
+  🟣 date · 🔴 binary · ⚪ text. You can override any type.
+- **Multiple-response columns** (comma or semicolon separated answers) are detected and highlighted;
+  binary indicator sets can be grouped into multiple-response sets.
+- **Data tab**: an editable table with undo/redo and column add/delete, **wide-to-long reshaping** for
+  repeated measures, **Encoding** (dummy and ordinal coding with value mapping), **Merge** (key-based
+  joins with key validation) and a **data profile** that suggests suitable analyses.
+- **Missing data**: multiple imputation (chained equations, monotone imputation) with MNAR
+  sensitivity analysis.
+- Fully empty rows inside a file are kept as observations (as R does); only trailing empty rows are dropped.
+
+### 2 · 131 analyses with professional options
+- **17 categories** in the Statistics tab: descriptive statistics, normality, parametric and
+  non-parametric tests, categorical data, multiple response, association and multivariate, meta-analysis,
+  regression, econometrics and causal inference, classification, clustering and dimension reduction,
+  scales and surveys, complex samples, advanced models, survival and time series.
+- **SPSS/SAS-level options**: post-hoc families (Tukey, REGWQ, Games-Howell, Dunnett, Scheffé …),
+  planned and custom contrasts (L matrix), Type I/II/III sums of squares, estimated marginal means,
+  robust and cluster-robust standard errors, exact and Monte Carlo p values, effect sizes with
+  confidence intervals, assumption tests, and alternative definitions where programs differ.
+- **Mixed and multilevel models**: LMM, GLMM, GEE, nested and crossed designs, variance components,
+  reference-level choice, interactions and group × time marginal means.
+- **Survival**: Kaplan-Meier, Cox (incl. time-dependent and frailty/cluster-robust), parametric AFT,
+  competing risks, interval censoring, survey-weighted Cox.
+- **Complex samples**: strata, clusters, weights and finite-population corrections with Taylor
+  linearisation or replicate weights (jackknife, BRR, Fay, bootstrap).
+- **Modern methods**: Bayesian t test, correlation, ANOVA and hierarchical models; SEM, CFA, PLS-SEM,
+  IRT, LCA/LPA; GAM, LOESS, response surface regression; regularised regression; CART, random forest,
+  gradient boosting, SVM, KNN, MLP; VAR, cointegration, GARCH, ARIMA, ETS, unobserved components.
+
+### 3 · Map tab: spatial analysis built in
+- Latitude/longitude columns are detected automatically and drawn on an interactive map.
+- **7 spatial methods**: KDE density, hexbin, spatial DBSCAN, Moran's I (global and LISA),
+  Getis-Ord Gi\* hot spots, empirical variogram with kriging, and point pattern analysis
+  (Ripley's K/L, G/F/J, Clark-Evans, CSR envelopes).
+- **Vector layers** (SHP, KML, KMZ, GPKG, GeoJSON) as overlays, and **geotagged photos** (EXIF + GPS)
+  imported straight into a data table for fieldwork.
+- Spatial regression (SAR, spatial error, GWR) in the Statistics tab.
+
+### 4 · Results you can read
+- Every run produces a **result card** with *Results · Chart · Table · Frequency* tabs; cards stay in
+  the session history and can be sent to the report.
+- Each analysis writes three plain-language paragraphs in the interface language — **Purpose**,
+  **Assumptions**, **Interpretation** — and an **APA 7 summary line**.
+- Undefined values are shown as "—" and very small p values as "p < .001".
+- Charts can be adjusted (axis limits, colours, zoom) and refined further in the **Chart Studio**.
+- **Tools tab**: Chart Studio, **power analysis** and **sample size** calculators.
+
+### 5 · Publication-ready reports
+- **APA 7 report generator**: select cards and export one document with a cover page, numbered tables
+  and figures, and italicised statistical symbols.
+- Formats: **DOCX · PDF · HTML · Excel**, and **LaTeX** tables.
+- Reports are written in the active language (Turkish, English or Spanish).
+
+### 6 · Reproducible analysis scripts
+- Every analysis you run is recorded with its full form settings. Save the session as an analysis
+  script (`.mqs`) and **replay it later on the same or updated data**, including from the command line,
+  to regenerate all results, tables and charts.
+
+### 7 · Optional AI interpreter (off by default)
+- A language model (Claude, NVIDIA NIM or DeepSeek, with your own API key) can draft the academic
+  commentary in reports. **Raw data never leaves your computer**: only the computed statistical summary
+  is sent. **Every number is checked** against the analysis output; if a value is not in the source, the
+  commentary is rejected and the rule-based text is used. The AI text is a suggestion and must be checked.
+
+### 8 · Multilingual, signed and self-updating
+- **Turkish · English · Spanish** interface, switchable without restarting; language packs can be added.
+- Code-signed Windows installer, Apple-notarized macOS build, Linux AppImage.
+- **Help → Check for Updates** downloads only the files that changed.
+
+### 9 · Learn with real examples
+- **15 discipline sample packs** with field-specific datasets for every analysis, each with a scenario,
+  variable selection, MerQur output and interpretation (Turkish and English).
+- Press **F1** for the full in-app user guide (Turkish, English, Spanish).
+
+> **Free for academic use** — registered work, T.C. Kültür ve Turizm Bakanlığı no. 2026/18517.
+> DOI: `10.53463/merqur.2026001`.
 
 ---
 
@@ -311,14 +386,6 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
   EMMs, replicate-weight survey variance (jackknife, BRR, Fay, bootstrap), panel unit-root tests, SUR/3SLS,
   REGWQ, lack-of-fit, Breusch-Pagan/White and Chow tests, spectral windows, CLS/ULS ARIMA and VARX,
   wide-to-long reshaping and LaTeX table export
-
-</details>
-
-<details>
-<summary><b>✔ v2.0 — validation release</b></summary>
-
-- All analyses validated option by option against R, SPSS and SAS on independent public datasets
-- Validation datasets attached to the release
 
 </details>
 
