@@ -17,7 +17,7 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.1.0-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.1.1-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
 ![Analyses](https://img.shields.io/badge/analyses-131%20%2B%207%20map-7C3AED?style=flat-square)
@@ -63,7 +63,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 
 ## ✔ Validated Against R, SPSS and SAS
 
-MerQur 2.1.0 is a **validated release**. Every analysis was recomputed on **independent, publicly
+MerQur 2.1.1 is a **validated release**. Every analysis was recomputed on **independent, publicly
 available datasets** downloaded from the internet, and its output was compared **option by option**
 with **R 4.5.3**, **IBM SPSS Statistics 27** and **SAS 9.4 (SAS/STAT 15.4, SAS/ETS 15.4)**, and with
 published values from textbooks, software documentation and NIST reference datasets where they exist.
@@ -104,7 +104,7 @@ have no equivalent in that program and are not counted).
 | Published values | 71,159 | 96.7% |
 
 **What you can check yourself.** The validation datasets are attached to every release
-([`MerQur-2.1.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip)):
+([`MerQur-2.1.1-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-validation-datasets.zip)):
 one folder per analysis, the data files used, and an index (`DIZIN.csv`) with the **source URL and
 SHA-256** of every file, so each comparison can be reproduced from the original source.
 
@@ -199,18 +199,18 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.1.0** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.1.0) and the
+**Latest release: v2.1.1** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.1.1) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.1.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-windows-x64-Setup.exe) · 351 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.1.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-windows-x64-portable.zip) · 525 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS** | [`MerQur-2.1.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-macos.dmg) · 562 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
-| 🐧 **Linux** | [`MerQur-2.1.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-linux-x86_64.AppImage) · 932 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.1.1-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-windows-x64-Setup.exe) · 351 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.1.1-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-windows-x64-portable.zip) · 525 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS** | [`MerQur-2.1.1-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-macos.dmg) · 566 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
+| 🐧 **Linux** | [`MerQur-2.1.1-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-linux-x86_64.AppImage) · 932 MB | `chmod +x` & run |
 
-**Validation datasets** — [`MerQur-2.1.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.0/MerQur-2.1.0-validation-datasets.zip) · 40 MB:
+**Validation datasets** — [`MerQur-2.1.1-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.1.1/MerQur-2.1.1-validation-datasets.zip) · 40 MB:
 the independent datasets used to validate every analysis against R, SPSS and SAS, organised by
 analysis name, with the source URL and SHA-256 of every file.
 
@@ -496,7 +496,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.1.0** · 131 Analyses · 7 Map Methods · 17 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.1.1** · 131 Analyses · 7 Map Methods · 17 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
