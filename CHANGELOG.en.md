@@ -6,6 +6,18 @@
 
 ---
 
+## [2.1.1] — 19 October 2026 · **Maintenance Release**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+MerQur 2.1.1 is a maintenance release; no new analyses were added. The computational methods are unchanged; the places where output changes are listed below.
+
+Two changes in results: the Kolmogorov-Smirnov line in the assumption section of the t-tests now uses the Lilliefors correction (the same test as the Normality analysis; because the mean and standard deviation are estimated from the sample, the uncorrected p value accepted normality too easily); in Moran's I, Getis-Ord Gi* and point pattern analysis a fixed seed (12345) is used when the seed is set to "Auto", so permutation p values are identical on every run.
+
+Fixes: very small p values are written as "<0.0001" instead of "0.0000" in the MANOVA Bonferroni line, multiple comparison corrections, multiple imputation, Cox and parametric survival models, and SAR and spatial error models; the description of the Normality analysis now states how tests are chosen by sample size and that normality is examined separately in each group in grouped analyses; in hierarchical clustering and k-means the chart is now updated when only the chart option is changed; in exponential smoothing with automatic selection the header shows the selected model and seasonal type; in variance components, choosing a column that differs on every row as a fixed effect gives an explanatory warning instead of an error; event labels in competing risks follow the interface language; in the Survey tab an edited question now appears in the list, and the "Other" option and rating limits are kept when editing; the "Missing value" choice in Data > Encoding (fill with mode, mark as unknown, drop row) is now applied; the titles of violin, ridge and Q-Q plots and the percentage format in the sample size calculator follow the interface language; the Windows installer now upgrades a previous version without waiting for confirmation in silent mode, and an all-users installation defaults to Program Files; a department name was corrected in an English sample dataset.
+
+---
+
 ## [2.1.0] — 17 October 2026 · **Eight New Analyses and SPSS/SAS-Level Options**
 
 > Published under the same DOI registration as v1.0.0 (2026/18517).
