@@ -6,6 +6,18 @@
 
 ---
 
+## [2.1.1] — 19 Ekim 2026 · **Düzeltme Sürümü**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.1.1 bir düzeltme sürümüdür; yeni analiz eklenmedi. Analizlerin hesaplama yöntemleri değişmedi; çıktısı değişen yerler aşağıda belirtilmiştir.
+
+Sonuçlarda değişen iki nokta: t-testlerinin varsayım bölümündeki Kolmogorov-Smirnov satırı artık Lilliefors düzeltmesiyle hesaplanıyor (Normallik analiziyle aynı test; ortalama ve standart sapma örneklemden kestirildiği için düzeltmesiz p değeri normalliği fazla kolay kabul ettiriyordu); Moran's I, Getis-Ord Gi* ve nokta örüntüsü analizinde tohum "Otomatik" iken sabit tohum (12345) kullanılıyor, böylece permütasyon p değerleri her çalıştırmada aynı çıkıyor.
+
+Düzeltmeler: MANOVA'nın Bonferroni satırında, çoklu karşılaştırma düzeltmelerinde, çoklu atamada, Cox ve parametrik sağkalım modellerinde, SAR ve mekânsal hata modellerinde çok küçük p değerleri "0.0000" yerine "<0.0001" yazılıyor; Normallik analizinin açıklaması, testlerin örneklem büyüklüğüne göre nasıl seçildiğini ve gruplu analizlerde normalliğin her grupta ayrı incelendiğini yazıyor; hiyerarşik kümeleme ve k-ortalamalarda yalnızca grafik seçeneği değiştirildiğinde grafik artık güncelleniyor; üstel düzleştirmede otomatik seçim yapıldığında başlık seçilen modeli ve mevsim türünü gösteriyor; varyans bileşenlerinde her satırda farklı olan bir sütun sabit etki seçildiğinde hata yerine açıklayıcı bir uyarı çıkıyor; rakip riskler analizinde olay etiketleri arayüz dilinde yazılıyor; Anket sekmesinde düzenlenen soru listede görünüyor, "Diğer" seçeneği ve derecelendirme sınırları düzenlemede korunuyor; Veri > Kodlama'daki "Boş değer" seçimi (mod ile doldur, "Bilinmiyor" yaz, satırı düşür) artık uygulanıyor; keman, ridge ve Q-Q grafiklerinin başlıkları ile örneklem hesaplayıcıdaki yüzde yazımı arayüz dilinde; Windows kurulumu sessiz kurulumda önceki sürümün üzerine onay beklemeden kuruluyor ve tüm kullanıcılara kurulumda varsayılan klasör Program Files oluyor; İngilizce örnek veride bir bölüm adı düzeltildi.
+
+---
+
 ## [2.1.0] — 17 Ekim 2026 · **Sekiz Yeni Analiz ve SPSS/SAS Düzeyinde Seçenekler**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
