@@ -6,6 +6,26 @@
 
 ---
 
+## [2.1.2] — 23 Ekim 2026 · **3 Boyutlu Grafikler ve Grafik Düzeltmeleri**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.1.2'de yeni analiz eklenmedi; sürüm, grafik katmanını büyüten ve bütün grafiklerin tek tek gözden geçirilmesiyle bulunan sorunları gideren bir sürümdür. Analizlerin hesaplama yöntemleri değişmedi; çıktısı değişen yerler aşağıda ayrıca belirtilmiştir.
+
+3 boyutlu grafikler: Grafik Stüdyosu'na 3B saçılım (tabana izdüşüm seçeneğiyle), 3B yüzey (üçgen yüzey, ızgara enterpolasyonu ve ikinci derece uydurma), kontur, iki değişkenli yoğunluk yüzeyi ve 3B histogram eklendi; 3B grafikler döndürme animasyonu (GIF; ffmpeg kuruluysa MP4) ve etkileşimli HTML olarak dışa aktarılabiliyor. Analiz panellerine 3B seçenekler geldi: yanıt yüzeyi regresyonunda 3B yüzey; PCA, faktör analizi, MDS ve uyum analizinde 3B skor, yük ve biplot; doğrusal, lojistik, GAM, LOESS, sayım, kantil, sağlam, ridge/lasso/düzenlileştirilmiş, doğrusal olmayan, probit, tobit, sıralı ve çok kategorili lojistik regresyonda iki yordayıcılı 3B yüzey; Cox ve parametrik sağkalımda S(t|x) yüzeyi; makine öğrenmesinde 3B kısmi bağımlılık ve karar yüzeyi; Bayesçi modellerde ortak sonsal yüzey; kümeleme, diskriminant, t-SNE, UMAP, CCA ve PLS'de 3B gösterim; Harita sekmesinde kriging/IDW ve çekirdek yoğunluğu yüzeyleri; güç analizinde güç yüzeyi.
+
+Grafik Stüdyosu kataloğu tamamlandı: yatay sütun, lolipop, şerit, hexbin, paralel koordinat, korelasyon matrisi, basamak, yığılmış alan, ağaç haritası, güneş patlaması, buz sarkıtı, daire paketleme, dendrogram, ağ, radar, kutupsal, Gantt, şelale, akış (streamgraph), Sankey ve alüvyon, sırt, çift ve hata çubuğu grafikleri ile takvim ısı haritası eklendi ya da menüye bağlandı; kaydetme PNG, SVG ve PDF olarak yapılabiliyor.
+
+Anket: kaydedilen JSON dosyaları yeniden yüklendiğinde soru türü, seçenekler ve atlama mantığı korunuyor (önceki sürümde yükleme hata veriyordu); araç çubuğuna "JSON Aç" ve "JSON'dan Ekle" eklendi; Ölçek Kütüphanesi ile hazır ölçek formları (TR/EN) ankete aktarılabiliyor; PDF ve DOCX katılımcı formu yalnızca yönergeyi basıyor, künye ve lisans bilgileri ayrı "araştırmacı notları" alanında tutuluyor; soru sırası sürükle-bırak ile değiştirilebiliyor. Veri: Excel'den içe aktarmada sayfa, başlık satırı ve sütun seçimi yapılabiliyor (çok sayfalı dosyalarda pencere kendiliğinden açılır).
+
+Sonuçlarda değişen noktalar: çok küçük p değerleri her yerde "p < 0.0001" biçiminde yazılıyor; Mann-Whitney U'da birinci grup artık kategori sırasına (yoksa veride görünme sırasına) göre belirleniyor, veride ilk görünen grup sıralamada ilk değilse U, r, Hodges-Lehmann kestirimi ve güven aralığının işareti ile tek yönlü p'nin yönü değişir, iki yönlü p aynıdır; permütasyon testinde fark işareti aynı kuralla dilden bağımsız; rastgele orman, gradyan artırma, SVM ve MLP sınıflandırıcılarında eğitim/test bölmesi ve çapraz geçerlik katları sınıf etiketinin dilinden bağımsız (önceki sürümde Türkçe ve İngilizce arayüzde aynı veri farklı doğruluk verebiliyordu; bu nedenle örnek verilerdeki doğruluk değerleri değişebilir); Getis-Ord Gi* permütasyon p'si için katlanmış/iki yönlü seçeneği eklendi (varsayılan önceki davranış).
+
+Grafik düzeltmeleri: Grafik Stüdyosu'nun koyu teması uygulamanın geri kalanına sızıyor, sonraki analiz grafikleri ve PDF/DOCX rapor görselleri koyu zeminle çıkıyordu; rapor dışa aktarımı sonrasında grafiklerde yazı ailesi kayboluyordu; her iki sorun giderildi. Tüm Stüdyo ve analiz grafikleri WCAG kontrast, taşma ve çakışma ölçütleriyle tarandı; Türkçe arayüzde İngilizce ve İngilizce arayüzde Türkçe kalan başlık, eksen ve gösterge metinleri çeviriye bağlandı; başlıksız grafiklere başlık, adsız eksenlere ad eklendi; grup sırası ve renkleri iki dilde aynı (ANOVA, Kaplan-Meier, ki-kare ailesi, çoklu yanıt); orman grafiklerinde log eksen işaretleri düz sayı, az katsayılı grafiklerde satırlar ortalanmış ve yanında değer sütunu; Bayesçi grafiklerde frekansçı terimler sonsal dille değiştirildi ve BF ekseni büyük değerlerde genişliyor; iki yönlü ANOVA'nın artık grafiği boş çıkıyordu, düzeltildi; ARIMA/ETS'de "Gözlenen" çizgisi ham seri; aracılık diyagramında değişken adları kesilmiyor; SAR/SEM'de sabit terim grafiğe ölçek bozmadan not olarak yazılıyor; çok sınıflı hedefte ROC bire-karşı-diğerleri eğrileri; gradyan artırma öğrenme eğrisi erken durdurma kapalıyken de çiziliyor; 3B yük/biplot etiketleri çakışmıyor; Stüdyo'da pasta/halka/çubuk yüzdeleri ve işaret değerleri yerel biçimde, zaman ekseninde aylar okunuyor, orman ve huni grafiklerinde ters-varyans ağırlıklı havuz tahmini, takvim ısı haritası düzeni, lolipop/radar/aşama hunisi/waffle/kontur/buz sarkıtı/daire paketleme etiketleri; güç analizinde HR/OR etki ızgarası 1'in iki yanını kapsıyor (koruyucu etkiler) ve göstergeler tamamlandı; nokta örüntüsü zarfları 0-1 aralığında, KDE birimi haritada ve 3B'de aynı; sonuç kartı başlığındaki bağımsız değişken sayısı bir eksik yazılıyordu, düzeltildi.
+
+Platform: Linux AppImage Ubuntu 22.04 üzerinde derleniyor ve glibc 2.35 ve üzeri dağıtımlarda açılıyor (kurulum ve sorun giderme notu README'de); macOS için Apple Silicon ve Intel DMG'leri ayrı ayrı sunuluyor.
+
+---
+
 ## [2.1.1] — 19 Ekim 2026 · **Düzeltme Sürümü**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
