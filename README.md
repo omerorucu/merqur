@@ -436,6 +436,13 @@ Contact the author for the translator guide.
   reference (available in TR / EN / ES)
 - 📄 **Promotional Presentation** — 57-page deck with worked examples for every
   analysis (uploaded as a Release asset)
+- 📑 **Technical Note: Analyses** — every analysis with its options, worked
+  examples and interpretation: [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.1.2/MerQur-2.1.2-Teknik-Not-TR.pdf) ·
+  [English](https://github.com/omerorucu/merqur/releases/download/v2.1.2/MerQur-2.1.2-Technical-Note-EN.pdf) (Release assets)
+- 📊 **Technical Note: Charts** — all 353 charts of the Chart Studio, analysis
+  panels, 3D options, Map and power analysis with data, settings and reading tips:
+  [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.1.2/MerQur-2.1.2-Grafik-Teknik-Notu-TR.pdf) ·
+  [English](https://github.com/omerorucu/merqur/releases/download/v2.1.2/MerQur-2.1.2-Chart-Technical-Note-EN.pdf) (Release assets)
 
 Developer and translator documentation lives with the source code;
 contact the author for access.
