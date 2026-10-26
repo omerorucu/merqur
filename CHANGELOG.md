@@ -6,6 +6,33 @@
 
 ---
 
+## [2.2.0] — 26 Ekim 2026 · **Çok Lokasyonlu Tesadüf Blokları ve Dayanıklılık Turu**
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.2.0 bir yeni analiz getirir ve bütün analizlerin bozuk, eksik ya da uç verilerle sistematik olarak sınandığı bir dayanıklılık turunun düzeltmelerini içerir. Doğru veride analizlerin sayısal sonuçları değişmedi; çıktısı değişen yerler aşağıda ayrıca belirtilmiştir.
+
+Yeni analiz: Çok Lokasyonlu Tesadüf Blokları (Birleştirilmiş Varyans Analizi). Tarımsal değerleri ölçme ve çeşit denemelerinde kullanılan standart çizelgeyi (lokasyon başına F, VK, AÖF, harf grupları; birleşik ortalamalar) ve birleştirilmiş varyans analizini (lokasyon sabit ya da rastgele) üretir. SAS ve R'daki seçeneklerin tamamı bulunur: on ortalama ayrımı yöntemi, Dunnett, aday-standart ve serbest kontrastlar, dilim analizi, etki büyüklükleri, sıra tabanlı testler, varyans homojenliği ve normallik tanıları, Tip I-IV kareler toplamı, LS-ortalamalar, karma model (REML, ML, TYPE3, MIVQUE0; Kenward-Roger ve Satterthwaite), lokasyon başına hata varyansı, dönüşümler, kayıp parsel (Yates), kovaryat ve çeşit × çevre etkileşimi ile stabilite analizleri (AMMI, GGE biplot, Eberhart-Russell, Finlay-Wilkinson ve on bir parametrik ve sıra tabanlı istatistik). Yirmi iki grafik türü vardır. Sonuçlar SAS 9.4 ve R ile karşılaştırılarak doğrulanmıştır; teknik not ve SAS karşılaştırması bu sürümün dosyaları arasındadır.
+
+Veri sayfası: Program açıldığında boş bir veri giriş sayfası gelir (sütunlar var1, var2…, satırlar 1, 2, 3…); veri yazılabilir ya da Excel ve benzeri programlardan yapıştırılabilir. Sayfa kenara gelindikçe ve yapıştırılan veri sığmadığında kendiliğinden büyür; yapıştırılan ilk satır metinse sütun adı olarak kullanılması önerilir. Virgüllü ondalıklar (3,5) sayıya çevrilir; yalnız sayı içeren sütunlar sayısal, diğerleri kategorik olur ve tür, sütun başlığı menüsünden değiştirilebilir. Boş sütunlar ve sondaki boş satırlar analize ve kayda girmez. Dosya yapıştırmasında da tablo sınırı dışına taşan veri artık reddedilmez.
+
+Rapor: Word, PDF, HTML, LaTeX ve Excel raporlarına her kartın Sonuçlar sekmesindeki metin eklenir (varsayılan açık).
+
+Dayanıklılık turu: 132 analizin her biri, küçük örneklem, eksik değer, boş hücre, sabit sütun, tek düzeyli faktör, dengesiz tasarım, aykırı değer ve yinelenen satır içeren veri varyantlarıyla ve her seçeneğiyle çalıştırıldı (yaklaşık 9.000 koşu); ayrıca p değerlerinin [0, 1] aralığında, güven aralıklarının doğru sırada, bilgi ölçütlerinin −2LL'den büyük olduğu ve Türkçe ile İngilizce arayüzün aynı sayıları verdiği denetlendi. Bulunan çökmeler ve İngilizce kalan kütüphane iletileri çevrilmiş, açıklayıcı uyarı ya da hata iletilerine dönüştürüldü; hesaplanamayan (tanımsız) değerler "nan" ya da "inf" yerine "—" ve bir dipnotla gösteriliyor; Türkçe arayüzde kalan İngilizce etiketler çevrildi. Bu tur bundan sonra her sürümün öncesinde tekrarlanacak.
+
+Sonuçlarda değişen noktalar:
+- Uç verilerde anlamsız sonuç basılmıyor. Sabit bağımlı değişkende t-testleri, ANOVA, ANCOVA, karma modeller, MANOVA, permütasyon testi, ICC, kantil regresyon, Tobit ve çok lokasyonlu tesadüf blokları, R ve SAS'ın davrandığı gibi açıklayıcı bir hata ya da "—" verir (önceki sürümlerde bazı durumlarda kayan nokta gürültüsünden anlamsız F ya da t değerleri basılabiliyordu). Çapraz tabloda satır ya da sütun tek düzeyliyse ki-kare istatistiği hesaplanmaz (SAS PROC FREQ gibi); frekans tablosu gösterilir. Varyans bileşenlerinde tanımlanamayan bileşen için açıklayıcı hata verilir.
+- Anket analizleri R `survey` paketi gibi davranır: 1'den küçük sonlu popülasyon düzeltmesi (FPC) değerleri örnekleme oranı olarak yorumlanır; negatif ağırlıkta ortalama, toplam ve frekans sonuç verir, regresyon modelleri R'deki gibi durur; anket regresyonunda sabit bir yordayıcı modelden düşülür ve "kestirilemez" olarak gösterilir.
+- Karma modelde sabit sayısal kovaryat, lme4'teki gibi modelden düşülür ve uyarı verilir; MANOVA'da sabit bağımlı değişken SAS gibi düşülür.
+- Çok lokasyonlu tesadüf bloklarında karma model ve rastgele çeşit seçildiğinde BIC değeri düzeltildi (SAS ile aynı) ve bu seçenekte ikili fark tablosu verilmez (rastgele faktörün LS-ortalaması yoktur).
+- İki grup permütasyon testinde ve klasik t satırında fark, 2.1.2'den beri olduğu gibi veride ilk görünen gruptan ikinciye doğru alınır; tek yönlü p değerleri bu yöne göredir.
+- Anket Cox regresyonunda (Survey-PHREG) tasarım serbestlik derecesi 0 ya da negatifse (PSU sayısı tabaka sayısını aşmıyorsa) katsayıların p değeri ve güven aralığı ile global Wald testi R gibi "—" ve açıklayıcı bir notla gösterilir (önceden serbestlik derecesi 1 alınıyordu); tek PSU'lu kümede oluşan çökme giderildi. Coğrafi ağırlıklı regresyonda sonsuz yerel koşul sayısı "—" ve bir notla gösterilir.
+- Normallik ve betimsel istatistikte n = 3 için çarpıklığın standart hatası gösterilir (SPSS ile aynı).
+
+Güncelleyici: Uygulama içi güncelleyici merqur.sdu.edu.tr adresine ulaşamadığında sürüm bilgisini GitHub sürüm sayfasından okur. 2.2.0'dan önceki sürümlerde site erişilemezken yeni sürüm GitHub sürüm sayfasından elle indirilebilir.
+
+---
+
 ## [2.1.2] — 23 Ekim 2026 · **3 Boyutlu Grafikler ve Grafik Düzeltmeleri**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
