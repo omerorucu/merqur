@@ -6,6 +6,33 @@
 
 ---
 
+## [2.2.0] — 26 October 2026 · **Multi-Location RCBD and Robustness Round**
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+MerQur 2.2.0 adds one new analysis and the fixes from a robustness round in which every analysis was systematically tested with broken, missing and extreme data. Numerical results on valid data are unchanged; the places where output changes are listed separately below.
+
+New analysis: Multi-Location Randomized Complete Block Design (Combined Analysis of Variance). It produces the standard table used in variety and value-for-cultivation trials (F, CV, LSD and letter groups per location; combined means) and the combined analysis of variance (location fixed or random). It includes all options found in SAS and R: ten mean-separation methods, Dunnett, candidate-versus-standard and free contrasts, slice analysis, effect sizes, rank-based tests, homogeneity-of-variance and normality diagnostics, Type I-IV sums of squares, LS-means, mixed models (REML, ML, TYPE3, MIVQUE0; Kenward-Roger and Satterthwaite), location-specific error variances, transformations, missing plot (Yates), covariates, and genotype-by-environment and stability analyses (AMMI, GGE biplot, Eberhart-Russell, Finlay-Wilkinson and eleven parametric and rank-based statistics), with twenty-two chart types. Results were validated against SAS 9.4 and R; the technical note and the SAS comparison are included among the files of this release.
+
+Data sheet: the program opens with an empty data-entry sheet (columns var1, var2…, rows 1, 2, 3…); data can be typed or pasted from Excel and similar programs. The sheet grows automatically near its edges and when pasted data do not fit; if the first pasted row is text, using it as column names is offered. Decimal commas (3,5) are converted to numbers; columns containing only numbers become numeric, others categorical, and the type can be changed from the column header menu. Empty columns and trailing empty rows are not included in analyses or saved files. Pasting beyond the table edge is no longer rejected for loaded files either.
+
+Report: the text of each card's Results tab is added to Word, PDF, HTML, LaTeX and Excel reports (on by default).
+
+Robustness round: each of the 132 analyses was run with every option on data variants containing small samples, missing values, empty cells, constant columns, single-level factors, unbalanced designs, outliers and duplicated rows (about 9,000 runs), and checks confirmed that p values lie in [0, 1], confidence limits are ordered, information criteria are not below −2LL, and the Turkish and English interfaces give identical numbers. Crashes and untranslated library messages found were turned into translated, explanatory warnings or errors; undefined values are shown as "—" with a footnote instead of "nan" or "inf"; remaining English labels in the Turkish interface were translated. This round will be repeated before every release.
+
+Changes in results:
+- Meaningless results are no longer printed for degenerate data. With a constant dependent variable, t-tests, ANOVA, ANCOVA, mixed models, MANOVA, the permutation test, ICC, quantile regression, Tobit and the multi-location RCBD give an explanatory error or "—", as R and SAS do (earlier versions could, in some cases, print meaningless F or t values arising from floating-point noise). In crosstabs with a single-level row or column variable no chi-square statistic is computed (as in SAS PROC FREQ); the frequency table is shown. Variance components give an explanatory error for an unidentifiable component.
+- Survey analyses behave like the R `survey` package: finite population correction (FPC) values below 1 are interpreted as sampling fractions; with negative weights, means, totals and frequencies are computed while regression models stop, as in R; a constant predictor in survey regression is dropped and shown as "not estimable".
+- In mixed models a constant numeric covariate is dropped with a warning, as in lme4; in MANOVA a constant dependent variable is dropped, as in SAS.
+- In the multi-location RCBD with the mixed model and random variety, BIC is corrected (same as SAS) and no pairwise difference table is given (a random factor has no LS-means).
+- In the two-group permutation test and the classical t line, the difference is taken from the first group in the data to the second, as since 2.1.2; one-sided p values follow this direction.
+- In survey Cox regression (Survey-PHREG), when the design degrees of freedom are zero or negative (no more PSUs than strata), coefficient p values and confidence limits and the global Wald test are shown as "—" with an explanatory note, as in R (previously one degree of freedom was used); a crash with a single-PSU cluster was fixed. In geographically weighted regression an infinite local condition number is shown as "—" with a note.
+- In normality and descriptive statistics the standard error of skewness is shown for n = 3 (same as SPSS).
+
+Updater: when merqur.sdu.edu.tr cannot be reached, the in-app updater reads version information from the GitHub release page. In versions before 2.2.0, while the site is unreachable, the new version can be downloaded manually from the GitHub release page.
+
+---
+
 ## [2.1.2] — 23 October 2026 · **3D Charts and Chart Fixes**
 
 > Published under the same DOI registration as v1.0.0 (2026/18517).
