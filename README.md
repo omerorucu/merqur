@@ -17,12 +17,19 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.2.0-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.3.0-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
-![Analyses](https://img.shields.io/badge/analyses-132%20%2B%207%20map-7C3AED?style=flat-square)
+![Analyses](https://img.shields.io/badge/analyses-137%20%2B%207%20map-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
 ![Validated](https://img.shields.io/badge/validated-R%20%7C%20SPSS%20%7C%20SAS-0F766E?style=flat-square)
+
+<img src="assets/ataturk_soz_tr.jpg" alt="Mustafa Kemal Atatürk" width="640" />
+
+<sub><i>“Societies that wish to live in comfort without working, without tiring and without producing are doomed
+to lose first their dignity, then their freedom, and then their independence and their future.”</i>
+— Mustafa Kemal Atatürk</sub>
+
 
 
 
@@ -63,7 +70,7 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 
 ## ✔ Validated Against R, SPSS and SAS
 
-MerQur 2.2.0 is a **validated release**. Every analysis was recomputed on **independent, publicly
+MerQur 2.3.0 is a **validated release**. Every analysis was recomputed on **independent, publicly
 available datasets** downloaded from the internet, and its output was compared **option by option**
 with **R 4.5.3**, **IBM SPSS Statistics 27** and **SAS 9.4 (SAS/STAT 15.4, SAS/ETS 15.4)**, and with
 published values from textbooks, software documentation and NIST reference datasets where they exist.
@@ -104,7 +111,7 @@ have no equivalent in that program and are not counted).
 | Published values | 71,159 | 96.7% |
 
 **What you can check yourself.** The validation datasets are attached to every release
-([`MerQur-2.2.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-validation-datasets.zip)):
+([`MerQur-2.3.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-validation-datasets.zip)):
 one folder per analysis, the data files used, and an index (`DIZIN.csv`) with the **source URL and
 SHA-256** of every file, so each comparison can be reproduced from the original source.
 
@@ -126,7 +133,7 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
   sensitivity analysis.
 - Fully empty rows inside a file are kept as observations (as R does); only trailing empty rows are dropped.
 
-### 2 · 132 analyses with professional options
+### 2 · 137 analyses with professional options
 - **17 categories** in the Statistics tab: descriptive statistics, normality, parametric and
   non-parametric tests, categorical data, multiple response, association and multivariate, meta-analysis,
   regression, econometrics and causal inference, classification, clustering and dimension reduction,
@@ -199,17 +206,17 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.2.0** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.2.0) and the
+**Latest release: v2.3.0** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.0) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.2.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-windows-x64-Setup.exe) · 352 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.2.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-windows-x64-portable.zip) · 526 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.2.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-macos.dmg) · 569 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
-| 🍎 **macOS (Intel)** | [`MerQur-2.2.0-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-macos-intel.dmg) · 614 MB | Notarized by Apple · for Intel Macs; the row above is for Apple Silicon |
-| 🐧 **Linux** | [`MerQur-2.2.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-linux-x86_64.AppImage) · 933 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.3.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-windows-x64-Setup.exe) · 352 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.3.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-windows-x64-portable.zip) · 527 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-macos.dmg) · 567 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
+| 🍎 **macOS (Intel)** | [`MerQur-2.3.0-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-macos-intel.dmg) · 615 MB | Notarized by Apple · for Intel Macs; the row above is for Apple Silicon |
+| 🐧 **Linux** | [`MerQur-2.3.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-linux-x86_64.AppImage) · 934 MB | `chmod +x` & run |
 
 **Linux notes** — the AppImage is built on Ubuntu 22.04 and runs on 64-bit distributions with glibc 2.35
 or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not start:
@@ -218,7 +225,7 @@ or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not
 `could not load the Qt platform plugin xcb` → `sudo apt install libxcb-cursor0 libxkbcommon-x11-0 libegl1 libgl1`.
 
 
-**Validation datasets** — [`MerQur-2.2.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-validation-datasets.zip) · 40 MB:
+**Validation datasets** — [`MerQur-2.3.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-validation-datasets.zip) · 42 MB:
 the independent datasets used to validate every analysis against R, SPSS and SAS, organised by
 analysis name, with the source URL and SHA-256 of every file.
 
@@ -240,7 +247,7 @@ Forest Genetics, Agriculture/Forestry/Aquatic, Sport Sciences). Download them fr
 2. **Data tab** — columns are auto-classified:
    - 🔵 Numeric · 🟠 Categorical · 🟢 Geo (lat/lon) · 🟣 Date · 🔴 Binary · ⚪ Text
    - Multi-choice columns (comma/semicolon-separated) auto-highlighted in purple
-3. **Statistics tab** — pick analysis from the sidebar (132 options across 17 categories)
+3. **Statistics tab** — pick analysis from the sidebar (137 options across 18 categories)
 4. **Run** ▶ — results appear as a **card** with Results / Chart / Table / Frequency tabs
 5. **Report tab** — select cards → export to **DOCX / PDF / HTML / Excel** with cover page
 
@@ -386,6 +393,22 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 </details>
 
 <details>
+<summary><b>🆕 Added in v2.3</b> — Moderation &amp; Mediation: 5 new analyses</summary>
+
+- New **Moderation &amp; Mediation** category on a common **conditional process engine**
+  (templates 1–92: conditional direct and indirect effects, simple slopes, Johnson-Neyman regions,
+  index of moderated mediation, percentile/BCa bootstrap and Monte Carlo intervals)
+- **Moderation Analysis** (Models 1–3)
+- **Multilevel Mediation** (1-1-1, 2-1-1, 2-2-1)
+- **Causal Mediation Analysis** (ACME/ADE, VanderWeele decomposition, sensitivity analysis)
+- **Multilevel SEM Mediation (MSEM)** (random intercepts, latent cluster means)
+- **Bayesian Mediation Analysis** (Models 4, 6, 7, 14; continuous and binary outcome)
+- Path Analysis gains specific, total indirect and total effects
+- The new analyses were validated against R, SAS and SPSS on independent, published datasets
+
+</details>
+
+<details>
 <summary><b>🆕 Added in v2.2</b> — 1 new analysis + empty data sheet</summary>
 
 - **Multi-location RCBD (combined analysis of variance)** for variety and value-for-cultivation trials:
@@ -456,12 +479,12 @@ Contact the author for the translator guide.
 - 📄 **Promotional Presentation** — 57-page deck with worked examples for every
   analysis (uploaded as a Release asset)
 - 📑 **Technical Note: Analyses** — every analysis with its options, worked
-  examples and interpretation: [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-Teknik-Not-TR.pdf) ·
-  [English](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-Technical-Note-EN.pdf) (Release assets)
+  examples and interpretation: [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-Teknik-Not-TR.pdf) ·
+  [English](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-Technical-Note-EN.pdf) (Release assets)
 - 📊 **Technical Note: Charts** — all 353 charts of the Chart Studio, analysis
   panels, 3D options, Map and power analysis with data, settings and reading tips:
-  [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-Grafik-Teknik-Notu-TR.pdf) ·
-  [English](https://github.com/omerorucu/merqur/releases/download/v2.2.0/MerQur-2.2.0-Chart-Technical-Note-EN.pdf) (Release assets)
+  [Turkish](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-Grafik-Teknik-Notu-TR.pdf) ·
+  [English](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-Chart-Technical-Note-EN.pdf) (Release assets)
 
 Developer and translator documentation lives with the source code;
 contact the author for access.
@@ -530,7 +553,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.2.0** · 132 Analyses · 7 Map Methods · 17 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.3.0** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
