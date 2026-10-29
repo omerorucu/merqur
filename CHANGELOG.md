@@ -6,6 +6,39 @@
 
 ---
 
+## [2.3.0] — 29 Ekim 2026 · **Düzenleyicilik ve Aracılık**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+> v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
+
+MerQur 2.3.0, düzenleyicilik (moderasyon) ve aracılık (mediasyon) analizlerini yeni "Düzenleyicilik ve Aracılık" kategorisinde toplar ve beş yeni analiz getirir. Aracılık ve Yol Analizi bu kategoriye taşındı. Önceki analizlerin doğru veride sayısal sonuçları değişmedi; çıktısı değişen yerler aşağıda ayrıca belirtilmiştir.
+
+Koşullu Süreç Motoru: Düzenleyicilik ve Aracılık analizleri, Hayes'in koşullu süreç modellerinin 1–92 numaralı şablonlarını kestiren ortak bir motor üzerinde çalışır. Koşullu doğrudan ve dolaylı etkiler, basit eğimler, Johnson-Neyman bölgeleri, düzenlenmiş aracılık indeksi ve dolaylı etki kontrastları; yüzdelik ve BCa bootstrap ile Monte Carlo güven aralıkları; kovaryatlar, çok kategorili X ve W, ikili bağımlı değişkende lojistik model ve ölçüm hatası düzeltmesi bulunur.
+
+Yeni analizler:
+- Düzenleyicilik Analizi (Model 1–3): basit eğim tabloları, Johnson-Neyman bölgesi ve etkileşim grafikleri.
+- Çok Düzeyli Aracılık: 1-1-1, 2-1-1 ve 2-2-1 tasarımları; rastgele eğimler, küme içi/küme ortalaması merkezleme, Kenward-Roger ve Satterthwaite serbestlik dereceleri, Monte Carlo güven aralıkları.
+- Nedensel Aracılık Analizi: ortalama nedensel aracılık etkisi (ACME) ve doğrudan etki (ADE), VanderWeele ayrıştırması, X × M etkileşimi ve duyarlılık analizi.
+- Çok Düzeyli YEM ile Aracılık (MSEM): rastgele kesişimli model, gizil küme ortalamaları ve en çok olabilirlik; 1-1-1, 2-1-1 ve 2-2-1 tasarımları; düzey içi ve düzey arası dolaylı etkiler.
+- Bayesçi Aracılık Analizi: Model 4, 6, 7 ve 14; sürekli ve ikili bağımlı değişken; sonsal dağılımdan eşit kuyruklu ve en yüksek yoğunluk (HDI) inanılırlık aralıkları ve düzenlenmiş aracılık indeksi.
+
+Aracılık ve Yol Analizi: Aracılık ve Koşullu Süreç Analizi paneli Koşullu Süreç Motoruna geçirildi. Yol Analizi'ne özgül dolaylı, toplam dolaylı ve toplam etkiler (delta yöntemi ve bootstrap güven aralıkları) eklendi; doğrudan, dolaylı ve toplam etkiler artık seçilen kestirim yöntemiyle tek bölümde verilir.
+
+Doğrulama: Yeni analizler R, SAS ve SPSS ile ve internetten indirilen yayımlanmış verilerle (Hayes 2022 kitabının verileri dahil) karşılaştırılarak doğrulandı. Teknik not ve doğrulama veri paketi bu sürümün dosyaları arasındadır.
+
+Arayüz: Uzun süren analizler (yeniden örnekleme, makine öğrenmesi, zaman serisi, YEM) bir ilerleme penceresiyle çalışır ve İptal ile durdurulabilir. Menüdeki "YENİ" rozetleri kaldırıldı. Türkçe arayüzde analiz adları, sonuç tablosu başlıkları ve iletiler Türkçeleştirildi ve terimler birleştirildi (ör. kestirim, sağlam, önsel/sonsal, inanılırlık aralığı, sapma, yordayıcı); arayüz metinlerinden program ve paket adları kaldırıldı. Hakkında penceresine APA 7 biçiminde atıf metni eklendi (sürüm numarası çalışan sürümden alınır).
+
+Sonuçlarda değişen noktalar:
+- Aracılık: "tam / kısmi aracılık" sınıflaması kaldırıldı. Karar satırı artık "dolaylı etki anlamlı / anlamlı değil" biçimindedir ve bir açıklama notu eşlik eder.
+- Aracılık ve koşullu süreç modellerinde ikili bağımlı değişkenli lojistik model, R'deki yakınsama ölçütüyle (ardışık sapma farkı, 1e-8) kestirilir; yineleme sınırı etkilidir ve model yakınsamazsa not verilir.
+- Yol Analizi: MLM kestiriminde dışsal değişkenler sabit alınır (fixed.x); yol katsayılarının standart hataları, ölçekli χ² ve dolaylı etki standart hataları R lavaan MLM ile aynıdır ve önceki sürümden küçük ölçüde farklı olabilir. Bootstrap güven aralığı uçları yüzdelik enterpolasyonla hesaplanır.
+- Anket frekanslarında "Wald (simetrik)" oran güven aralığı %95 düzeyinde de uygulanır (önceden bu düzeyde logit aralığı kalıyordu).
+- VAR: APA özeti, artıklarda otokorelasyon bulunup bulunmadığını portmanteau testinin sonucuna göre yazar (önceden her durumda "otokorelasyon yok" yazıyordu); tanı gecikmesi gözlem sayısına ulaştığında portmanteau testi atlanır.
+
+---
+
 ## [2.2.0] — 26 Ekim 2026 · **Çok Lokasyonlu Tesadüf Blokları ve Dayanıklılık Turu**
 
 > v1.0.0 ile aynı DOI tescili (2026/18517) altında yayımlanır.
