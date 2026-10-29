@@ -6,6 +6,42 @@
 
 ---
 
+## [2.3.0] — 29 October 2026 · **Moderation and Mediation**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
+> — Mustafa Kemal Atatürk
+
+> Published under the same DOI registration as v1.0.0 (2026/18517).
+
+MerQur 2.3.0 gathers moderation and mediation analyses in a new "Moderation & Mediation" category and adds five new analyses. Mediation and Path Analysis were moved to this category. Numerical results of earlier analyses on valid data are unchanged; the places where output changes are listed separately below.
+
+Conditional Process Engine: the moderation and mediation analyses run on a common engine that estimates templates 1–92 of Hayes's conditional process models. It provides conditional direct and indirect effects, simple slopes, Johnson-Neyman regions, the index of moderated mediation and contrasts of indirect effects; percentile and BCa bootstrap and Monte Carlo confidence intervals; covariates, multicategorical X and W, a logistic model for a binary outcome and correction for measurement error.
+
+New analyses:
+- Moderation Analysis (Models 1–3): simple-slope tables, the Johnson-Neyman region and interaction plots.
+- Multilevel Mediation: 1-1-1, 2-1-1 and 2-2-1 designs; random slopes, within-cluster/cluster-mean centering, Kenward-Roger and Satterthwaite degrees of freedom, Monte Carlo confidence intervals.
+- Causal Mediation Analysis: average causal mediation effect (ACME) and direct effect (ADE), the VanderWeele decomposition, X × M interaction and sensitivity analysis.
+- Multilevel SEM Mediation (MSEM): random-intercept model with latent cluster means and maximum likelihood; 1-1-1, 2-1-1 and 2-2-1 designs; within- and between-level indirect effects.
+- Bayesian Mediation Analysis: Models 4, 6, 7 and 14; continuous and binary outcome; equal-tailed and highest-density (HDI) credible intervals from the posterior, and the index of moderated mediation.
+
+Mediation and Path Analysis: the Mediation and Conditional Process Analysis panel now runs on the Conditional Process Engine. Path Analysis gains specific indirect, total indirect and total effects (delta-method and bootstrap confidence intervals); direct, indirect and total effects are now reported in a single section using the selected estimation method.
+
+Validation: the new analyses were validated against R, SAS and SPSS and against published data downloaded from the internet (including the data of Hayes's 2022 book). The technical note and the validation data package are among the files of this release.
+
+Interface: long-running analyses (resampling, machine learning, time series, SEM) run with a progress window and can be stopped with Cancel. The "NEW" badges were removed from the menu. In the Turkish interface, analysis names, result-table headings and messages were translated and terminology was unified; program and package names were removed from interface texts. The About window shows an APA 7 citation (the version number is taken from the running version).
+
+Changes in results:
+- Mediation: the "full / partial mediation" classification was removed. The decision line now reads "indirect effect significant / not significant" and is accompanied by an explanatory note.
+- In mediation and conditional process models, the logistic model for a binary outcome is estimated with R's convergence criterion (successive deviance change, 1e-8); the iteration limit is effective and a note is given if the model does not converge.
+- Path Analysis: with MLM estimation, exogenous variables are treated as fixed (fixed.x); standard errors of path coefficients, the scaled χ² and standard errors of indirect effects match R lavaan MLM and may differ slightly from the previous version. Bootstrap confidence limits use percentile interpolation.
+- Survey frequencies: the "Wald (symmetric)" proportion confidence interval is also applied at the 95% level (previously the logit interval remained at this level).
+- VAR: the APA summary states whether residual autocorrelation is present according to the portmanteau test (previously it always stated "no autocorrelation"); the portmanteau test is skipped when the diagnostic lag reaches the number of observations.
+
+---
+
 ## [2.2.0] — 26 October 2026 · **Multi-Location RCBD and Robustness Round**
 
 > Published under the same DOI registration as v1.0.0 (2026/18517).
