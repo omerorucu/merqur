@@ -17,7 +17,7 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.3.0-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.3.1-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
 ![Analyses](https://img.shields.io/badge/analyses-137%20%2B%207%20map-7C3AED?style=flat-square)
@@ -110,7 +110,7 @@ have no equivalent in that program and are not counted).
 | SAS 9.4 | 584,804 | 94.3% |
 | Published values | 71,159 | 96.7% |
 
-**What you can check yourself.** The validation datasets are attached to every release
+**What you can check yourself.** The validation datasets are attached to the v2.3.0 release
 ([`MerQur-2.3.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-validation-datasets.zip)):
 one folder per analysis, the data files used, and an index (`DIZIN.csv`) with the **source URL and
 SHA-256** of every file, so each comparison can be reproduced from the original source.
@@ -181,18 +181,13 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
   script (`.mqs`) and **replay it later on the same or updated data**, including from the command line,
   to regenerate all results, tables and charts.
 
-### 7 · Optional AI interpreter (off by default)
-- A language model (Claude, NVIDIA NIM or DeepSeek, with your own API key) can draft the academic
-  commentary in reports. **Raw data never leaves your computer**: only the computed statistical summary
-  is sent. **Every number is checked** against the analysis output; if a value is not in the source, the
-  commentary is rejected and the rule-based text is used. The AI text is a suggestion and must be checked.
-
-### 8 · Multilingual, signed and self-updating
-- **Turkish · English · Spanish** interface, switchable without restarting; language packs can be added.
+### 7 · Multilingual, signed and self-updating
+- **Turkish · English · Spanish** interface, switchable without restarting; on first start MerQur opens in
+  the language of your operating system (English for other languages); language packs can be added.
 - Code-signed Windows installer, Apple-notarized macOS build, Linux AppImage.
 - **Help → Check for Updates** downloads only the files that changed.
 
-### 9 · Learn with real examples
+### 8 · Learn with real examples
 - **15 discipline sample packs** with field-specific datasets for every analysis, each with a scenario,
   variable selection, MerQur output and interpretation (Turkish and English).
 - Press **F1** for the full in-app user guide (Turkish, English, Spanish).
@@ -206,17 +201,17 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.3.0** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.0) and the
+**Latest release: v2.3.1** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.1) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.3.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-windows-x64-Setup.exe) · 352 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.3.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-windows-x64-portable.zip) · 527 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-macos.dmg) · 567 MB | Notarized by Apple · open the DMG and drag MerQur to Applications |
-| 🍎 **macOS (Intel)** | [`MerQur-2.3.0-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-macos-intel.dmg) · 615 MB | Notarized by Apple · for Intel Macs; the row above is for Apple Silicon |
-| 🐧 **Linux** | [`MerQur-2.3.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-linux-x86_64.AppImage) · 934 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.3.1-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-windows-x64-Setup.exe) · 349 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.3.1-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-windows-x64-portable.zip) · 523 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.1-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-macos.dmg) · 571 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
+| 🍎 **macOS (Intel)** | [`MerQur-2.3.1-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-macos-intel.dmg) · 624 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
+| 🐧 **Linux** | [`MerQur-2.3.1-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-linux-x86_64.AppImage) · 929 MB | `chmod +x` & run |
 
 **Linux notes** — the AppImage is built on Ubuntu 22.04 and runs on 64-bit distributions with glibc 2.35
 or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not start:
@@ -225,7 +220,7 @@ or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not
 `could not load the Qt platform plugin xcb` → `sudo apt install libxcb-cursor0 libxkbcommon-x11-0 libegl1 libgl1`.
 
 
-**Validation datasets** — [`MerQur-2.3.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-validation-datasets.zip) · 42 MB:
+**Validation datasets** (v2.3.0 release) — [`MerQur-2.3.0-validation-datasets.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.0/MerQur-2.3.0-validation-datasets.zip) · 42 MB:
 the independent datasets used to validate every analysis against R, SPSS and SAS, organised by
 analysis name, with the source URL and SHA-256 of every file.
 
@@ -393,6 +388,19 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 </details>
 
 <details>
+<summary><b>🛠 Updated in v2.3.1</b> — maintenance release</summary>
+
+- **macOS**: the 2.3.0 packages closed at launch on macOS 12–13; fixed (Intel: macOS 12+, Apple Silicon: macOS 12.3+)
+- **Mixed models** (LMM, GLMM, GEE, nested and crossed LMM): user-defined level order in EMM tables and plots
+  (e.g. chronological time points); simple comparisons adjusted within each level or as one family; Holm adjustment
+- **GWR / MGWR**: improved MGWR bandwidth search; extra outputs for local R², local condition number and the Monte Carlo test
+- **Custom contrasts**: parentheses and division in contrast expressions, e.g. `(A + B)/2 - C`
+- MerQur opens in the language of your operating system on first start; the Windows installer no longer asks for a language
+- Occasional crashes on closing and when started without a console fixed
+
+</details>
+
+<details>
 <summary><b>🆕 Added in v2.3</b> — Moderation &amp; Mediation: 5 new analyses</summary>
 
 - New **Moderation &amp; Mediation** category on a common **conditional process engine**
@@ -553,7 +561,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.3.0** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.3.1** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
