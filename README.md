@@ -43,9 +43,10 @@ to lose first their dignity, then their freedom, and then their independence and
 data analysis. From data ingestion to APA-7 publication-ready reports —
 everything in a single tool.
 
-Every analysis has been **validated option by option against R, SPSS and SAS** on independent,
-publicly available datasets: **140 analysis forms, 686 datasets and 7,180 cases**, with every number in
-the output compared (2.36 million statistics) and **no MerQur error remaining in the comparisons** (see [Validation](#-validated-against-r-spss-and-sas)).
+MerQur's analyses have been **validated option by option against R, SPSS and SAS** on independent,
+publicly available datasets: **140 analysis forms, 495 independent datasets (686 analysis–dataset pairs) and
+7,180 validation cases**, with every number in the output compared (2.36 million statistics). All MerQur
+errors found in these comparisons were fixed (see [Validation](#-validated-against-r-spss-and-sas)).
 
 <div align="center">
 
@@ -70,16 +71,21 @@ In a single tool: **data import** · **descriptive statistics** · **parametric 
 
 ## ✔ Validated Against R, SPSS and SAS
 
-MerQur 2.3.0 is a **validated release**. Every analysis was recomputed on **independent, publicly
-available datasets** downloaded from the internet, and its output was compared **option by option**
-with **R 4.5.3**, **IBM SPSS Statistics 27** and **SAS 9.4 (SAS/STAT 15.4, SAS/ETS 15.4)**, and with
-published values from textbooks, software documentation and NIST reference datasets where they exist.
+The analyses were recomputed on **independent, publicly available datasets** downloaded from the
+internet, and their output was compared **option by option** with **R 4.5.3**, **IBM SPSS Statistics 27**
+and **SAS 9.4 (SAS/STAT 15.4, SAS/ETS 15.4)**, and with published values from textbooks, software
+documentation and NIST reference datasets where they exist.
+
+*Scope:* the comparison tables below come from the main validation round (MerQur 2.0–2.1, 131 analyses
+plus Map-tab methods and tools). Analyses added later (moderation and mediation analyses, multi-location
+trials) were validated separately against reference implementations in R and SAS. A full re-run of the
+validation with the current release is in progress; the figures will be updated when it is complete.
 
 <div align="center">
 
-| **140** | **686** | **7,180** | **7,340** |
+| **140** | **495** | **7,180** | **7,340** |
 |:---:|:---:|:---:|:---:|
-| Analysis forms<br>(incl. Map tab and tools) | Independent datasets<br>(1,894 data files) | Validation cases<br>(analysis × dataset × options) | Parameter options<br>tested |
+| Analysis forms<br>(incl. Map tab and tools) | Independent datasets<br>(686 analysis–dataset pairs) | Validation cases<br>(analysis × dataset × options) | Parameter options<br>tested |
 
 </div>
 
@@ -98,7 +104,7 @@ correct confidence interval). Every comparison was classified:
 | **Reference limitation** | 16,641 | 0.8% | The reference program rounds, truncates or cannot compute the value |
 | **Unexplained** | 4,817 | 0.2% | A small residual difference whose cause could not be pinned down; documented per analysis |
 | **Published-value discrepancy** | 339 | 0.02% | The published reference value itself differs from all programs |
-| **MerQur error** | **0** | **0%** | All errors found during validation were fixed before release |
+| **MerQur error** | **0** | **0%** | All MerQur errors found in these comparisons were fixed before release |
 
 \* Share of the 2,201,511 comparisons that have a counterpart in the reference (158,299 statistics
 have no equivalent in that program and are not counted).
