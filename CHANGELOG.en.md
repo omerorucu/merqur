@@ -6,6 +6,65 @@
 
 ---
 
+## [2.3.2] — 2 November 2026 · **Maintenance Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.3.2 is a maintenance release. Errors found in an independent, blind reproduction study with data from published studies have been fixed, and the options of every analysis in the program were checked one by one to confirm that they are actually applied. With default settings and well-behaved data most results are unchanged; the places where results change are listed below.
+
+**Errors found in the independent blind reproduction study**
+
+- Count regression (negative binomial): with many zeros, the maximum likelihood estimate of θ could move without warning to its upper bound (Poisson); the omnibus LR χ² could be negative and the Type III tests and standard errors were wrong. θ now reaches the true maximum; results are unchanged where the estimate converges cleanly. The same fix applies to the negative binomial model of causal mediation.
+- Exploratory factor analysis (polychoric correlations, pairwise missing data): with "pairwise" selected the polychoric matrix was still computed listwise and the n of Bartlett's test was inconsistent. The matrix is now really computed pairwise; KMO and Bartlett values change.
+- Cronbach's alpha: with pairwise selected, ordinal α is now also obtained from the pairwise polychoric matrix (previously listwise and unlabelled).
+- Exploratory factor analysis, oblique rotation: it was unclear what the "Rotation SS" column showed. The column is now labelled diag(ΦP′P), the structure-matrix sums of squares (ΣS²) are added next to it, and the "cannot be added" note appears only for oblique rotations. Numbers are unchanged.
+- MANOVA (crossed design): when the computation fails, the actual reason (empty cell, singular design matrix, insufficient error degrees of freedom) is stated; previously a generic "post-hoc could not be computed" message was shown.
+- Time series, automatic ARIMA: candidate models were compared without a convergence check, so very small input differences could change the selected model. A non-converged candidate is re-estimated with stronger settings and excluded with a note if it still does not converge.
+- Confirmatory factor analysis, measurement invariance: with the MLM estimator selected the invariance steps were silently estimated with ML. The selected estimator (ML, MLM, MLR) is now used; with MLM the scaled χ² and the Satorra-Bentler (2001) difference test are used, and the table title states the estimator and the difference test. ML and MLR results are unchanged.
+- CFA/SEM, multiple groups: impossible values in a non-converged group (χ² = 0, negative R², zero standard errors) were reported with only a warning. The model covariance matrix must now be positive definite; if the model does not converge a second set of starting values is tried, and otherwise a clear error names the problem group.
+- Panel regression, two-way fixed effects: within, between and overall R² were computed without the time effects. They are now computed with the common definition that includes the time effects; the internal R² without time effects is given on a separate row. One-way and other models are unchanged.
+- Numerically coded columns (such as 1/2/3) marked "categorical" in the Data tab were ignored by 50 analyses and used as a single numeric term. The mark is now passed to the analyses; fields that accept only numeric input give a clear warning. Results for unmarked data are unchanged.
+- Chi-Square Independence and Crosstabs: for a 2×2 table with a zero cell the two panels gave different, unlabelled odds ratios. Both now give the same result with the Haldane–Anscombe correction (+0.5 added to every cell) and the Woolf confidence interval; the correction is stated and the raw odds ratio is given as a note. Tables without a zero cell are unchanged.
+- Probit (LD/ED): the heterogeneity correction was not applied to the Fieller confidence limits. The limits are now computed with the scale factor and the t critical value; an optional heterogeneity threshold (always / goodness-of-fit p < 0.15 / p < 0.10) was added. Results without scaling are unchanged.
+- One-way ANOVA (Welch): with a single-observation or zero-variance group, a request for Welch silently fell back to the classic F. Welch is now shown as "not computed" with the affected group named; the classic F appears only on a separately labelled information row. The same rule applies to Brown-Forsythe, Welch contrasts and Games-Howell.
+- Survey-weighted logistic regression: there was no warning for complete or quasi-complete separation; a warning naming the separating variable is now given. Coefficients and standard errors are unchanged.
+- Latent class / latent profile analysis: "LMR p" was computed with a χ² approximation. The Vuong-Lo-Mendell-Rubin likelihood ratio test and the adjusted LMR are now computed with the weighted sum of chi-squares distribution (sandwich covariance by default; Hessian as an option).
+
+**New principle: the "Requested vs applied settings" block**
+
+- If a selected option (estimator, correction, model, missing-data method, variable type, etc.) cannot be applied, the program no longer silently switches to another method or ignores the option. A "Requested vs applied settings" block at the top of the result text gives the requested value, the applied value and the reason. The block also appears in the Results tab, the result history, the project file and the Word/PDF/report output. When every option can be applied the output is the same as before.
+- The options of all analyses were checked one by one; where an option is effective only under certain conditions (e.g. the Yates correction only for 2×2 tables) this is stated in the block or in a result note, and dependent options are enabled only when they take effect.
+
+**Options found by the option audit that are now actually applied**
+
+- Robust regression (MM): the tuning constant, maximum iterations, weight function (Tukey, Hampel) and scale estimator were ignored; they are now applied.
+- Spatial autoregressive model: SDM with GMM/S2SLS (including the robust standard error option) silently fell back to maximum likelihood; it is now really estimated with GMM/S2SLS.
+- Quantile regression: the test of equal slopes uses the selected kernel (Powell) standard errors.
+- Repeated measures ANOVA (one factor): the selected adjustment of pairwise comparisons (LSD, Šidák; Holm added) is now really applied.
+- Multiple comparisons: the reference group is applied on every change (previously only when the field lost focus).
+- Linear regression: the lack-of-fit test is also carried out for weighted (WLS) models.
+- Ridge and Lasso: with automatic α off, the selection criterion (GCV, HKB, L-W, k-fold λ_min / λ_1SE) and the number of cross-validation folds are applied; the suggested α is reported in a separate section.
+- Count regression: the robust (sandwich) covariance is also applied to the zero part of zero-inflated and hurdle models.
+- k-means clustering: the maximum number of iterations is applied.
+- Mediation and moderation: with BCa selected, the conditional indirect effect curve now uses BCa limits (previously percentile); manually entered moderator values are applied; in path analysis and multilevel mediation, variables marked categorical are coded with indicator variables.
+- Multi-location randomized complete block trial: the Variety×Location random option was ignored; it is now applied (Variety F is tested against the Variety×Location mean square).
+
+**Other fixes**
+
+- Multilevel mediation (stacked model): in non-identified cases the confidence interval and p value of the between-level direct effect silently fell back to the normal (z) approximation and an extremely large θ standard error was printed. The Satterthwaite degrees of freedom and the θ standard error are now computed finitely with a generalised inverse.
+- GEE: when the time variable was also selected as a predictor, a categorical variable was silently converted to numeric; fixed.
+- Switching panels quickly (ROC, TSS, confusion matrix, survey logistic, t-SNE/UMAP) could occasionally close the program without a message; fixed.
+- Result history panel: a crash that could occur after the last card was hidden has been fixed.
+- Convergence warnings that used to be suppressed (survival, multiple imputation, auxiliary fits, MGWR back-fitting, etc.) are now shown in the result; the use of a pseudo-inverse for a singular matrix is stated.
+- Logistic and count regression: a profile likelihood confidence interval option was added (Wald by default; existing results unchanged).
+- English terms left in the Turkish texts were translated.
+
+---
+
 ## [2.3.1] — 30 October 2026 · **Maintenance Release**
 
 - Custom contrasts (L matrix): contrast expressions accept parentheses, division, multiplication by numbers, unary minus and nested parentheses; for example `(A + B)/2 - C` now gives the same row as `0.5*A + 0.5*B - C`. Results of contrasts written in the earlier form are unchanged. Unbalanced parentheses, a product of two coefficients and division by zero or by a coefficient are reported with a translated error message.
