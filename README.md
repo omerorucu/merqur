@@ -395,7 +395,7 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 </details>
 
 <details>
-<summary><b>🛠 Updated in v2.3.2</b> — maintenance release</summary>
+<summary><b>🛠 Updated in v2.3.2</b> — stable release</summary>
 
 - **Requested vs applied settings**: if a selected option cannot be applied, MerQur no longer switches
   silently to another method; a block at the top of the result gives the requested setting, the applied
