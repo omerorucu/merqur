@@ -6,7 +6,7 @@
 
 ---
 
-## [2.3.2] — 2 November 2026 · **Maintenance Release**
+## [2.3.2] — 2 November 2026 · **Stable Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
 > — Mustafa Kemal Atatürk
@@ -14,7 +14,7 @@
 > "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
 > — Mustafa Kemal Atatürk
 
-MerQur 2.3.2 is a maintenance release. Errors found in an independent, blind reproduction study with data from published studies have been fixed, and the options of every analysis in the program were checked one by one to confirm that they are actually applied. With default settings and well-behaved data most results are unchanged; the places where results change are listed below.
+MerQur 2.3.2 is a stable release. Errors found in an independent, blind reproduction study with data from published studies have been fixed, and the options of every analysis in the program were checked one by one to confirm that they are actually applied. With default settings and well-behaved data most results are unchanged; the places where results change are listed below.
 
 **Errors found in the independent blind reproduction study**
 
