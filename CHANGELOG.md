@@ -6,12 +6,12 @@
 
 ---
 
-## [2.3.2] — 2 Kasım 2026 · **Düzeltme Sürümü**
+## [2.3.2] — 2 Kasım 2026 · **Kararlı Sürüm**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
 > — Mustafa Kemal Atatürk
 
-MerQur 2.3.2 bir düzeltme sürümüdür. Yayımlanmış çalışmaların verileriyle yapılan bağımsız, kör yeniden üretim doğrulamasında bulunan hatalar düzeltildi; programdaki bütün analizlerin seçeneklerinin gerçekten uygulanıp uygulanmadığı tek tek denetlendi. Varsayılan ayarlarla ve sorunsuz veride sonuçların büyük çoğunluğu değişmedi; sonucu değişen yerler aşağıda belirtilmiştir.
+MerQur 2.3.2 kararlı sürümdür. Yayımlanmış çalışmaların verileriyle yapılan bağımsız, kör yeniden üretim doğrulamasında bulunan hatalar düzeltildi; programdaki bütün analizlerin seçeneklerinin gerçekten uygulanıp uygulanmadığı tek tek denetlendi. Varsayılan ayarlarla ve sorunsuz veride sonuçların büyük çoğunluğu değişmedi; sonucu değişen yerler aşağıda belirtilmiştir.
 
 **Bağımsız kör yeniden üretim doğrulamasında bulunan hatalar**
 
