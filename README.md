@@ -17,7 +17,7 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.3.1-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.3.2-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
 ![Analyses](https://img.shields.io/badge/analyses-137%20%2B%207%20map-7C3AED?style=flat-square)
@@ -44,13 +44,13 @@ data analysis. From data ingestion to APA-7 publication-ready reports —
 everything in a single tool.
 
 MerQur's analyses have been **validated option by option against R, SPSS and SAS** on independent,
-publicly available datasets: **140 analysis forms, 495 independent datasets (686 analysis–dataset pairs) and
+publicly available datasets: **140 analysis forms, 495 distinct datasets (686 analysis–dataset pairs) and
 7,180 validation cases**, with every number in the output compared (2.36 million statistics). All MerQur
 errors found in these comparisons were fixed (see [Validation](#-validated-against-r-spss-and-sas)).
 
 <div align="center">
 
-| **131** | **17** | **7** | **APA 7** |
+| **137** | **18** | **7** | **APA 7** |
 |:---:|:---:|:---:|:---:|
 | Statistical<br>Analyses | Analysis<br>Categories | Map-tab<br>Methods | Report<br>Generator |
 
@@ -78,14 +78,15 @@ documentation and NIST reference datasets where they exist.
 
 *Scope:* the comparison tables below come from the main validation round (MerQur 2.0–2.1, 131 analyses
 plus Map-tab methods and tools). Analyses added later (moderation and mediation analyses, multi-location
-trials) were validated separately against reference implementations in R and SAS. A full re-run of the
-validation with the current release is in progress; the figures will be updated when it is complete.
+trials) were validated separately against reference implementations in R and SAS. The MerQur side of the
+validation was re-run with a frozen copy of MerQur 2.3.1 (R, SPSS and SAS reference outputs
+unchanged); errors found were fixed in MerQur 2.3.2.
 
 <div align="center">
 
 | **140** | **495** | **7,180** | **7,340** |
 |:---:|:---:|:---:|:---:|
-| Analysis forms<br>(incl. Map tab and tools) | Independent datasets<br>(686 analysis–dataset pairs) | Validation cases<br>(analysis × dataset × options) | Parameter options<br>tested |
+| Analysis forms<br>(incl. Map tab and tools) | Distinct public datasets<br>(686 analysis–dataset pairs) | Validation cases<br>(analysis × dataset × options) | Parameter options<br>tested |
 
 </div>
 
@@ -207,17 +208,17 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.3.1** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.1) and the
+**Latest release: v2.3.2** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.2) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.3.1-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-windows-x64-Setup.exe) · 349 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.3.1-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-windows-x64-portable.zip) · 523 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.1-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-macos.dmg) · 571 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
-| 🍎 **macOS (Intel)** | [`MerQur-2.3.1-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-macos-intel.dmg) · 624 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
-| 🐧 **Linux** | [`MerQur-2.3.1-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.1/MerQur-2.3.1-linux-x86_64.AppImage) · 929 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.3.2-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-windows-x64-Setup.exe) · 350 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.3.2-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-windows-x64-portable.zip) · 523 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.2-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-macos.dmg) · 572 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
+| 🍎 **macOS (Intel)** | [`MerQur-2.3.2-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-macos-intel.dmg) · 620 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
+| 🐧 **Linux** | [`MerQur-2.3.2-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-linux-x86_64.AppImage) · 929 MB | `chmod +x` & run |
 
 **Linux notes** — the AppImage is built on Ubuntu 22.04 and runs on 64-bit distributions with glibc 2.35
 or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not start:
@@ -394,6 +395,24 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 </details>
 
 <details>
+<summary><b>🛠 Updated in v2.3.2</b> — maintenance release</summary>
+
+- **Requested vs applied settings**: if a selected option cannot be applied, MerQur no longer switches
+  silently to another method; a block at the top of the result gives the requested setting, the applied
+  setting and the reason (also in the result history, project file and Word/PDF reports)
+- The options of every analysis were checked one by one; options that were previously ignored are now
+  applied (e.g. robust regression MM, spatial GMM/S2SLS, Ridge/Lasso selection criterion,
+  repeated-measures pairwise adjustment, Variety×Location random term in multi-location trials)
+- **Fixes from an independent blind reproduction study** with data from published studies: negative
+  binomial count regression, polychoric factor analysis and ordinal alpha with pairwise missing data,
+  automatic ARIMA, CFA measurement invariance (MLM) and multiple-group models, two-way panel R²
+- Numerically coded columns marked *categorical* in the Data tab are treated as categorical in all analyses
+- Zero-cell 2×2 odds ratio, probit LD/ED limits, Welch ANOVA and the LMR test corrected; convergence
+  warnings that were suppressed are now shown
+
+</details>
+
+<details>
 <summary><b>🛠 Updated in v2.3.1</b> — maintenance release</summary>
 
 - **macOS**: the 2.3.0 packages closed at launch on macOS 12–13; fixed (Intel: macOS 12+, Apple Silicon: macOS 12.3+)
@@ -515,11 +534,6 @@ contact the author for access.
 **PyQt6** · **Matplotlib** · **Folium** · **Plotly**
 **pyreadstat** · **openpyxl** · **python-docx** · **reportlab** · **Babel**
 
-### Artificial Intelligence · Architectural and coding partner
-**Anthropic Claude** — served as a continuous development partner throughout
-MerQur's architecture, code authoring, and testing. Collaborated on the design
-and implementation of 130+ analyses.
-
 > ***«If I have seen further, it is by standing on the shoulders of giants.»***
 > — *Isaac Newton*
 
@@ -567,7 +581,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.3.1** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.3.2** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
