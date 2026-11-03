@@ -6,6 +6,62 @@
 
 ---
 
+## [2.3.2] — 2 Kasım 2026 · **Düzeltme Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.3.2 bir düzeltme sürümüdür. Yayımlanmış çalışmaların verileriyle yapılan bağımsız, kör yeniden üretim doğrulamasında bulunan hatalar düzeltildi; programdaki bütün analizlerin seçeneklerinin gerçekten uygulanıp uygulanmadığı tek tek denetlendi. Varsayılan ayarlarla ve sorunsuz veride sonuçların büyük çoğunluğu değişmedi; sonucu değişen yerler aşağıda belirtilmiştir.
+
+**Bağımsız kör yeniden üretim doğrulamasında bulunan hatalar**
+
+- Sayım regresyonu (negatif binom): sıfırı bol verilerde θ'nın en çok olabilirlik kestirimi uyarısız olarak üst sınıra (Poisson'a) gidebiliyor; omnibus LR χ² negatif çıkıyor, Tip III testleri ve standart hatalar yanlış oluyordu. θ artık gerçek en büyük değere ulaşır; kestirimin sorunsuz yakınsadığı verilerde sonuç değişmez. Aynı düzeltme nedensel aracılığın negatif binom modeline de uygulandı.
+- Açımlayıcı faktör analizi (polikorik korelasyon, çift bazında eksik veri): "çift bazında" seçildiğinde polikorik matris yine liste bazında hesaplanıyordu ve Bartlett testinin n'si tutarsızdı. Matris artık gerçekten çift bazında hesaplanır; KMO ve Bartlett değerleri değişir.
+- Cronbach alfa: çift bazında seçiliyken sıralı (ordinal) α da artık çift bazında hesaplanan polikorik matristen elde edilir (önceden liste bazında ve etiketsizdi).
+- Açımlayıcı faktör analizi, eğik döndürme: "Döndürme KT" sütununun neyi gösterdiği belirsizdi. Sütun artık diag(ΦP′P) olarak etiketlenir ve yanına yapı matrisinin kareler toplamı (ΣS²) eklenir; "toplanamaz" notu yalnız eğik döndürmede basılır. Sayılar değişmedi.
+- MANOVA (çapraz desen): hesap yapılamadığında gerçek neden (boş hücre, tekil tasarım matrisi, yetersiz hata serbestlik derecesi) açıkça yazılır; önceden genel bir "post-hoc hesaplanamadı" iletisi veriliyordu.
+- Zaman serisi, otomatik ARIMA: aday modeller yakınsama denetimi yapılmadan karşılaştırılıyordu; girdideki çok küçük farklar seçilen modeli değiştirebiliyordu. Yakınsamayan aday güçlendirilmiş ayarlarla yeniden kestirilir, yine yakınsamazsa bir notla dışlanır.
+- Doğrulayıcı faktör analizi, ölçme değişmezliği: MLM kestiricisi seçildiğinde değişmezlik basamakları sessizce ML ile kestiriliyordu. Artık seçilen kestirici (ML, MLM, MLR) uygulanır; MLM'de ölçekli χ² ve Satorra-Bentler (2001) fark testi kullanılır, tablo başlığı kestiriciyi ve fark testini yazar. ML ve MLR sonuçları değişmedi.
+- DFA/YEM, çok gruplu model: yakınsamayan grupta imkânsız değerler (χ² = 0, negatif R², sıfır standart hata) yalnız bir uyarıyla raporlanıyordu. Model kovaryans matrisinin artık pozitif tanımlı olması gerekir; yakınsama olmazsa ikinci bir başlangıç değeri denenir, yine olmazsa sorunlu grubun adıyla açık bir hata verilir.
+- Panel regresyonu, iki yönlü sabit etkiler: grup içi, gruplar arası ve genel R² zaman etkileri dışarıda bırakılarak hesaplanıyordu. Artık zaman etkilerini içeren yaygın tanımla hesaplanır; zaman etkileri hariç içsel R² ayrı bir satırda verilir. Tek yönlü ve diğer modeller değişmedi.
+- Veri sekmesinde "kategorik" olarak işaretlenen sayısal kodlu sütunlar (1/2/3 gibi) 50 analizde yok sayılıyor ve tek bir sayısal terim olarak kullanılıyordu. İşaret artık analizlere taşınır; yalnız sayısal girdi kabul eden alanlarda açık bir uyarı verilir. İşaretsiz veride sonuçlar değişmez.
+- Ki-Kare Bağımsızlık ve Çapraz Tablo: sıfır hücreli 2×2 tabloda iki panel farklı ve etiketsiz odds oranı veriyordu. İkisi de artık Haldane–Anscombe düzeltmesi (bütün hücrelere +0,5) ve Woolf güven aralığıyla aynı sonucu verir; düzeltme açıkça belirtilir, ham odds oranı not olarak yazılır. Sıfır hücresi olmayan tablolarda sonuç değişmez.
+- Probit (LD/ED): heterojenlik düzeltmesi Fieller güven sınırlarına uygulanmıyordu. Artık sınırlar da ölçek katsayısı ve t kritik değeriyle hesaplanır; isteğe bağlı heterojenlik eşiği (her zaman / uyum p < 0,15 / p < 0,10) eklendi. Ölçek uygulanmadığında sonuçlar aynıdır.
+- Tek yönlü ANOVA (Welch): tek gözlemli ya da varyansı sıfır olan bir grup varken Welch istendiğinde uyarı verilmeden klasik F'ye dönülüyordu. Artık Welch "hesaplanmadı" olarak gösterilir ve etkilenen grup belirtilir; klasik F yalnız ayrı etiketli bir bilgi satırında yer alır. Aynı ilke Brown-Forsythe, Welch kontrastları ve Games-Howell için de uygulandı.
+- Karmaşık örneklem lojistik regresyonu: tam ya da yarı-tam ayrışma uyarısı yoktu; artık ayrışmaya yol açan değişkenin adıyla uyarı verilir. Katsayılar ve standart hatalar değişmedi.
+- Gizil sınıf / gizil profil analizi: "LMR p" ki-kare yaklaşımıyla hesaplanıyordu. Artık Vuong-Lo-Mendell-Rubin olabilirlik oranı testi ve düzeltilmiş LMR, ağırlıklı ki-kareler toplamı dağılımıyla hesaplanır (varsayılan sandviç kovaryans; Hessian seçenek olarak).
+
+**Yeni ilke: "İstenen ve uygulanan ayarlar" bloğu**
+
+- Seçilen bir seçenek (kestirici, düzeltme, model, eksik veri yöntemi, değişken türü vb.) uygulanamıyorsa artık sessizce başka bir yönteme geçilmez ya da seçenek yok sayılmaz. Sonuç metninin başındaki "İstenen ve uygulanan ayarlar" bloğunda istenen değer, uygulanan değer ve nedeni yazılır. Blok Sonuçlar sekmesine, sonuç geçmişine, proje dosyasına ve Word/PDF/rapor çıktılarına da yansır. Bütün seçenekler uygulanabildiğinde çıktı önceki sürümle aynıdır.
+- Bütün analizlerin seçenekleri tek tek denetlendi; bir seçeneğin yalnız belirli koşullarda etkili olduğu durumlar (ör. Yates düzeltmesi yalnız 2×2 tabloda) bu blokta ya da sonuç notunda belirtilir; bağımlı seçenekler yalnız etkili olduklarında etkin görünür.
+
+**Seçenek denetimiyle bulunan ve artık gerçekten uygulanan seçenekler**
+
+- Sağlam regresyon (MM): ayar sabiti, en çok yineleme, ağırlık işlevi (Tukey, Hampel) ve ölçek kestiricisi yok sayılıyordu; artık uygulanır.
+- Mekânsal otoregresif model: SDM ile GMM/S2SLS (sağlam standart hatalı seçenek dahil) sessizce en çok olabilirlik kestirimine dönüyordu; artık gerçekten GMM/S2SLS ile kestirilir.
+- Kantil regresyon: eğim eşitliği testi seçilen çekirdek (Powell) standart hatasıyla yapılır.
+- Tekrarlı ölçümler ANOVA (tek faktör): ikili karşılaştırmalarda seçilen düzeltme (LSD, Šidák; Holm eklendi) gerçekten uygulanır.
+- Çoklu karşılaştırma: referans grup her değişiklikte uygulanır (önceden yalnız alandan çıkıldığında).
+- Doğrusal regresyon: uyum eksikliği testi ağırlıklı (WLS) modelde de yapılır.
+- Ridge ve Lasso: otomatik α kapalıyken de seçim ölçütü (GCV, HKB, L-W, k-kat λ_min / λ_1SE) ve çapraz doğrulama kat sayısı uygulanır; önerilen α ayrı bir bölümde bildirilir.
+- Sayım regresyonu: sağlam (sandviç) kovaryans sıfır-şişirilmiş ve engel modelinin sıfır bölümünde de uygulanır.
+- k-ortalamalar kümeleme: en çok yineleme sayısı uygulanır.
+- Aracılık ve düzenleyicilik: koşullu dolaylı etki eğrisinde BCa seçildiğinde BCa sınırları hesaplanır (önceden yüzdelik); elle girilen düzenleyici değerleri uygulanır; yol analizi ve çok düzeyli aracılıkta kategorik işaretli değişkenler gösterge değişkenleriyle kodlanır.
+- Çok lokasyonlu tesadüf blokları deneme analizi: Çeşit×Lokasyon rastgele seçeneği yok sayılıyordu; artık uygulanır (Çeşit F'i Çeşit×Lokasyon kareler ortalamasına karşı sınanır).
+
+**Ek düzeltmeler**
+
+- Çok düzeyli aracılık (yığılmış model): belirlenemez durumda düzeyler arası doğrudan etkinin güven aralığı ve p değeri sessizce normal (z) yaklaşımına düşüyor, θ standart hatası aşırı büyük basılıyordu. Satterthwaite serbestlik derecesi ve θ standart hatası artık genelleştirilmiş ters ile sonlu hesaplanır.
+- GEE: zaman değişkeni aynı zamanda yordayıcı olarak seçildiğinde kategorik değişken sessizce sayısala çevriliyordu; düzeltildi.
+- Hızlı panel değişiminde (ROC, TSS, karışıklık matrisi, karmaşık örneklem lojistik, t-SNE/UMAP) program ara sıra uyarısız kapanabiliyordu; giderildi.
+- Sonuç geçmişi paneli: son kart gizlendikten sonra görülebilen çökme giderildi.
+- Susturulan yakınsama uyarıları (sağkalım, çoklu atama, yardımcı uyumlar, MGWR geri uydurma vb.) artık sonuçta görünür; tekil matriste sözde ters kullanıldığında bu belirtilir.
+- Lojistik ve sayım regresyonuna profil olabilirlik güven aralığı seçeneği eklendi (varsayılan Wald; mevcut sonuçlar değişmez).
+- Türkçe metinlerde kalan İngilizce terimler çevrildi (ör. "robust" → "sağlam", "posterior" → "sonsal").
+
+---
+
 ## [2.3.1] — 30 Ekim 2026 · **Düzeltme Sürümü**
 
 - Özel kontrast (L matrisi): kontrast ifadesinde parantez, bölme, sayıyla çarpma, tekli eksi ve iç içe parantez kullanılabilir; örneğin `(A + B)/2 - C` artık `0.5*A + 0.5*B - C` ile aynı satırı verir. Eski biçimde yazılmış kontrastların sonucu değişmedi. Eşleşmeyen parantez, iki katsayının çarpımı ve sıfıra ya da katsayıya bölme çevrilmiş bir hata iletisiyle bildirilir.
