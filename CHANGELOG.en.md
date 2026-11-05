@@ -6,6 +6,22 @@
 
 ---
 
+## [2.4.1] — 5 November 2026 · **Bug-Fix Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.4.1 fixes errors that gave wrong results for certain data structures in two groups of analyses. Results for other data do not change.
+
+Fixes (results change):
+- Variance Components, ANOVA (Type I) method: in nested designs with many terms and large samples (from about 1000 observations), sums of squares and component estimates were computed incorrectly. The cause was the numerical threshold that determines the rank of the design matrix; the threshold was corrected.
+- Variance Components, REML and ML methods: when the name of one factor was the beginning of another factor's name (e.g. "pop" and "popfam", "rep" and "reppop"), the components were mixed up. In models with many terms and components on the zero boundary, the estimation could also stop short of the optimum. REML and ML now use the same computation engine as the Mixed Model analysis; components, their standard errors and confidence intervals come from the same model fit.
+- Two-Way ANOVA, ANCOVA (two factors) and Crossed Mixed Model: when a combination of factor levels had no observations (empty cell), the interaction degrees of freedom were too large, the Type II sums of squares were wrong and no warning was given. In designs with empty cells, sums of squares are now computed by comparing nested models, degrees of freedom count only the non-empty cells, and the output says so. Type III sums of squares are not defined with empty cells, so Type II or Type I must be chosen in that case. Results for data without empty cells do not change.
+
+The corrected analyses were validated against independent reference results (all 432 variance component and sum-of-squares values from a provenance–progeny trial agree); permanent tests were added for large samples, nested naming and empty cells.
+
+---
+
 ## [2.4.0] — 5 November 2026 · **New Analyses and Randomization Plan**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
