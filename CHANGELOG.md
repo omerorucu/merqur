@@ -6,6 +6,22 @@
 
 ---
 
+## [2.4.1] — 5 Kasım 2026 · **Düzeltme Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.4.1, iki analiz grubunda belirli veri yapılarında yanlış sonuç veren hataları giderir. Bu yapıların dışındaki verilerde sonuçlar değişmez.
+
+Düzeltmeler (sonucu değiştiren):
+- Varyans Bileşenleri, ANOVA (Tip I) yöntemi: çok terimli iç içe tasarımlarda büyük örneklemde (yaklaşık 1000 gözlemden sonra) kareler toplamları ve bileşen kestirimleri yanlış hesaplanıyordu. Sorun, tasarım matrisinin rankını belirleyen sayısal eşikteydi; eşik düzeltildi.
+- Varyans Bileşenleri, REML ve ML yöntemleri: bir faktörün adı başka bir faktörün adının başlangıcıysa (ör. "pop" ve "popfam", "rep" ve "reppop") bileşenler birbirine karışıyordu. Ayrıca sıfır sınırında bileşen bulunan çok terimli modellerde kestirim en iyi çözüme ulaşmayabiliyordu. REML ve ML artık Karma Model analiziyle aynı hesap motorunu kullanır; bileşenler, standart hataları ve güven aralıkları aynı model uyumundan gelir.
+- İki Yönlü ANOVA, ANCOVA (iki faktörlü) ve Çapraz Karma Model: bir faktör düzeyi birleşiminde hiç gözlem olmadığında (boş hücre) etkileşimin serbestlik derecesi fazla, Tip II kareler toplamı yanlış hesaplanıyor ve uyarı verilmiyordu. Boş hücreli tasarımda kareler toplamları artık iç içe modellerin karşılaştırmasıyla, serbestlik dereceleri yalnız dolu hücreler sayılarak hesaplanır ve sonuçta bu durum belirtilir. Tip III kareler toplamı boş hücrede tanımlı olmadığından bu durumda Tip II ya da Tip I seçilmesi istenir. Boş hücre içermeyen verilerde sonuçlar değişmez.
+
+Düzeltilen analizler bağımsız referans sonuçlarla karşılaştırılarak doğrulandı (bir orijin–döl denemesi verisinde 432 varyans bileşeni ve kareler toplamı değerinin tamamı uyumlu); büyük örneklem, iç içe adlandırma ve boş hücre durumları için kalıcı testler eklendi.
+
+---
+
 ## [2.4.0] — 5 Kasım 2026 · **Yeni Analizler ve Rastgeleleştirme Planı**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
