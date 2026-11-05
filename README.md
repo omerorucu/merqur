@@ -17,10 +17,10 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.3.2-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.4.0-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
-![Analyses](https://img.shields.io/badge/analyses-137%20%2B%207%20map-7C3AED?style=flat-square)
+![Analyses](https://img.shields.io/badge/analyses-143%20%2B%207%20map-7C3AED?style=flat-square)
 ![APA 7](https://img.shields.io/badge/reports-APA%207-27AE60?style=flat-square)
 ![Validated](https://img.shields.io/badge/validated-R%20%7C%20SPSS%20%7C%20SAS-0F766E?style=flat-square)
 
@@ -50,7 +50,7 @@ errors found in these comparisons were fixed (see [Validation](#-validated-again
 
 <div align="center">
 
-| **137** | **18** | **7** | **APA 7** |
+| **143** | **18** | **7** | **APA 7** |
 |:---:|:---:|:---:|:---:|
 | Statistical<br>Analyses | Analysis<br>Categories | Map-tab<br>Methods | Report<br>Generator |
 
@@ -140,7 +140,7 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
   sensitivity analysis.
 - Fully empty rows inside a file are kept as observations (as R does); only trailing empty rows are dropped.
 
-### 2 · 137 analyses with professional options
+### 2 · 143 analyses with professional options
 - **17 categories** in the Statistics tab: descriptive statistics, normality, parametric and
   non-parametric tests, categorical data, multiple response, association and multivariate, meta-analysis,
   regression, econometrics and causal inference, classification, clustering and dimension reduction,
@@ -175,7 +175,8 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
   **Assumptions**, **Interpretation** — and an **APA 7 summary line**.
 - Undefined values are shown as "—" and very small p values as "p < .001".
 - Charts can be adjusted (axis limits, colours, zoom) and refined further in the **Chart Studio**.
-- **Tools tab**: Chart Studio, **power analysis** and **sample size** calculators.
+- **Tools tab**: Chart Studio, **power analysis** and **sample size** calculators, and a
+  **randomization plan** for designing trials.
 
 ### 5 · Publication-ready reports
 - **APA 7 report generator**: select cards and export one document with a cover page, numbered tables
@@ -208,17 +209,17 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.3.2** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.3.2) and the
+**Latest release: v2.4.0** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.4.0) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.3.2-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-windows-x64-Setup.exe) · 350 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.3.2-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-windows-x64-portable.zip) · 523 MB | Extract & run `MerQur.exe` |
-| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.3.2-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-macos.dmg) · 572 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
-| 🍎 **macOS (Intel)** | [`MerQur-2.3.2-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-macos-intel.dmg) · 620 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
-| 🐧 **Linux** | [`MerQur-2.3.2-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.3.2/MerQur-2.3.2-linux-x86_64.AppImage) · 929 MB | `chmod +x` & run |
+| 🪟 **Windows 10/11** | [`MerQur-2.4.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.4.0/MerQur-2.4.0-windows-x64-Setup.exe) · 350 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.4.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.4.0/MerQur-2.4.0-windows-x64-portable.zip) · 524 MB | Extract & run `MerQur.exe` |
+| 🍎 **macOS (Apple Silicon)** | [`MerQur-2.4.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.4.0/MerQur-2.4.0-macos.dmg) · 583 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
+| 🍎 **macOS (Intel)** | [`MerQur-2.4.0-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.4.0/MerQur-2.4.0-macos-intel.dmg) · 640 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
+| 🐧 **Linux** | [`MerQur-2.4.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.4.0/MerQur-2.4.0-linux-x86_64.AppImage) · 944 MB | `chmod +x` & run |
 
 **Linux notes** — the AppImage is built on Ubuntu 22.04 and runs on 64-bit distributions with glibc 2.35
 or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not start:
@@ -249,7 +250,7 @@ Forest Genetics, Agriculture/Forestry/Aquatic, Sport Sciences). Download them fr
 2. **Data tab** — columns are auto-classified:
    - 🔵 Numeric · 🟠 Categorical · 🟢 Geo (lat/lon) · 🟣 Date · 🔴 Binary · ⚪ Text
    - Multi-choice columns (comma/semicolon-separated) auto-highlighted in purple
-3. **Statistics tab** — pick analysis from the sidebar (137 options across 18 categories)
+3. **Statistics tab** — pick analysis from the sidebar (143 options across 18 categories)
 4. **Run** ▶ — results appear as a **card** with Results / Chart / Table / Frequency tabs
 5. **Report tab** — select cards → export to **DOCX / PDF / HTML / Excel** with cover page
 
@@ -391,6 +392,27 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 
 - Stationarity tests (ADF, KPSS)
 - Trend & seasonal decomposition
+
+</details>
+
+<details>
+<summary><b>🆕 Added in v2.4</b> — New Analyses and Randomization Plan: 6 new analyses + 1 tool</summary>
+
+- **Gamma / Inverse Gaussian / Tweedie GLM** for continuous positive responses (Tweedie also with exact zeros)
+- **Relative Risk and Prevalence Ratio** (log-binomial / modified Poisson)
+- **Complex-Survey Ordinal Logistic Regression** and **Complex-Survey Multinomial Logistic Regression**
+- **Tolerance Intervals** (normal and distribution-free)
+- **Analysis of Means (ANOM)**, including p-ANOM for proportions and u-ANOM for counts
+- New tool: **Randomization Plan** (Tools > Calculators): completely randomized, randomized complete block,
+  Latin square, factorial, split-plot and clinical trial randomization lists; field layout chart,
+  export to Excel/CSV
+- New options: Firth correction in Cox regression, stepwise selection in discriminant analysis, all subsets
+  in linear regression, keeping observations with missing values in the design in weighted logistic regression
+- **Data import**: numbers with a decimal comma or stored as text are now read as numbers
+- GWR bandwidth search with lower and upper bounds; variable fields consistently named
+  "Dependent variable" and "Independent variables" in all analyses
+- The new analyses and options were validated against independent reference results, including published
+  data; the new options are off by default
 
 </details>
 
@@ -581,7 +603,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.3.2** · 137 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.4.0** · 143 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
