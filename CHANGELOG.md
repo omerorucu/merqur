@@ -6,6 +6,51 @@
 
 ---
 
+## [2.4.0] — 5 Kasım 2026 · **Yeni Analizler ve Rastgeleleştirme Planı**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.4.0 altı yeni analiz, bir deneme planlama aracı ve dört mevcut analize yeni seçenekler getirir; veri yüklemede metin olarak saklanmış sayıların okunmasını düzeltir. Yeni seçenekler varsayılan olarak kapalıdır; açılmadıkça önceki analizlerin doğru veride sayısal sonuçları değişmez. Çıktısı değişen yerler aşağıda ayrıca belirtilmiştir.
+
+Yeni analizler:
+- Gamma / Ters Gauss / Tweedie GLM (Regresyon): sürekli ve pozitif yanıt için genelleştirilmiş doğrusal model; Tweedie ailesi tam sıfır içeren sürekli yanıtı da modeller. Bağlantı seçimi (kanonik, log, ters, özdeşlik, ters kare), kategorik değişkenler, etkileşim terimleri ve referans düzeyi; Tweedie güç parametresi elle ya da profil olabilirlikle (güven aralığı ve profil grafiği). Ölçek: Pearson χ²/sd (varsayılan), sapma/sd ya da en çok olabilirlik; bilgi matrisi: beklenen (varsayılan) ya da gözlenen. Katsayı tablosu (Wald ya da profil olabilirlik güven aralığı, log bağlantıda exp(β)), sapma, AIC/BIC, sıfır modeline karşı F ve olabilirlik oranı testleri, terim testleri, artık tanıları; gözlenen–kestirilen, artık, Q-Q ve p profili grafikleri.
+- Göreli Risk ve Prevalans Oranı (Log-Binom / Değiştirilmiş Poisson) (Regresyon): ikili sonuçta göreli risk ya da prevalans oranı, güven aralığı ve p değeri; log-binom model ya da değiştirilmiş Poisson (sağlam sandviç standart hata). Düzeltilmiş ve ham oranlar, kategorik maruziyetlerde düzey başına olay oranı, referans düzeyi ve olay kategorisi seçimi; orman grafiği. Log-binom model yakınsamazsa ya da kestirim sınırdaysa açık uyarı verilir; değiştirilmiş Poisson'a kendiliğinden geçilmez.
+- Karmaşık Örneklem Sıralı Lojistik Regresyon (Karmaşık Örneklem): üç ya da daha çok düzeyli sıralı yanıt için kümülatif bağlantı modeli (lojistik, probit, tamamlayıcı log-log, log-log). Ağırlık, tabaka, küme, sonlu evren düzeltmesi ve alt evren modeli; Taylor doğrusallaştırmalı standart hatalar; eşikler, eğimler, odds oranları, ayarlı Wald F testleri ve orantılı odds varsayımı için tasarım tabanlı Brant türü test. Y düzeylerinin sırası kullanıcı tarafından verilebilir.
+- Karmaşık Örneklem Çok Terimli Lojistik Regresyon (Karmaşık Örneklem): üç ya da daha çok kategorili nominal yanıt için genelleştirilmiş logit modeli; referans kategori seçimi, aynı tasarım seçenekleri, odds oranları, model geneli ve terim bazlı ayarlı Wald F testleri, orman grafiği.
+- Tolerans Aralıkları (Normal ve Dağılımdan Bağımsız) (Tanımlayıcı): anakütle değerlerinin en az seçilen oranını seçilen güvenle kapsayan aralık; iki yanlı ya da tek yanlı, gruplara göre. Normal aralıkta kesin (Odeh) ya da Howe çarpanı; dağılımdan bağımsız aralıkta sıra istatistikleri ve elde edilen güven. Örneklem istenen güvene yetmezse sınırlar en küçük ve en büyük gözlemdir; bu durum tabloda işaretlenir, uyarıda gereken en küçük örneklem büyüklüğü yazılır. Histogram ve tolerans sınırları grafiği.
+- Ortalamalar Analizi (ANOM) (Parametrik Testler): her grup ortalaması genel ortalamayla karşılaştırılır; dengeli ve dengesiz grup boyutları, oranlar için p-ANOM ve sayımlar için u-ANOM. Kritik değer benzetimsiz, kesin olarak hesaplanır. Grup sapmaları, düzeltilmiş p değerleri, sınır dışı gruplar ve ANOM grafiği.
+
+Yeni araç:
+- Rastgeleleştirme Planı (Araçlar > Hesaplayıcılar): veri gerektirmeyen deneme planlama aracı. Tam tesadüf, tesadüf blokları, Latin kare, faktöriyel (2–3 faktör), bölünmüş parsel ve klinik deneme randomizasyon listesi (basit, sabit ya da değişken büyüklüklü blok, tabakalı); dengesiz ayırma oranı (ör. 2:1). Tohum ve parsel numaralandırma seçenekleri; plan tablosu, renkli saha yerleşim şeması ve yöntem özeti; Excel, CSV ve Veri sekmesine aktarma. Aynı tohum ve aynı girdiler aynı planı üretir.
+
+Mevcut analizlere yeni seçenekler:
+- Cox Regresyonu, Firth düzeltmesi (cezalı olabilirlik): katsayılar cezalı kısmi olabilirlikten, güven aralıkları ve p değerleri profil cezalı olabilirlikten hesaplanır; ayrışma durumunda (ör. bir grupta hiç olay olmaması) da sonlu kestirim verir. Tabakalı modelde çalışır. Firth kestirimi Breslow bağ yöntemiyle tanımlıdır; Efron/kesin bağ, küme-sağlam standart hata ve adımsal seçim Firth ile birlikte uygulanmaz ve bu "İstenen ve uygulanan ayarlar" bloğunda yazılır. Standart Cox çalıştırmasında ayrışma belirtisi görülürse uyarılara Firth düzeltmesini öneren bir ileti eklenir.
+- Diskriminant Analizi, adımsal seçim: yön (adımsal / ileri / geri) ve ölçüt (F-giriş/F-çıkış ya da p-giriş/p-kalma). Adım tablosuna kısmi R², Wilks Λ'nın p değeri ve ortalama karesel kanonik korelasyon sütunları eklendi. Önceki varsayılan ayar aynı seçimi ve aynı sayıları verir.
+- Doğrusal Regresyon, tüm alt kümeler: en çok 15 aday terimin bütün alt kümeleri uydurulur; her model büyüklüğü için en iyi k model ve seçilen ölçüte göre (düzeltilmiş R², R², Mallows Cp, AIC, BIC) sıralama. Kategorik bir değişkenin kukla sütunları tek terim olarak birlikte girip çıkar. İstenirse ana regresyon çıktıları en iyi modelle verilir. Bu tablodaki AIC ve BIC hata kareler toplamından hesaplanır; ana modeldeki olabilirlik tabanlı değerlerden sabit bir farkla ayrılır, modellerin sırası aynıdır.
+- Ağırlıklı Lojistik Regresyon (Karmaşık Örneklem), eksik değerli gözlemler: "Tasarımdan çıkar" (varsayılan; önceki davranış) ya da "Tasarımda tut (sıfır katkı)". İkinci seçenekte tabaka başına küme sayısı ve sonlu evren düzeltmesi tam tasarımdan hesaplanır; kestirimler aynı kalır, yalnız standart hatalar değişebilir.
+
+Veri yükleme:
+- Metin olarak saklanmış sayılar: ondalık ayırıcısı virgül olan sayılar (ör. `12,5`, `1.234,5`, `2,95e-13`; noktalı virgül ayırıcılı CSV ve metin olarak saklanmış Excel hücreleri) ve metin hücresine yazılmış sayılar artık sayıya çevrilir. Önceden bu sütunlar Veri sekmesinde "sayısal" görünüyor ama değerleri metin olarak kalıyordu; normallik, korelasyon, regresyon gibi formlar bu sütunları listelemiyordu.
+- Karışık sütunlar: değerlerinin en az %90'ı sayı olan sütunlarda metin hücreli sayılar sayıya çevrilir, sayı olmayan hücreler (ör. "yok", "-") eksik sayılır. Çevrilen sütunlar ve eksik sayılan hücrelerin sayısı örnekleriyle yükleme günlüğüne yazılır. Birden çok virgül içeren hücreler (ör. çok seçimli yanıt `1,2,3`), baştaki sıfırı anlamlı kod sütunları (ör. `007`) ve tarih sütunları olduğu gibi kalır.
+- Ondalık virgüllü CSV'de yalnız "53,9" gibi değerlerden oluşan bir sütun tarih sanılıp analiz formlarında seçilemiyordu; artık sayısal okunur (gerçek tarih sütunları etkilenmez). Bütün hücreleri ondalık virgüllü olan noktalı virgül ayırıcılı CSV dosyaları da artık tek sütun olarak okunmaz.
+
+Diğer düzeltmeler:
+- Koşullu Lojit: eksik değerler çıkarıldıktan sonra 2'den az seçeneği kalan ya da seçilen seçeneği düşen seçim kümeleri olabilirliğe katkı vermediği için artık notla analizden çıkarılır; önceden analiz tümüyle reddediliyordu. Eksiksiz veride sonuçlar değişmez.
+- Coğrafi ağırlıklı regresyon (GWR): otomatik bant aramasına alt ve üst sınır seçenekleri eklendi (uyarlanır bantta komşu sayısı, sabit bantta uzaklık). Güvenli alt sınırın altındaki değer bu sınıra çekilir; MGWR'de ve elle bant girildiğinde sınırlar uygulanmaz. Her iki durum da "İstenen ve uygulanan ayarlar" bloğunda belirtilir.
+- Terim birliği: bütün analizlerde bağımlı değişken alanları "Bağımlı değişken", açıklayıcı değişken alanları "Bağımsız değişkenler" olarak adlandırıldı (önceden "Hedef sütun", "Yordayıcılar", "Bağımsız (Özellikler)" gibi farklı adlar kullanılıyordu). "Çoklu Doğrusal Regresyon" adı "Doğrusal Regresyon", "Lojistik Regresyon" adı "İkili Lojistik Regresyon" oldu. Hesaplar ve kayıtlı betikler değişmez.
+- Anket önizlemesi: ölçekli (Likert) ve matris sorularda satırlar seçeneklerle hizalı görünür; tablonun ayrı kaydırma çubuğu kaldırıldı, uzun ifadeler alt satıra geçer.
+- Getis-Ord Gi* artımlı uzamsal otokorelasyon (ISA) seçeneğinin ipucunda tablonun açıldığı pencere doğru adla ("Tablo / Grafik") yazıldı; Türkçe ayar bloğunda bir ifade düzeltildi.
+- macOS ve Linux paketleri: `.sav`, `.dta`, `.sas7bdat`, eski Excel ve Parquet okuyucuları ile sağkalım, GWR/MGWR, yapısal eşitlik yardımcıları ve PowerPoint dışa aktarımı pakete eklendi (2.3.2'nin yeniden derlenmiş macOS ve Linux paketlerinde de yayımlandı).
+
+Sonuçlarda değişen noktalar:
+- Veri yükleme: yukarıdaki durumlarda önceden seçilemeyen sütunlar artık sayısal okunur ve analizlerde kullanılabilir; karışık sütunlarda sayı olmayan hücreler eksik değer olarak işlenir.
+- Diskriminant Analizi: sabit bir değişken adımsal seçime artık girmez (önceden tanımsız F ile girebiliyordu); tek değişkenli Wilks tablosu sabit değişkende hata vermek yerine "—" yazar. Yalnız bozuk veride sonuç değişir.
+
+Doğrulama: Yeni analizler ve seçenekler, aynı veri ve aynı tanımla bağımsız referans uygulamaların sonuçlarıyla karşılaştırıldı (yayımlanmış veriler dahil: McCullagh ve Nelder pıhtılaşma verisi, Hosmer ve Lemeshow düşük doğum ağırlığı verisi); katsayı, standart hata, güven aralığı ve test istatistikleri basılan basamakta aynıdır. Tanımın ayrıştığı noktalar (ör. sıralı modelde eğimlerin işaret kuralı, Tweedie'de güç parametresi sabitken verilen standart hatalar, p-/u-ANOM'un klasik normal yaklaşımlı tanımı) sonuç notlarında açıklanır.
+
+---
+
 ## [2.3.2] — 2 Kasım 2026 · **Kararlı Sürüm**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
