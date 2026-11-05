@@ -6,6 +6,54 @@
 
 ---
 
+## [2.4.0] — 5 November 2026 · **New Analyses and Randomization Plan**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.4.0 adds six new analyses, a trial planning tool and new options for four existing analyses, and fixes the reading of numbers stored as text at data import. The new options are off by default; unless they are switched on, numerical results of earlier analyses on valid data do not change. Places where output changes are listed separately below.
+
+New analyses:
+- Gamma / Inverse Gaussian / Tweedie GLM (Regression): generalized linear model for a continuous, positive response; the Tweedie family also models a continuous response with exact zeros. Choice of link (canonical, log, inverse, identity, inverse squared), categorical variables, interaction terms and reference level; Tweedie power parameter fixed or estimated by profile likelihood (confidence interval and profile plot). Scale: Pearson χ²/df (default), deviance/df or maximum likelihood; information matrix: expected (default) or observed. Coefficient table (Wald or profile-likelihood confidence intervals, exp(β) with the log link), deviance, AIC/BIC, F and likelihood-ratio tests against the null model, term tests, residual diagnostics; observed vs fitted, residual, Q-Q and p-profile charts.
+- Relative Risk and Prevalence Ratio (Log-Binomial / Modified Poisson) (Regression): relative risk or prevalence ratio for a binary outcome with confidence interval and p-value; log-binomial model or modified Poisson (robust sandwich standard errors). Adjusted and crude ratios, event proportion by level of categorical exposures, choice of reference level and event category; forest plot. If the log-binomial model does not converge or the estimate is on the boundary, an explicit warning is given; the analysis does not switch to modified Poisson on its own.
+- Complex-Survey Ordinal Logistic Regression (Complex Survey): cumulative link model for an ordinal response with three or more levels (logistic, probit, complementary log-log, log-log). Weight, strata, clusters, finite population correction and subpopulation model; Taylor linearization standard errors; thresholds, slopes, odds ratios, adjusted Wald F tests and a design-based Brant-type test of the proportional odds assumption. The order of the levels of Y can be set by the user.
+- Complex-Survey Multinomial Logistic Regression (Complex Survey): generalized logit model for a nominal response with three or more categories; choice of reference category, the same design options, odds ratios, overall and per-term adjusted Wald F tests, forest plot.
+- Tolerance Intervals (Normal and Distribution-Free) (Descriptive): interval containing at least a chosen proportion of the population with a chosen confidence; two-sided or one-sided, by group. Exact (Odeh) or Howe factor for the normal interval; order statistics and achieved confidence for the distribution-free interval. If the sample is too small for the requested confidence, the limits are the smallest and largest observations; this is flagged in the table and the warning gives the minimum sample size needed. Histogram with tolerance limits.
+- Analysis of Means (ANOM) (Parametric Tests): each group mean is compared with the overall mean; balanced and unbalanced group sizes, p-ANOM for proportions and u-ANOM for counts. The critical value is computed exactly, without simulation. Group deviations, adjusted p-values, out-of-limit groups and the ANOM chart.
+
+New tool:
+- Randomization Plan (Tools > Calculators): a trial planning tool that needs no data. Completely randomized, randomized complete block, Latin square, factorial (2–3 factors), split-plot and clinical trial randomization list (simple, fixed or variable block sizes, stratified); unequal allocation ratios (e.g. 2:1). Seed and plot numbering options; plan table, coloured field layout and method summary; export to Excel, CSV and the Data tab. The same seed and inputs reproduce the same plan.
+
+New options in existing analyses:
+- Cox Regression, Firth correction (penalized likelihood): coefficients come from the penalized partial likelihood, confidence intervals and p-values from the profile penalized likelihood; finite estimates are obtained under separation (e.g. no events in one group). Works with a stratified model. The Firth estimator is defined with Breslow ties; Efron/exact ties, cluster-robust standard errors and stepwise selection are not applied together with Firth, and this is stated in the "Requested and applied settings" block. In a standard Cox run, a sign of separation adds a warning recommending the Firth correction.
+- Discriminant Analysis, stepwise selection: direction (stepwise / forward / backward) and criterion (F-to-enter/F-to-remove or p-to-enter/p-to-stay). The step table has new columns for partial R², the p-value of Wilks' Λ and the average squared canonical correlation. The previous default settings give the same selection and the same numbers.
+- Linear Regression, all subsets: all subsets of at most 15 candidate terms are fitted; the best k models for each model size and a ranking by the chosen criterion (adjusted R², R², Mallows Cp, AIC, BIC). The dummy columns of a categorical variable enter and leave together as one term. Optionally the main regression output is given for the best model. AIC and BIC in this table are computed from the residual sum of squares; they differ from the likelihood-based values of the main model by a constant, and the ordering of models is the same.
+- Weighted Logistic Regression (Complex Survey), observations with missing values: "Remove from the design" (default; previous behaviour) or "Keep in the design (zero contribution)". With the second option, cluster counts per stratum and the finite population correction come from the full design; estimates are unchanged, only standard errors can change.
+
+Data import:
+- Numbers stored as text: numbers that use a comma as decimal separator (e.g. `12,5`, `1.234,5`, `2,95e-13`; semicolon-separated CSV files and Excel cells stored as text) and numbers typed into text cells are now converted to numbers. Previously these columns were shown as numeric in the Data tab but their values stayed text, so forms such as normality, correlation and regression did not list them.
+- Mixed columns: in columns where at least 90% of the values are numbers, numbers in text cells are converted and cells that are not numbers (e.g. "none", "-") are treated as missing. Converted columns and the number of cells treated as missing, with examples, are reported in the import log. Cells with several commas (e.g. multiple-response answers `1,2,3`), code columns with meaningful leading zeros (e.g. `007`) and date columns are left unchanged.
+- In a CSV with decimal commas, a column made only of values such as "53,9" was taken for a date and could not be selected in analysis forms; it is now read as numeric (real date columns are unaffected). Semicolon-separated CSV files in which every cell has a decimal comma are no longer read as a single column.
+
+Other fixes:
+- Conditional Logit: choice sets that, after missing values are removed, have fewer than 2 alternatives or lose the chosen alternative do not contribute to the likelihood and are now excluded with a note; previously the whole analysis was rejected. Results on complete data are unchanged.
+- Geographically weighted regression (GWR): lower and upper bounds can now be set for the automatic bandwidth search (number of neighbours for an adaptive bandwidth, distance for a fixed one). A value below the safe lower limit is raised to that limit; the bounds are not applied in MGWR or when a manual bandwidth is entered. Both cases are reported in the "Requested vs applied settings" block.
+- Consistent terminology: in all analyses the outcome field is now "Dependent variable" and the explanatory field "Independent variables" (previously "Target column", "Predictors", "Independents (Features)" and similar). "Multiple Linear Regression" is now "Linear Regression" and "Logistic Regression" is "Binary Logistic Regression". Computations and saved scripts are unchanged.
+- Survey preview: rows of Likert and matrix questions are aligned with their options; the separate scroll bar of the table was removed and long statements wrap.
+- The tooltip of the Getis-Ord Gi* incremental spatial autocorrelation (ISA) option now names the window in which the table opens ("Table / Chart").
+- macOS and Linux packages: `.sav`, `.dta`, `.sas7bdat`, legacy Excel and Parquet readers, survival analysis, GWR/MGWR, structural equation helpers and PowerPoint export were added to the packages (also published in the rebuilt 2.3.2 macOS and Linux packages).
+
+Changes in results:
+- Data import: columns that could not be selected in the cases above are now read as numeric and can be used in analyses; in mixed columns, cells that are not numbers are handled as missing values.
+- Discriminant Analysis: a constant variable no longer enters stepwise selection (previously it could enter with an undefined F); the univariate Wilks table shows "—" for a constant variable instead of failing. Results change only for degenerate data.
+
+Validation: The new analyses and options were compared, on the same data and with the same definitions, with the results of independent reference implementations (including published data: the McCullagh and Nelder clotting data and the Hosmer and Lemeshow low birth weight data); coefficients, standard errors, confidence intervals and test statistics agree to the printed digits. Points where definitions differ (e.g. the sign convention of slopes in the ordinal model, standard errors conditional on the power parameter in Tweedie, the classical normal-approximation definition of p-/u-ANOM) are explained in the output notes.
+
+---
+
 ## [2.3.2] — 2 November 2026 · **Stable Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
