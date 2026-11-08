@@ -6,6 +6,24 @@
 
 ---
 
+## [2.5.0] — 8 November 2026 · **Accuracy and Validation Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.5.0 builds on the findings of independent validation studies (blind reproduction of published articles and an accuracy assessment with the NIST StRD certified datasets). Its aim is to improve computational accuracy and the reliability of results, and to add options whose absence these studies revealed. New options are off by default.
+
+Highlights:
+- Full precision: result values are stored at full precision while the on-screen display is unchanged; very small statistics and p values are printed with significant digits.
+- Result-changing fixes: underscore-containing text values in data loading, natural response in probit analysis, sample-size lower bounds in GLMM/GEE and cointegration tests, complete separation in Cox regression.
+- New options: small-sample correction for clustered standard errors in panel regression; between-within degrees of freedom in linear mixed models; nested MANOVA; seasonal search in automatic ARIMA; likelihood-ratio tests in Cox regression; t statistics and intercept inference in robust regression; one-sided Dunn test; predefined split column and grouped cross-validation in machine learning; adjustable seed for Monte Carlo and bootstrap; interaction terms and passive imputation in multiple imputation.
+- Substantially faster multi-group confirmatory factor analysis and measurement invariance.
+- Minor improvements to warning and result texts, script form restoration and stability.
+
+Fixed and added items were verified against independent reference results.
+
+---
+
 ## [2.4.1] — 5 November 2026 · **Bug-Fix Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
