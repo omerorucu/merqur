@@ -6,6 +6,24 @@
 
 ---
 
+## [2.5.0] — 8 Kasım 2026 · **Doğruluk ve Doğrulama Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.5.0, bağımsız doğrulama çalışmalarının (yayımlanmış makalelerin kör yeniden üretimi ve NIST StRD sertifikalı veri setleriyle doğruluk değerlendirmesi) bulgularına dayanır. Amacı hesap doğruluğunu ve sonuçların güvenilirliğini artırmak, bu çalışmalarda eksikliği görülen seçenekleri eklemektir. Yeni seçenekler varsayılan olarak kapalıdır.
+
+Öne çıkanlar:
+- Tam duyarlık: sonuç değerleri tam duyarlıkla saklanır, ekrandaki gösterim değişmez; çok küçük istatistik ve p değerleri anlamlı basamakla yazılır.
+- Sonucu değiştiren düzeltmeler: veri yüklemede alt çizgili metin değerleri, probit analizinde doğal yanıt, GLMM/GEE ve eşbütünleşme testlerinde örneklem alt sınırları, Cox regresyonunda tam ayrışma.
+- Yeni seçenekler: panel regresyonunda kümelenmiş standart hata için küçük örneklem düzeltmesi; doğrusal karma modelde gruplar arası–grup içi serbestlik derecesi; yuvalanmış MANOVA; otomatik ARIMA'da mevsimsel arama; Cox regresyonunda olabilirlik oranı testleri; sağlam regresyonda t istatistiği ve sabit terim çıkarımı; tek yönlü Dunn testi; makine öğrenmesinde hazır bölme sütunu ve gruplu çapraz doğrulama; Monte Carlo ve bootstrap için ayarlanabilir tohum; çoklu atamada etkileşim terimleri ve pasif atama.
+- Çok gruplu doğrulayıcı faktör analizi ve ölçme değişmezliği hesaplarında belirgin hızlanma.
+- Uyarı ve sonuç metinlerinde, betik formunun geri yüklenmesinde ve kararlılıkta küçük iyileştirmeler.
+
+Düzeltilen ve eklenen öğeler bağımsız referans sonuçlarla karşılaştırılarak doğrulandı.
+
+---
+
 ## [2.4.1] — 5 Kasım 2026 · **Düzeltme Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
