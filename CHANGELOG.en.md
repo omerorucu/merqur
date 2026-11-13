@@ -6,6 +6,81 @@
 
 ---
 
+## [2.6.0] — 13 November 2026 · **New Analyses and Validation Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.6.0 adds two new analyses (content validity and a Naive Bayes classifier), the comparison of areas under the curve (AUC) in power analysis, and exact (full-enumeration) p-values for Kruskal-Wallis, Friedman and larger contingency tables. It also fixes errors found during the independent reproduction of published studies and the independent reference validation. The fixes mainly concern structural equation modelling (SEM), confirmatory factor analysis (CFA) and measurement invariance, ARIMA, decision trees, latent profile/class analyses and complex-sample ordinal logistic regression. New options are off by default. Apart from the cases listed under result-changing fixes, numerical results do not change.
+
+New analyses and features:
+- Content validity (Lawshe): the item content validity ratio (CVR), the exact binomial critical value (Ayre and Scally, 2014; the Lawshe 1975 table for information) and the content validity index (CVI). A 4-point relevance mode gives the item- and scale-level content validity indices (I-CVI, S-CVI/Ave, S-CVI/UA) and the modified kappa (κ*); the I-CVI decision rule can be Polit, Beck and Owen (2007; I-CVI ≥ .78, default) or Lynn (1986; 1.00 with five or fewer experts). Experts can be in rows or columns; codes are mapped from the form.
+- Naive Bayes classifier: numeric predictors are modelled with a normal density and categorical predictors with conditional probability tables; both are combined for mixed data. Laplace smoothing, prior probabilities (training proportions, equal or user-defined), a probability floor, an optional kernel density and the missing-value rule can be chosen. Outputs are class-conditional parameter tables, training, test and cross-validation performance, the confusion matrix, ROC and savable posterior probabilities. If a class has fewer than 2 valid values for a numeric variable the analysis continues; the posterior probabilities of the affected rows are left undefined ("—") and a warning is shown.
+- Power analysis, new "ROC / AUC" tab: sample size, power and detectable difference for a single AUC (against a null value) and for comparing two AUCs (paired or independent design). The variance can be the Obuchowski and McClish binormal formula or the Hanley and McNeil formula.
+- Exact (full-enumeration) p: an optional exact p-value was added alongside the Monte Carlo p for Kruskal-Wallis, Friedman and tables larger than 2×2 (Fisher-Freeman-Halton; Fisher's exact test and Crosstabs panels). Ties are handled through the conditional distribution with midranks. If the computation limit is exceeded no exact p is given or the Monte Carlo p is used instead; this is stated in the "Requested and applied settings" block.
+
+Result-changing fixes:
+- A column marked categorical in the Data tab with three or more levels was silently dropped when used as level codes (e.g. subset splits of the decision tree), while the preprocessing note said it had been used. The column now enters the analysis; decision-tree results on such marked data may change.
+- SEM, mean structure: in a single-group model, writing an intercept as `x ~ 1` in the syntax did not add the mean structure to the model. Degrees of freedom were undercounted (27 instead of 38 in the example data), RMSEA and TLI were wrong, and the information matrix was singular with the MLR estimator. The mean structure is now included, and degrees of freedom and fit indices are computed accordingly.
+- SEM, second-order factor: when a latent variable was specified as an indicator of another latent variable, the second-order factor was not built; free covariances among the first-order factors were added instead (χ² = 79.49, df = 90 in the example data; correct: χ² = 115.84, df = 100). The second-order factor is now built and no extra covariances are added among the first-order factors.
+- Measurement invariance, score (Lagrange multiplier) test of equality constraints: when the information matrix was singular, the test statistic was computed with a direct inverse of that matrix, printing very large values (6282.5 in the example data; correct: 0.052) and wrong significance marks. A generalized inverse is now used; if the matrix is singular, a warning accompanies the result and rows that cannot be computed are not printed.
+- ARIMA, model with exogenous regressors: the final refinement step of estimation could accept an invalid point (negative error variance, non-stationary autoregressive or non-invertible moving-average coefficients). This step now accepts only valid points. Exogenous regressors are scaled during estimation, and coefficients and standard errors are transformed back to the original scale.
+- ARIMA, automatic model selection: with automatic model selection on, entering a period (m ≥ 2) in the seasonal part now also searches seasonal models; the entered m takes precedence over the period detected from the date frequency. In earlier versions the entered seasonal component was silently dropped. The change is shown in the "Requested and applied settings" block; models without an entered m and manually specified models do not change.
+- ARIMA, starting values: maximum likelihood estimation is also started from the conditional sum-of-squares estimate, and the solution with the higher likelihood is kept. This removes convergence to a local optimum in some models; automatic selection may find a model with a lower AICc.
+- Decision tree (CART): the complexity parameter (cp) is now computed by default while the tree is grown, which is the reference definition of recursive partitioning. The tree, the cp table and predictions may change. The previous result is available with the "exact weakest link" option; the computation used is written in the "Requested and applied settings" block.
+- Complex-sample (survey) ordinal logistic regression, logit link with the observed information matrix (default): for data with extreme linear predictors the logit derivative lost numerical precision and standard errors were too small (0.0035 instead of 0.0191 in an example data set), which also affected p-values, confidence intervals and the proportional-odds test. The derivative is now computed in a numerically stable way. Coefficients and results for moderate data are unchanged.
+
+Other fixes and new options:
+- Measurement invariance, scaled estimators (MLR, MLM): ΔCFI and ΔRMSEA labelled "scaled" were computed from unscaled values; they are now differences of the scaled values. Robust CFI and RMSEA and their differences were added in a separate table; with missing data (full-information maximum likelihood, FIML) they are computed from the missing-data-corrected test.
+- Multi-group CFA and measurement invariance: much faster with many groups (with 85 groups the run time dropped from minutes to seconds); results are unchanged.
+- CFA, two-indicator factors: two-indicator factors correlated with another factor are now estimated. A single-factor two-indicator model is not identified and stops with an explicit error message.
+- Complex-sample (survey) analyses: the weight column is now optional. If none is selected, all weights are 1 and this is reported in the "Requested and applied settings" block.
+- Gradient boosting: when run with the classic engine, the result printed a fixed and wrong settings label ("100 trees, depth 3"). The label now gives the engine used, the number of trees (the last round under early stopping), the learning rate, depth and subsampling. Numerical results do not change.
+- Bootstrap confidence interval: the undocumented n < 10 lower limit was removed. The interval is computed for n ≥ 2; for n < 10 a warning that coverage may be low is given and written to the assumptions text. Results for n ≥ 10 do not change.
+- ARIMA output:
+  - The maximum likelihood and the degrees-of-freedom-corrected innovation variance are given on two separate, clearly named lines.
+  - The applied forecast horizon is reported.
+  - An optional approximate (conditional sum-of-squares) search was added to automatic selection; it is off by default.
+- Machine learning panels and k-nearest neighbours: a "Test file" option was added. When a predefined split is used, the split line states the split applied.
+- Confusion metrics: a multi-class summary with macro and weighted averages was added; classes are shown in level order.
+- Latent profile and latent class analysis (LPA/LCA), new measures and options:
+  - The smallest number of classes (K) can be chosen.
+  - Entropy R² is printed.
+  - Comparison of distal outcomes with the three-step BCH method was added.
+  - In LPA the standard error type can be chosen: empirical information, observed information or sandwich.
+- LPA/LCA output:
+  - A note on the covariance definition of the VLMR test was added.
+  - The 1/(B+1) floor of the bootstrap likelihood ratio test (BLRT) p value is noted.
+  - Solutions for non-selected K are also shown.
+- p value display: very small p values are no longer stored or printed as "0.0". In ANOM and Tolerance Intervals the inline "p = <0.0001" is now written as "p < 0.0001".
+- Undefined statistics: in multiple-response cross-tabulations with df = 0, χ², df and p are printed as "—". When the correlation matrix is not positive definite, KMO is undefined ("—" and a warning).
+- Hierarchical Bayesian regression: group intervals are named "conditional (empirical Bayes) intervals".
+- Panel regression:
+  - R² labels in two-way models were clarified.
+  - A negative Hausman statistic is reported as undefined; a separate line gives |χ²| and p computed from the absolute value of the statistic as additional information.
+- Exploratory factor analysis, parallel analysis: the output states that the method is component based. A factor-based parallel analysis option was added; the default is unchanged.
+- Script compatibility: analysis scripts saved with the previous version now restore the Descriptive Statistics column selection without error, and selections in multi-select lists and checkable option groups are now saved to and restored from scripts.
+- Negative binomial GLMM: when θ reaches its upper bound (no overdispersion), results are reported from the Poisson limit with a warning recommending the Poisson or binomial family; standard errors that cannot be computed are shown as "—" instead of 0, and z, p, confidence interval and significance are not reported for those rows.
+- Labels left in English in the Turkish and Spanish interface were translated: scaled CFI/TLI/RMSEA, the Satorra-Bentler scaling factor and the log-likelihood in CFA; the confidence interval columns of the SEM parameter table; the root node in the decision tree text output.
+- Stability: ARIMA with conditional least squares (CLS) estimation on very short series and CFA models that cannot be fitted numerically now give a translated error message instead of a library message.
+- A program name in interface texts was removed; the note of the measurement-invariance score test gives the name of the method (one-degree-of-freedom Lagrange multiplier / score test).
+- Positive-valued GLM (Gamma, inverse Gaussian, Tweedie): in term tests, a row whose reduced model fails to converge or cannot be fitted is no longer printed without warning; its values are shown as "—" with a † mark and a translated warning. For non-Tweedie families the settings block records both the power-method and power-value requests.
+- Cox regression: with the Firth correction, a request for single-term likelihood-ratio tests is no longer dropped silently; it is listed with its reason in the settings block. Large hazard-ratio confidence limits are printed in fixed notation instead of scientific notation.
+- Stepwise discriminant analysis (F criteria): removal steps now report their p-value.
+- Randomization plan: the summary notes when an allocation ratio with a common divisor is reduced (e.g. 2:2 → 1:1); the duplicate-stratum message was fixed. The plan is unchanged.
+- ANOM: large total N and group n values are printed as full integers, and small rates with at least four significant digits.
+- Complex-sample ordinal and multinomial logistic regression: Wald-test p-values are now reported when the z distribution is selected; domain values (e.g. 1) match correctly in numeric columns that contain missing values; the observation count is printed without a thousands separator, the Wald-table model label is no longer truncated, and the note mentions only the statistics shown. When one of the cut-point binary models shows separation, the proportional-odds test no longer prints meaningless values and reports that it could not be applied.
+- Stability (Windows): to prevent a crash when reading parquet files after certain module load orders, the relevant library is loaded early with the system memory allocator.
+
+Validation: the corrected and added computations were compared with independent reference results. Degrees of freedom, χ², fit indices (including scaled and robust values) and the score test in SEM, CFA and measurement invariance; the log-likelihood, coefficients, standard errors and the automatically selected model with its AICc in ARIMA; the cp table and the tree in decision trees; entropy R², the BCH comparison and standard errors in LPA/LCA; the Hausman test in panel regression; and the unweighted design in complex-sample analyses agree with the reference. Permanent regression tests were added for each fix. Six analyses that had not been independently tested before (ANOM, tolerance intervals, positive-valued GLM, relative risk, complex-sample ordinal and multinomial logistic regression) and four further analyses were compared with independent reference computations on openly available data downloaded for this purpose, about 27,000 values in total; the errors found are fixed in this release.
+
+Robustness: the 29 changed analyses were run 4,094 times on corrupted, missing and small-data variants and on option pairs; the two library messages found in the first round (ARIMA with CLS estimation on very short series, CFA models that cannot be fitted numerically) were turned into translated error messages, and no raw exception remained in the final round. p values lie in [0, 1] and confidence intervals contain the estimate; the only time-outs were runs with the largest settings (e.g. 10,000 bootstrap replicates, K = 12).
+
+---
+
 ## [2.5.0] — 8 November 2026 · **Accuracy and Validation Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
