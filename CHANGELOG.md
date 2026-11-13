@@ -6,6 +6,78 @@
 
 ---
 
+## [2.6.0] — 13 Kasım 2026 · **Yeni Analizler ve Doğrulama Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.6.0 iki yeni analiz (kapsam geçerliliği ve Naive Bayes sınıflandırıcı), güç analizinde eğri altındaki alan (EAA) karşılaştırması ve Kruskal-Wallis, Friedman ve büyük çapraz tablolar için kesin (tam sayım) p değeri ekler. Ayrıca yayımlanmış çalışmaların bağımsız yeniden üretiminde ve bağımsız referans doğrulamasında ortaya çıkan hataları giderir. Düzeltmeler başta yapısal eşitlik modeli (YEM), doğrulayıcı faktör analizi (DFA) ve ölçme değişmezliği, ARIMA, karar ağacı, gizil profil/sınıf analizleri ve karmaşık örneklem sıralı lojistik regresyondadır. Yeni seçenekler varsayılan olarak kapalıdır. Aşağıda sonucu değiştiren düzeltmeler başlığında belirtilen durumların dışında sayısal sonuçlar değişmez.
+
+Yeni analizler ve özellikler:
+- Kapsam geçerliliği (Lawshe): madde kapsam geçerlik oranı (KGO), kesin binom kritik değeri (Ayre ve Scally, 2014; Lawshe 1975 tablosu bilgi amaçlı) ve kapsam geçerlik indeksi (KGİ). 4'lü uygunluk kipinde madde ve ölçek kapsam geçerlik indeksleri (I-CVI, S-CVI/Ave, S-CVI/UA) ve düzeltilmiş kappa (κ*) verilir; I-CVI karar ölçütü Polit, Beck ve Owen (2007; I-CVI ≥ ,78, varsayılan) ya da Lynn (1986; 5 ya da daha az uzmanda 1,00) olarak seçilebilir. Uzmanlar satırda ya da sütunda olabilir; kodlar formdan eşlenir.
+- Naive Bayes sınıflandırıcı: sayısal yordayıcılar normal yoğunlukla, kategorik yordayıcılar koşullu olasılık tablosuyla modellenir; karma veride ikisi birlikte kullanılır. Laplace düzeltmesi, önsel olasılıklar (eğitim oranları, eşit ya da kullanıcı tanımlı), olasılık alt sınırı, isteğe bağlı çekirdek yoğunluğu ve eksik değer kuralı seçilebilir. Sınıf koşullu parametre tabloları, eğitim, test ve çapraz doğrulama başarımı, karışıklık matrisi, ROC ve kaydedilebilir sonsal olasılıklar verilir. Bir sınıfta sayısal değişkenin geçerli gözlemi 2'den azsa analiz durmaz; etkilenen satırların sonsal olasılıkları tanımsız ("—") bırakılır ve uyarı verilir.
+- Güç analizi, yeni "ROC / EAA" sekmesi: tek EAA (bir H₀ değerine karşı) ve iki EAA karşılaştırması (eşleşik ya da bağımsız tasarım) için örneklem büyüklüğü, güç ve saptanabilir fark. Varyans için Obuchowski ve McClish binormal formülü ya da Hanley ve McNeil formülü seçilebilir.
+- Kesin (tam sayım) p: Kruskal-Wallis, Friedman ve 2×2'den büyük çapraz tablolar (Fisher-Freeman-Halton; Fisher kesin testi ve Çapraz tablo panelleri) için Monte Carlo p'nin yanına isteğe bağlı kesin p eklendi. Bağlar orta sıralarla koşullu dağılımda hesaba katılır. Hesap sınırı aşılırsa kesin p verilmez ya da Monte Carlo p'ye geçilir; bu "İstenen ve uygulanan ayarlar" bloğunda belirtilir.
+
+Sonucu değiştiren düzeltmeler:
+- Veri sekmesinde kategorik işaretlenmiş 3 ve daha çok düzeyli bir sütun, düzey kodlarıyla kullanıldığında (ör. karar ağacının alt küme bölmeleri) analizden sessizce düşüyor, ön işleme notu ise sütunun kullanıldığını yazıyordu. Sütun artık analize girer; bu tür işaretli veride karar ağacı sonuçları değişebilir.
+- YEM, ortalama yapısı: tek gruplu modelde sözdizimine `x ~ 1` biçiminde bir sabit terim yazıldığında ortalama yapısı modele katılmıyordu. Serbestlik derecesi eksik sayılıyor (örnek veride 38 yerine 27), RMSEA ve TLI yanlış hesaplanıyor, MLR kestiricisinde bilgi matrisi tekil çıkıyordu. Ortalama yapısı artık açılır; serbestlik derecesi ve uyum ölçüleri buna göre hesaplanır.
+- YEM, ikinci düzey faktör: bir gizil değişken başka bir gizil değişkenin göstergesi olarak tanımlandığında ikinci düzey faktör kurulmuyor, onun yerine birinci düzey faktörler arasına serbest kovaryanslar ekleniyordu (örnek veride χ² = 79,49, sd = 90; doğrusu χ² = 115,84, sd = 100). İkinci düzey faktör artık kurulur; birinci düzey faktörler arasına ek kovaryans konmaz.
+- Ölçme değişmezliği, eşitlik kısıtlarının puan (Lagrange çarpanı) testi: bilgi matrisi tekil olduğunda test istatistiği bu matrisin doğrudan tersiyle hesaplanıyor, çok büyük değerler (örnek veride 6282,5; doğrusu 0,052) ve yanlış anlamlılık işaretleri basılıyordu. Hesap artık genelleştirilmiş tersle yapılır; matris tekilse sonuçla birlikte uyarı verilir, hesaplanamayan satırlar basılmaz.
+- ARIMA, dışsal değişkenli model: kestirimin son iyileştirme adımı geçersiz bir noktayı kabul edebiliyordu (negatif hata varyansı, durağan olmayan otoregresif ya da tersinir olmayan hareketli ortalama katsayıları). Bu adım artık yalnız geçerli noktaları kabul eder. Dışsal değişkenler kestirim sırasında ölçeklenir; katsayılar ve standart hatalar özgün ölçeğe geri çevrilir.
+- ARIMA, otomatik model seçimi: otomatik model seçimi açıkken mevsimsel bölümde bir periyot (m ≥ 2) girilirse mevsimsel modeller de aranır; girilen m tarih sıklığından bulunan periyodun önüne geçer. Önceki sürümlerde girilen mevsimsel bileşen uyarısız atılıyordu. Değişiklik "İstenen ve uygulanan ayarlar" bloğunda gösterilir; m girilmeyen ve elle kurulan modeller değişmez.
+- ARIMA, kestirim başlangıcı: en çok olabilirlik kestirimi koşullu kareler kestiriminden başlatılarak da denenir ve olabilirliği daha yüksek olan çözüm alınır. Böylece bazı modellerde yerel optimumda kalma sorunu giderilir; otomatik seçim AICc değeri daha düşük bir model bulabilir.
+- Karar ağacı (CART): karmaşıklık parametresi (cp) artık varsayılan olarak ağaç büyütülürken hesaplanır; bu, özyinelemeli bölmenin başvuru tanımıdır. Ağaç, cp tablosu ve tahminler değişebilir. Önceki sonuç "kesin en zayıf halka" seçeneğiyle elde edilir; kullanılan hesap "İstenen ve uygulanan ayarlar" bloğunda yazılır.
+- Karmaşık örneklem (anket) sıralı lojistik regresyon, logit bağlantı ve gözlenen bilgi matrisi (varsayılan): doğrusal yordayıcının uç değerler aldığı verilerde logit türevi sayısal duyarlık yitiriyor, standart hatalar olması gerekenden küçük çıkıyordu (örnek veride 0,0035; doğrusu 0,0191). Bu yüzden p değerleri, güven aralıkları ve oransal odds testi de etkileniyordu. Türev artık sayısal olarak kararlı hesaplanır. Katsayılar ve ılımlı verideki sonuçlar değişmez.
+
+Diğer düzeltmeler ve yeni seçenekler:
+- Ölçme değişmezliği, ölçekli kestiriciler (MLR, MLM): "ölçeklenmiş" diye etiketlenen ΔCFI ve ΔRMSEA ölçeklenmemiş değerlerden hesaplanıyordu; artık ölçekli değerlerin farkıdır. Yanına sağlam CFI ve RMSEA değerleri ve bunların farkları ayrı bir tabloda eklendi; eksik veride (tam bilgi en çok olabilirlik, FIML) bu değerler eksik veri düzeltmeli testten hesaplanır.
+- Çok gruplu DFA ve ölçme değişmezliği: grup sayısı büyük olduğunda hesap çok daha hızlıdır (85 grupta süre dakikalardan saniyelere indi); sonuçlar aynıdır.
+- DFA, iki göstergeli faktörler: başka bir faktörle ilişkili iki göstergeli faktörler artık kestirilir. Tek faktörlü iki göstergeli model tanımlanamadığından açık bir hata iletisiyle durdurulur.
+- Karmaşık örneklem (anket) analizleri: ağırlık sütunu isteğe bağlı oldu. Seçilmezse bütün ağırlıklar 1 alınır ve bu "İstenen ve uygulanan ayarlar" bloğunda bildirilir.
+- Gradyan artırma: klasik motorla çalıştırıldığında sonuçta sabit ve yanlış bir ayar etiketi ("100 ağaç, derinlik 3") basılıyordu. Etiket artık kullanılan motoru, ağaç sayısını (erken durdurmada son turu), öğrenme oranını, derinliği ve alt örneklemeyi yazar. Sayısal sonuçlar değişmez.
+- Bootstrap güven aralığı: belgelenmemiş n < 10 alt sınırı kaldırıldı. Aralık n ≥ 2'de hesaplanır; n < 10'da kapsamanın düşük olabileceği uyarısı verilir ve varsayım metnine yazılır. n ≥ 10'da sonuçlar değişmez.
+- ARIMA çıktısı:
+  - En çok olabilirlik ve serbestlik derecesi düzeltmeli yenilik varyansı iki ayrı, açık adlı satırda verilir.
+  - Uygulanan öngörü ufku yazılır.
+  - Otomatik seçime isteğe bağlı yaklaşık (koşullu kareler) arama seçeneği eklendi; varsayılan kapalıdır.
+- Makine öğrenmesi panelleri ve K-en yakın komşu: "Test dosyası" seçeneği eklendi. Hazır bölme kullanıldığında bölme satırı kullanılan bölmeyi yazar.
+- Karışıklık ölçüleri: çok sınıflı özet ile makro ve ağırlıklı ortalamalar eklendi; sınıflar düzey sırasıyla gösterilir.
+- Gizil profil ve gizil sınıf analizi (LPA/LCA), yeni ölçüler ve seçenekler:
+  - En küçük sınıf sayısı (K) seçilebilir.
+  - Entropi R² basılır.
+  - Üç adımlı BCH yöntemiyle dış değişken karşılaştırması eklendi.
+  - LPA'da standart hata türü seçilebilir: ampirik bilgi, gözlenen bilgi ya da sandviç.
+- LPA/LCA çıktısı:
+  - VLMR testinde kovaryans tanımına ilişkin not eklendi.
+  - Bootstrap olabilirlik oranı testinde (BLRT) p değerinin 1/(B+1) tabanı not edilir.
+  - Seçilmeyen K çözümleri de gösterilir.
+- p gösterimi: çok küçük p değerleri artık "0.0" olarak saklanmaz ya da yazılmaz. ANOM ve Tolerans Aralıkları'nda metin içindeki "p = <0.0001" yazımı "p < 0.0001" oldu.
+- Tanımsız istatistikler: çoklu yanıt çapraz tablolarında sd = 0 iken χ², sd ve p "—" olarak basılır. Korelasyon matrisi pozitif tanımlı değilken KMO tanımsızdır ("—" ve uyarı).
+- Hiyerarşik Bayesçi regresyon: grup aralıkları "koşullu (ampirik Bayes) aralık" olarak adlandırılır.
+- Panel regresyon:
+  - İki yönlü modelde R² etiketleri netleştirildi.
+  - Negatif Hausman istatistiği tanımsız olarak raporlanır; ayrı bir satırda istatistiğin mutlak değeriyle hesaplanan |χ²| ve p ek bilgi olarak verilir.
+- Açımlayıcı faktör analizi, paralel analiz: yöntemin bileşen tabanlı olduğu yazılır. Faktör tabanlı paralel analiz seçeneği eklendi; varsayılan değişmedi.
+- Betik uyumu: önceki sürümle kaydedilmiş analiz betiklerinde Tanımlayıcı İstatistikler sütun seçimi artık hatasız geri yükleniyor; çok seçimli listelerdeki seçim ve işaretlenebilir seçenek grupları da betiğe yazılıp geri yükleniyor.
+- Negatif binom GLMM: θ üst sınıra gittiğinde (aşırı yayılım yok) sonuçlar Poisson sınırından verilip Poisson/binom aile önerisiyle uyarı gösteriliyor; hesaplanamayan standart hatalar 0 yerine "—" basılıyor ve bu satırlarda z, p, güven aralığı ve anlamlılık verilmiyor.
+- Türkçe ve İspanyolca arayüzde İngilizce kalan etiketler çevrildi: DFA'da ölçekli CFI/TLI/RMSEA, Satorra-Bentler ölçekleme katsayısı ve log-olabilirlik; YEM parametre tablosunda güven aralığı sütunları; karar ağacı metin çıktısında kök düğüm.
+- Kararlılık: çok kısa seride koşullu kareler (CLS) kestirimli ARIMA ve sayısal olarak uydurulamayan DFA modelleri kütüphane iletisi yerine çevrilmiş bir hata iletisi verir.
+- Arayüz metinlerinde geçen bir program adı kaldırıldı; ölçme değişmezliği puan testinin notunda yöntemin adı (tek serbestlik dereceli Lagrange çarpanı / puan testi) yazılır.
+- Pozitif değerli GLM (Gamma, ters Gauss, Tweedie): terim testinde terim çıkarılarak kurulan model yakınsamaz ya da kurulamazsa bu satır artık uyarısız basılmaz; değerler "—" ve † ile gösterilir, çevrilmiş bir uyarı verilir. Ayar bloğu Tweedie dışı ailede güç yöntemi ve güç değeri isteklerinin ikisini de kaydeder.
+- Cox regresyonu: Firth düzeltmesi açıkken tek terim olabilirlik oranı testi isteği artık sessizce düşmez; ayar bloğunda gerekçesiyle gösterilir. Tehlike oranı güven aralığının büyük sınırları bilimsel gösterim yerine düz ondalıkla yazılır.
+- Adımsal diskriminant analizi (F ölçütü): çıkarma adımlarının p değeri artık hesaplanır.
+- Rastgeleleştirme planı: ortak böleni olan bir atama oranının sadeleştirildiği (ör. 2:2 → 1:1) özete not olarak yazılır; yinelenen tabaka adı iletisi düzeltildi. Plan değişmez.
+- ANOM: büyük toplam N ve grup n değerleri tam sayı olarak, küçük oranlar en az dört anlamlı basamakla yazılır.
+- Karmaşık örneklem sıralı ve çok terimli lojistik regresyon: z dağılımı seçildiğinde Wald testlerinin p değeri artık verilir; eksik değer içeren sayısal sütunda alt evren değeri (ör. 1) doğru eşleşir; gözlem sayısı binlik ayırıcısız yazılır, Wald tablosundaki model etiketi kesilmez, not satırı yalnız gösterilen istatistikleri anar. Kesim noktası ikili modellerinden biri ayrıştığında oransal odds testi anlamsız değer basmaz, "uygulanamadı" notu verir.
+- Kararlılık (Windows): bazı modül yükleme sıralarında parquet dosyası okunurken oluşabilen çökmeye karşı ilgili kütüphane erken ve sistem bellek ayırıcısıyla yüklenir.
+
+Doğrulama: düzeltilen ve eklenen hesaplar bağımsız referans sonuçlarla karşılaştırıldı. YEM, DFA ve ölçme değişmezliğinde serbestlik derecesi, χ², uyum ölçüleri (ölçekli ve sağlam değerler dahil) ve puan testi; ARIMA'da log olabilirlik, katsayılar, standart hatalar ve otomatik seçilen model ile AICc; karar ağacında cp tablosu ve ağaç; LPA/LCA'da Entropi R², BCH karşılaştırması ve standart hatalar; panel regresyonda Hausman testi; karmaşık örneklem analizlerinde ağırlıksız tasarım referansla uyumludur. Her düzeltme için kalıcı regresyon testleri eklendi. Daha önce bağımsız olarak sınanmamış altı analiz (ANOM, tolerans aralıkları, pozitif değerli GLM, göreli risk, karmaşık örneklem sıralı ve çok terimli lojistik) ile dört ek analiz, internetten indirilen açık veriler ve bağımsız referans hesaplarla toplam yaklaşık 27 000 değer üzerinden karşılaştırıldı; bulunan hatalar bu sürümde düzeltildi.
+
+Dayanıklılık: değişen 29 analiz bozuk, eksik ve küçük veri varyantları ile seçenek çiftleri üzerinde 4094 kez çalıştırıldı; ilk turda bulunan iki kütüphane iletisi (çok kısa seride CLS kestirimli ARIMA, sayısal olarak uydurulamayan DFA) çevrilmiş hata iletisine dönüştürüldü ve son turda ham istisna kalmadı. p değerleri [0, 1] aralığında, güven aralıkları tahmini içerir; zaman aşımına uğrayan koşular yalnız en büyük ayarlardır (ör. 10 000 bootstrap, K = 12).
+
+---
+
 ## [2.5.0] — 8 Kasım 2026 · **Doğruluk ve Doğrulama Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
