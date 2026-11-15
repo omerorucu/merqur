@@ -6,6 +6,142 @@
 
 ---
 
+## [2.7.0] — 15 Kasım 2026 · **Doğrulama ve Tutarlılık Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.7.0 yeni analiz eklemez; bir doğrulama ve tutarlılık sürümüdür. Bu sürüm için 145 analizin her biri kaynak koduyla tek tek incelendi. Formüller birincil kaynaklardaki tanımlarla ve bağımsız hesapla karşılaştırıldı. Bulunan hatalar düzeltildi. Ayrıca 51 tanım ve tutarlılık kararı alındı; tanımın belirsiz olduğu ya da başvuru tanımlarının ayrıştığı yerlerde yöntemin özgün tanımı esas alındı. Bu kararlar ve düzeltmelerin bir bölümü sayısal sonucu değiştirir; bunlar aşağıda ayrı başlıkta verilmiştir. Öteki düzeltmeler çoğunlukla gösterim, uyarı ve iletilerle ilgilidir.
+
+Ortak ilkeler (bütün analizlerde):
+- **Düzey sırası:** grup ve kategori düzeyleri tek kuralla sıralanır. Önce Veri sekmesinde tanımlı sıra kullanılır. Sayısal ya da sayı içeren etiketlerde doğal sıra kullanılır ("hafta4" < "hafta12", "<55" < "55-70" < ">70"). Bunların dışında verideki ilk görülme sırası alınır. Alfabetik sıra kendiliğinden kullanılmaz. Varsayılan referans düzey bu sıranın ilk düzeyidir. Kullanılan sıra çıktıda yazılır. Sıralı yanıtta tanınan sıralı sözcük dizileri de kullanılır (düşük < orta < yüksek, Likert dizileri gibi); sıra hiçbir yoldan belirlenemiyorsa analiz yapılmaz ve sıranın tanımlanması istenir. Eğilim testleri sıra veriden gelmiyorsa uyarı verir.
+- **Olay kategorisi:** ikili sonuçta olay kategorisi seçilmemişse bütün analizlerde aynı kural uygulanır. 0/1 ya da 1/2 kodda büyük değer olaydır. İki değerden yalnız biri tanınan olumlu bir etiketse (evet, var, pozitif, vaka, olay, ölüm gibi) o değer olaydır. Bunların dışında düzey sırasındaki ikinci değer olay alınır ve uyarı verilir. Olay ve referans kategorisi çıktıda yazılır.
+- **Uç veride tanımsız sonuç:** sıfır varyans, bütün değerlerin eşit olduğu veri, mükemmel ilişki ya da sınırda kestirim gibi durumlarda p = 1, "fark yok", "varsayım karşılanıyor" ya da "✅ Normal" gibi bir karar basılmaz. Değer tanımsız ("—") gösterilir ve çevrilmiş bir uyarı verilir ya da analiz açık bir iletiyle durur.
+- **Güven düzeyi ve α:** güven aralığı etiketleri, anlamlılık yıldızları, "anlamlı / anlamlı değil" kararları ve varsayım uyarıları formda seçilen güven düzeyini ve α'yı izler. Sabit bir eşik kullanılıyorsa çıktıda yazılır. %95 güven düzeyinde ve α = 0,05'te çıktı değişmez.
+
+Sonucu değiştiren düzeltmeler:
+- **Düzey sırası ve olay kategorisi.** Yukarıdaki iki ilke bütün analizlere uygulandı. Metin etiketli kategoriklerde şunlar değişebilir:
+  - post hoc çiftlerinin sırası ve farkın yönü (büyüklük, p ve aralık genişliği aynıdır);
+  - regresyon, lojistik, probit, sayım, sağkalım, karma model, GEE, anket ve aracılık modellerinde varsayılan referans düzey, kukla katsayılarının işareti ve sabit terim (model uyumu, test istatistikleri ve tahminler aynıdır);
+  - Fisher kesin testinde, CMH'de ve doğrusal-doğrusal testinde tablo sırası ve OR yönü;
+  - sınıflama analizlerinde sınıf sırası ve pozitif sınıf;
+  - göreli risk, lojistik ve ROC'ta olay kategorisi.
+
+  Karma desen ANOVA'da sayı içeren düzey adlarında polinom kontrastlar önceden yanlış sıraya uygulanıyordu; bu düzeltildi. McNemar testi iki ölçümün düzeylerini artık konuma göre değil ada göre eşler; farklı kodlanmış sütunlar (0/1 ve Hayır/Evet) açık bir iletiyle reddedilir. Naive Bayes'te adla verilen önsel olasılıklar önceden yanlış sınıfa gidebiliyordu; artık sınıf adına göre eşlenir. Cochran Q'da Evet/Hayır sütunları olay kuralıyla kodlanır.
+- **ANOVA, ANCOVA, MANOVA ve post hoc:**
+  - Tukey HSD farkı, p'si ve aralığı yuvarlanmış ara tablodan değil tam değerden hesaplanır.
+  - Post hoc yöntemlerinde ve Dunnett testinde çok küçük düzeltilmiş p'ler 0 olarak saklanmaz.
+  - SNK ve Duncan'da adım-aşağı kapanış uygulanır: kapsayan aralık anlamsızsa içindeki dar aralıklar da anlamsız sayılır.
+  - ANCOVA'da Tip I kareler toplamında kovaryat önce girer. Düzeltilmiş ortalamalar kovaryatın yuvarlanmamış ortalamasında hesaplanır.
+  - MANOVA'da karar yuvarlanmamış p'den verilir. Hotelling–Lawley F'si bütün MANOVA yollarında ve kanonik korelasyonda McKeon (1974) yaklaşımıyla verilir.
+  - Çok lokasyonlu deneme, GLM motoru: rastgele lokasyon Tekrar(Lokasyon) kareler ortalamasıyla test edilir; dengeli veride iki motor aynı F'yi verir.
+- **Parametrik olmayan testler ve benzetim p'leri:**
+  - Monte Carlo p'leri (b + 1)/(B + 1) ile hesaplanır ve p = 0 yazılmaz. Bu kural Kolmogorov–Smirnov parametrik bootstrap, Mann–Whitney ve Wilcoxon Monte Carlo, Buishand ve SNHT testlerinde uygulanır.
+  - Değerleri tümüyle eksik grup düzeyi Kruskal-Wallis, bağımsız t ve Mann–Whitney testinde analizden çıkarılır ve adıyla yazılır.
+  - Mann–Whitney'de bütün değerler eşitken ve Friedman'da her denekte bütün koşullar eşitken p = 1 ya da tanımsız χ² yerine açık bir ileti verilir.
+  - Wilcoxon'da zsplit yönteminin iki kesin p'si artık aynı sıralarla hesaplanır.
+  - Cohen kappa ve Cochran Q p değerleri sağ kuyruktan hesaplanır.
+  - Anderson–Darling testi n ≥ 8 için yapılır.
+  - Binom testinde 0.9999999 gibi kayan nokta artıklı değerler 1'e yuvarlanır.
+  - Permütasyon testinin bootstrap aralığı kendi rastgele sayı akışıyla üretilir. Aynı tohumla sınırlar önceki sürümden farklıdır.
+- **Etki büyüklüğü ve bootstrap:**
+  - Glass Δ'da kontrol grubu seçilebilir ve adıyla yazılır; payda kontrol grubunun standart sapmasıdır.
+  - d_av bütün modüllerde ortalama fark / √((s₁² + s₂²)/2) olarak hesaplanır.
+  - 2×2 risk ölçülerinde 0/1 kodlu sütunlarda varsayılan maruz grup ve olay 1'dir.
+  - Bootstrap aralığında BCa'nın z0 sayımı kayan nokta artığından etkilenmez. Tabakalı bootstrap tabakaları düzey sırasıyla çeker.
+- **Tanımlayıcı istatistikler ve ön testler:**
+  - "Yüzdelik tanımı" seçeneği ana tablodaki Q1, Q3 ve IQR'ye de uygulanır.
+  - Çoklu karşılaştırma düzeltmesinde iki nokta içeren etiketler ve ondalık virgüllü değerler doğru okunur; okunamayan satırlar sessizce atlanmaz.
+  - Bland-Altman'da farkların varyansı sıfırken yanlılık testi tanımsızdır.
+  - Bayesçi t testinde sonradan güç formdaki güven düzeyine karşılık gelen α ile hesaplanır.
+- **Çapraz tablolar:**
+  - G-testi seçiliyken Monte Carlo p'si G istatistiğiyle hesaplanır.
+  - CMH'de tabakalar arasında düzey kümesi farklı olan veri 2×2×K sayılmaz.
+  - McNemar'da uyumsuz çift yoksa test tanımsızdır.
+  - Çoklu yanıt panellerinde 1/2 kodlu ikili setlerde frekanslar sessizce 0 çıkmaz, açık uyarı verilir.
+  - Log-doğrusal model geriye elemesinde eşit adaylar belirleyici bir kuralla seçilir.
+  - Göreli riskte (log-binom) kestirim sınırdayken geçersiz standart hata ve aralık gösterilmez.
+- **Korelasyon ve regresyon:**
+  - Korelasyonda ortak gözlem sayısı 3'ten az olan çiftlerin p'si tanımsızdır ve p düzeltmesine girmez.
+  - Bayesçi korelasyonda güç yalnız Pearson'da, formdaki α ve hipotez yönüyle hesaplanır.
+  - Kanonik korelasyonda Λ = 0 olduğunda Wilks testleri tanımsızdır.
+  - Ridge, Lasso ve düzenlileştirilmiş regresyonda:
+    - çapraz doğrulamada ceza parametresi (λ) katlarda sabit tutulur;
+    - düzeltilmiş R² etkin serbestlik derecesiyle (df = tr(H_λ)) hesaplanır;
+    - lojistik/Poisson yolunun durdurma ölçütü açıklanan sapma oranındaki mutlak artıştır;
+    - R²(CV) kat büyüklüğüyle ağırlıklı kat ortalamasıdır;
+    - kullanıcının girdiği α artık değişmez.
+  - Sağlam regresyonda aykırı gözlem bütün kestiricilerde |r/ŝ| > 3 ölçütüyle belirlenir (Rousseeuw ve Leroy, 1987).
+  - Probit heterojenlik χ²'si ortak değişken örüntülerine toplulaştırılmış veride hesaplanır.
+  - Tobit'te sandviç standart hata seçildiğinde marjinal etkilerin standart hataları da sağlam kovaryansla hesaplanır.
+  - Panel regresyonda seri korelasyon yorumu Wooldridge birinci fark testine dayanır.
+  - Kantil regresyonda sözde R¹ Koenker–Machado tanımıyla hesaplanır.
+  - Doğrusal olmayan regresyonda bootstrap yeniden uyumları asıl uyumla aynı çözücüyü kullanır.
+  - Yanıt yüzeyinde kanonik analiz ve sırt analizi "Kodlama yok" seçeneğinde de kodlanmış ölçekte yapılır.
+  - GAM'da düzgünleştirici terim p'si Wood (2013) testiyle hesaplanır. Kısmi bağımlılık eğrileri sıfır ortalamaya merkezlenir.
+- **Bayesçi analizler:**
+  - Bayesçi ANOVA'da kanıt etiketi JZS Bayes faktörüne göre verilir; BIC yaklaşımı ek bilgidir.
+  - Bayesçi doğrusal regresyonda log marjinal olabilirlik büyük ölçekli yordayıcılarda da sonlu hesaplanır. "Sabit için düz önsel" seçiliyken önsel duyarlılığı tablosu da düz önselle hesaplanır.
+  - Hiyerarşik Bayesçi regresyonda çok küçük sabit etki p'leri 0'a inmez.
+- **Sağkalım ve zaman serisi:**
+  - Zamana bağlı Cox'ta Cox paneliyle aynı sıkı yakınsama ölçütü kullanılır.
+  - Parametrik sağkalımda Weibull ve log-lojistik kestirimi en çok olabilirlik noktasına kadar yakınsar. Tam ayrışmada katsayıların SH, p ve aralığı tanımsızdır.
+  - Rakip risklerde metin olay kodları verideki ilk görülme sırasıyla numaralanır.
+  - Aralık sansürlü sağkalımda bootstrap aralığı nokta kestirimiyle aynı kuralı kullanır.
+  - Gamma kırılganlıkta θ = 0'daki log-olabilirlik doğru hesaplanır.
+  - STL'de tek dönemli ve otomatik dönemli ayrıştırma standart tanıma uyar.
+  - Mann–Kendall'da aynı zaman noktasındaki çiftler S'ye katılmaz.
+  - ETS'de AIC, AICc ve BIC aynı parametre sayısıyla hesaplanır. Seri ortasında eksik değer varsa en uzun kesintisiz kesim kullanılır.
+  - Mevsimli ARIMA'da başlangıç dönemi artıkları standart tanımla hesaplanır.
+- **Çok değişkenli analizler ve makine öğrenmesi:**
+  - k-en yakın komşuda eğitim/test bölmesi ve katlar sınıf adlarından bağımsızdır.
+  - Gradyan artırma tek iş parçacığıyla kurulur; aynı veri ve tohum her bilgisayarda aynı modeli verir.
+  - t-SNE'de örneklem formdaki tohumla çekilir. Üç boyutta KL ıraksaması doğru çekirdekle hesaplanır.
+  - Gizil sınıf analizinde (LCA) en küçük sınıf sayısı seçilebilir; başlangıçlar gizil profil analiziyle aynı kurala göre üretilir.
+  - YEM'de tanımlı parametrelerin bootstrap aralığı Yol Analizi paneliyle aynı tanımla hesaplanır. Bootstrap tohumu formda seçilir.
+  - Diskriminant analizinde çapraz doğrulama doğruluğunun SS'si n − 1 bölenlidir.
+  - TSS'in Wald aralığı [−1, 1] aralığına kırpılır.
+  - Likert analizinde tümüyle boş satırlar n'ye girmez.
+  - Açımlayıcı faktör analizinde döndürülmemiş faktörler kareler toplamına göre sıralanır.
+- **Karmaşık örneklem (anket):**
+  - Tasarım etkisinin (DEFF) paydası aynı n'lik iadeli basit rastgele örneklemdir; sonlu evren düzeltmesi verilmişse iadesiz örneklem kullanılır. Göreli ağırlıklı veride DEFF önceden çok büyük çıkıyordu.
+  - Sıralı ve çok terimli lojistik regresyonda ayrışma denetimi doğrusal programla yapılır.
+  - Cox regresyonunda uyum indeksi (C) tasarım ağırlıklarıyla hesaplanır.
+  - Cox regresyonunda ve çapraz tablo testlerinde analiz değişkeni eksik gözlemler tasarımda sıfır katkıyla tutulur.
+- **Çoklu atama:**
+  - Her atama tek tohumdan türetilen bağımsız bir rastgele sayı akışıyla yapılır. Aynı tohumla atamalar ve havuzlanmış sonuçlar önceki sürümden farklıdır.
+  - FMI uyarıları Barnard–Rubin FMI ile verilir.
+  - Havuzlanmış R² aralığı seçilen güven düzeyiyle hesaplanır.
+- **Aracılık analizleri:**
+  - Dolaylı etkinin anlamlılık kararı her yapılandırmada seçilen bootstrap aralığına göre verilir.
+  - Nedensel aracılıkta duyarlılık analizi ana tablodaki karşıtlıkla hesaplanır.
+  - Çok düzeyli aracılık ve çok düzeyli YEM ile aracılıkta bir parametreye tek p verilir: tek parametrelerde Wald p'si, çarpım içeren etkilerde aralıkla aynı çekilişlerden "çekiliş p'si".
+  - Çok düzeyli aracılıkta ML kestirimi erken durmaz.
+- **GEE, GLMM ve öteki modeller:**
+  - GEE'de QIC ve QICu Pan (2001) tanımıyla hesaplanır. Modeller arası QIC sırası değişmez; mutlak değerler değişir.
+  - Koşullu lojit ve eğilim skorunda düzey sırası ortak kurala bağlandı.
+- **Mekânsal analizler:**
+  - SDEM'de satır standart olmayan ağırlık matrisinde dolaylı etki ortalama satır toplamıyla ölçeklenir.
+  - Coğrafi ağırlıklı regresyonda Gauss ve üstel çekirdekte bant araması en küçük komşu uzaklığına kadar iner. Artık Moran's I komşuları coğrafi koordinatta büyük çember uzaklıkla bulunur.
+  - Mekânsal gecikme ve hata modellerinde karar seçilen güven düzeyine göre verilir.
+- **Uç (dejenere) veri:** sabit sütunda normallik testi, sabit seride Mann–Kendall ve ARIMA, sabit yanıtta pozitif GLM, Bayesçi doğrusal regresyon ve Bayesçi ANOVA artık karar basmaz; çevrilmiş iletiyle durur. Tam uyumda ANCOVA eğim homojenliği "karşılanıyor" demez. Mekânsal gecikme modelinde negatif LR tanımsızdır.
+
+Diğer düzeltmeler:
+- **p gösterimi:** "0.000", "0.000000" ya da "p = < .001" yazımları kaldırıldı. Çok küçük p'ler "<0.0001" ya da APA biçiminde "p < .001" yazılır. Benzetim p'si 0 çıktığında benzetimin çözünürlük sınırı yazılır (ör. B = 1000'de "p < .002").
+- **Etiketler:** güven aralığı ve inanılırlık aralığı başlıkları seçilen düzeyi yazar. Sıralı lojistikte logit dışı bağlantıda exp(β) sütunu "OR" diye adlandırılmaz. Çok büyük test istatistikleri bilimsel gösterimle yazılır.
+- **Metin ve tablo tutarlılığı:** APA satırları ve yorum cümleleri tablodaki değerden, seçilen referans testten ve gerçekleşen değerlerden kurulur (ör. istenen değil gerçekleşen küme sayısı).
+- **Tanım notları:** kullanılan tanım çıktıda yazılır; örneğin RMSR (Harman 1976), GFI/AGFI, d_av paydası, DEFF paydası, QIC, kesinlik/duyarlılık/F1 ortalaması, bootstrap aralığı yöntemi, Cox temel sağkalım eğrisinin kovaryat profili.
+- **Uyarılar ve iletiler:** ham kütüphane hataları çevrilmiş iletilere dönüştürüldü (ör. tekil matris, tam doğrusal bağımlılık, özdeş değişkenler). Sınırda kestirim, yakınsamama, küçük örneklem ve hesap sınırı durumlarında açık uyarı verilir.
+- **Satır numaraları:** anomali tespiti, Poisson/negatif binom tanı tablosu ve sağlam regresyon tanılarında satır numarası veri görünümündeki 1 tabanlı satırdır.
+- **Yeni küçük seçenekler:** karma desen ANOVA'da güven düzeyi, Bayesçi ANOVA'da inanılırlık düzeyi, YEM'de bootstrap tohumu, Glass Δ'da kontrol grubu, Cochran Q'da Monte Carlo tekrar sayısı ve tohum, anket analizlerinde DEFF paydası ve eksik değer kuralı, probit'te "Otomatik" olay seçeneği. Varsayılanlar önceki davranışı ya da yukarıdaki ilkeleri izler.
+- **Arayüz:** araç ipuçları ve açıklama metinleri kodun gerçek davranışına göre güncellendi; Türkçe ve İspanyolca arayüzde İngilizce kalan etiketler çevrildi.
+
+Doğrulama: her analizin kodu okunarak formülleri adım adım yazıldı; sonuçlar elle ve bağımsız hesapla yeniden üretildi. Başvuru tanımları ayrıştığında karar sırasıyla yöntemin birincil kaynaktaki tanımına, istatistiksel geçerliliğe, başvuru tanımlarının çoğunluğuna ve iç tutarlılığa göre verildi. Düzeltmeler için kalıcı regresyon testleri eklendi.
+
+Dayanıklılık: bütün analizler bozuk, eksik ve küçük veri varyantlarıyla, değişen analizler ayrıca seçenek çiftleriyle çalıştırıldı; son turda ham istisna kalmadı. Bu sürümde ilk kez anlam değişmezlikleri de denetlendi: düzey adlarının değiştirilmesi ve satır sırasının karıştırılması, farklı güven düzeyleri, metin ile tablo sayılarının tutarlılığı, arayüz ile betik sonucunun eşitliği ve uç veride kararın anlamı. Bulunan aykırılıklar düzeltildi; değişen analizler yeniden tarandı.
+
+---
+
 ## [2.6.0] — 13 Kasım 2026 · **Yeni Analizler ve Doğrulama Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
