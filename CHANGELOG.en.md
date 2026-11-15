@@ -6,6 +6,145 @@
 
 ---
 
+## [2.7.0] — 15 November 2026 · **Validation and Consistency Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su futuro."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.7.0 adds no new analyses; it is a validation and consistency release. For this release each of the 145 analyses was reviewed one by one against its source code. The formulas were compared with the definitions in the primary sources and with independent computations. The errors found were fixed. In addition, 51 decisions on definitions and consistency were made; where a definition was ambiguous or reference definitions disagreed, the original definition of the method was followed. Some of these decisions and fixes change numerical results; they are listed under a separate heading below. The other fixes mostly concern display, warnings and messages.
+
+Common principles (all analyses):
+- **Level order:** group and category levels follow a single rule. A level order defined in the Data tab comes first. Numeric labels and labels containing numbers use natural order ("week4" < "week12", "<55" < "55-70" < ">70"). Otherwise the order of first appearance in the data is used. Alphabetical order is never applied implicitly. The default reference level is the first level in this order. The order used is stated in the output. For ordinal responses, recognised ordered word sequences are also used (low < medium < high, Likert sequences and similar); if the order cannot be determined in any of these ways, the analysis is not run and the user is asked to define the order. Trend tests give a warning when the order does not come from the data.
+- **Event category:** when no event category is selected for a binary outcome, every analysis applies the same rule. With 0/1 or 1/2 codes the larger value is the event. If only one of the two values is a recognised positive label (yes, present, positive, case, event, death and similar), that value is the event. Otherwise the second value in level order is taken as the event and a warning is shown. The event and reference categories are stated in the output.
+- **Undefined results on degenerate data:** with zero variance, all values equal, a perfect relationship or a boundary estimate, no decision such as p = 1, "no difference", "assumption met" or "✅ Normal" is printed. The value is shown as undefined ("—") with a translated warning, or the analysis stops with a clear message.
+- **Confidence level and α:** confidence-interval labels, significance stars, "significant / not significant" decisions and assumption warnings follow the confidence level and α selected in the form. Where a fixed threshold is used, the output states it. At the 95% level and α = 0.05 the output does not change.
+
+Result-changing fixes:
+- **Level order and event category.** The two principles above were applied to all analyses. For text-labelled categorical variables the following may change:
+  - the order of post hoc pairs and the direction of the difference (magnitude, p and interval width are unchanged);
+  - the default reference level, the sign of dummy coefficients and the intercept in regression, logistic, probit, count, survival, mixed, GEE, survey and mediation models (model fit, test statistics and predictions are unchanged);
+  - the table order and OR direction in Fisher's exact test, CMH and the linear-by-linear test;
+  - the class order and positive class in classification analyses;
+  - the event category in relative risk, logistic regression and ROC.
+
+  In mixed-design ANOVA, polynomial contrasts were previously applied in the wrong order for level names that contain numbers; this was fixed. McNemar's test now matches the levels of the two measurements by name rather than by position; differently coded columns (0/1 and No/Yes) are rejected with a clear message. In Naive Bayes, prior probabilities given by class name could previously go to the wrong class; they are now matched by class name. In Cochran's Q, Yes/No columns are coded with the event rule.
+- **ANOVA, ANCOVA, MANOVA and post hoc tests:**
+  - Tukey HSD differences, p-values and intervals are computed from full-precision values instead of a rounded intermediate table.
+  - Very small adjusted p-values in post hoc methods and Dunnett's test are no longer stored as 0.
+  - SNK and Duncan apply step-down closure: if a covering range is not significant, the narrower ranges within it are also not significant.
+  - In ANCOVA Type I sums of squares the covariate enters first. Adjusted means are computed at the unrounded covariate mean.
+  - In MANOVA the decision is based on the unrounded p-value. The Hotelling–Lawley F uses the McKeon (1974) approximation in all MANOVA paths and in canonical correlation.
+  - Multi-location trial, GLM engine: a random location is tested against the Replicate(Location) mean square; on balanced data both engines give the same F.
+- **Nonparametric tests and simulation p-values:**
+  - Monte Carlo p-values are computed as (b + 1)/(B + 1), and p = 0 is never reported. The rule applies to the Kolmogorov–Smirnov parametric bootstrap, Mann–Whitney and Wilcoxon Monte Carlo, and the Buishand and SNHT tests.
+  - A group level whose values are all missing is removed from Kruskal-Wallis, the independent t test and Mann–Whitney, and is named in the output.
+  - In Mann–Whitney when all values are equal, and in Friedman when all conditions are equal within every subject, a clear message is given instead of p = 1 or an undefined χ².
+  - In Wilcoxon, the two exact p-values of the zsplit method are now computed from the same ranks.
+  - The p-values of Cohen's kappa and Cochran's Q are computed from the right tail.
+  - The Anderson–Darling test is run for n ≥ 8.
+  - In the binomial test, values with floating-point residue such as 0.9999999 are rounded to 1.
+  - The bootstrap interval of the permutation test uses its own random number stream. With the same seed the limits differ from the previous version.
+- **Effect sizes and bootstrap:**
+  - In Glass's Δ the control group can be selected and is named; the denominator is the standard deviation of the control group.
+  - d_av is computed as mean difference / √((s₁² + s₂²)/2) in all modules.
+  - For 2×2 risk measures with 0/1-coded columns, the default exposed group and event are 1.
+  - The z0 count of the BCa bootstrap interval is not affected by floating-point residue. Stratified bootstrap draws the strata in level order.
+- **Descriptive statistics and preliminary tests:**
+  - The "Percentile definition" option is also applied to Q1, Q3 and the IQR in the main table.
+  - Multiple comparison correction reads labels containing colons and decimal-comma values correctly; unreadable lines are not dropped silently.
+  - In Bland-Altman, the bias test is undefined when the variance of the differences is zero.
+  - In the Bayesian t test, post hoc power uses the α corresponding to the confidence level in the form.
+- **Contingency tables:**
+  - With the G-test selected, the Monte Carlo p-value is computed from the G statistic.
+  - In CMH, data whose strata have different level sets are not treated as 2×2×K.
+  - In McNemar's test, the test is undefined when there are no discordant pairs.
+  - In multiple-response panels, binary sets coded 1/2 no longer give all-zero frequencies silently; a clear warning is shown.
+  - In backward elimination of log-linear models, tied candidates are chosen by a deterministic rule.
+  - In relative risk (log-binomial), invalid standard errors and intervals are not shown when the estimate is on the boundary.
+- **Correlation and regression:**
+  - In correlation, pairs with fewer than 3 common observations have an undefined p-value and are excluded from p-value adjustment.
+  - In Bayesian correlation, power is computed only for Pearson, with the α and hypothesis direction from the form.
+  - In canonical correlation, the Wilks tests are undefined when Λ = 0.
+  - In Ridge, Lasso and regularized regression:
+    - the penalty parameter (λ) is held fixed across cross-validation folds;
+    - adjusted R² uses the effective degrees of freedom (df = tr(H_λ));
+    - the stopping rule of the logistic/Poisson path is the absolute increase in the fraction of deviance explained;
+    - R²(CV) is the fold-size-weighted mean over folds;
+    - the α entered by the user is no longer changed.
+  - In robust regression, outliers are identified by |r/ŝ| > 3 for all estimators (Rousseeuw and Leroy, 1987).
+  - The probit heterogeneity χ² is computed on data aggregated to covariate patterns.
+  - In Tobit, when sandwich standard errors are selected, the standard errors of marginal effects also use the robust covariance.
+  - In panel regression, the serial-correlation interpretation is based on the Wooldridge first-difference test.
+  - In quantile regression, the pseudo R¹ follows the Koenker–Machado definition.
+  - In nonlinear regression, bootstrap refits use the same solver as the main fit.
+  - In response surface analysis, canonical and ridge analysis are done on the coded scale also with the "No coding" option.
+  - In GAM, the smooth-term p-value uses the Wood (2013) test. Partial dependence curves are centred to mean zero.
+- **Bayesian analyses:**
+  - In Bayesian ANOVA, the evidence label follows the JZS Bayes factor; the BIC approximation is additional information.
+  - In Bayesian linear regression, the log marginal likelihood is finite also with large-scale predictors. With "flat prior for the intercept", the prior sensitivity table also uses the flat prior.
+  - In hierarchical Bayesian regression, very small fixed-effect p-values are no longer reduced to 0.
+- **Survival and time series:**
+  - Time-dependent Cox uses the same strict convergence criterion as the Cox panel.
+  - In parametric survival, Weibull and log-logistic estimation converges to the maximum-likelihood point. Under complete separation, the SE, p and interval of the coefficients are undefined.
+  - In competing risks, text event codes are numbered in order of first appearance.
+  - In interval-censored survival, the bootstrap interval uses the same rule as the point estimate.
+  - In gamma frailty, the log-likelihood at θ = 0 is computed correctly.
+  - STL decomposition with a single period and with an automatic period follows the standard definition.
+  - In Mann–Kendall, pairs at the same time point do not contribute to S.
+  - In ETS, AIC, AICc and BIC use the same number of parameters. With missing values in the middle of the series, the longest contiguous stretch is used.
+  - In seasonal ARIMA, residuals of the initial period follow the standard definition.
+- **Multivariate analyses and machine learning:**
+  - In k-nearest neighbours, the train/test split and folds are independent of class names.
+  - Gradient boosting is fitted with a single thread; the same data and seed give the same model on every computer.
+  - In t-SNE, the subsample is drawn with the seed from the form. In three dimensions the KL divergence uses the correct kernel.
+  - In latent class analysis (LCA), the minimum number of classes can be selected; starting values follow the same rule as latent profile analysis.
+  - In SEM, the bootstrap interval of defined parameters uses the same definition as the Path Analysis panel. The bootstrap seed is selected in the form.
+  - In discriminant analysis, the SD of cross-validated accuracy uses the n − 1 divisor.
+  - The Wald interval of TSS is clipped to [−1, 1].
+  - In Likert analysis, completely empty rows are not counted in n.
+  - In exploratory factor analysis, unrotated factors are ordered by sum of squares.
+- **Complex samples (survey):**
+  - The denominator of the design effect (DEFF) is simple random sampling with replacement of the same n; if a finite population correction is given, sampling without replacement is used. With relative weights, DEFF was previously far too large.
+  - In ordinal and multinomial logistic regression, separation is checked by linear programming.
+  - In Cox regression, the concordance index (C) is computed with the design weights.
+  - In Cox regression and contingency table tests, observations with a missing analysis variable are kept in the design with zero contribution.
+- **Multiple imputation:**
+  - Each imputation uses an independent random number stream derived from a single seed. With the same seed, imputations and pooled results differ from the previous version.
+  - FMI warnings use the Barnard–Rubin FMI.
+  - The pooled R² interval uses the selected confidence level.
+- **Mediation analyses:**
+  - The significance decision for the indirect effect follows the selected bootstrap interval in every configuration.
+  - In causal mediation, the sensitivity analysis uses the contrast of the main table.
+  - In multilevel mediation and multilevel SEM mediation, each parameter has a single p-value: a Wald p for single parameters and, for effects that involve a product, a "draw p-value" from the same draws as the interval.
+  - In multilevel mediation, the ML estimate no longer stops early.
+- **GEE, GLMM and other models:**
+  - In GEE, QIC and QICu follow the Pan (2001) definition. The order of QIC across models is unchanged; the absolute values change.
+  - Conditional logit and propensity score analyses follow the common level-order rule.
+- **Spatial analyses:**
+  - In SDEM with a weight matrix that is not row-standardised, the indirect effect is scaled by the mean row sum.
+  - In geographically weighted regression with Gaussian and exponential kernels, the bandwidth search extends down to the smallest neighbour distance. Neighbours for the residual Moran's I are found by great-circle distance for geographic coordinates.
+  - In spatial lag and spatial error models, the decision follows the selected confidence level.
+- **Degenerate data:** normality tests on a constant column, Mann–Kendall and ARIMA on a constant series, and positive-valued GLM, Bayesian linear regression and Bayesian ANOVA with a constant response no longer print a decision; they stop with a translated message. Under a perfect fit, the ANCOVA homogeneity-of-slopes check no longer reports "met". In the spatial lag model a negative LR is undefined.
+
+Other fixes:
+- **p-value display:** the forms "0.000", "0.000000" and "p = < .001" were removed. Very small p-values are written as "<0.0001" or, in APA style, "p < .001". When a simulation p-value is 0, the resolution limit of the simulation is written (e.g. "p < .002" with B = 1000).
+- **Labels:** confidence-interval and credible-interval headings state the selected level. In ordinal logistic regression with a non-logit link, the exp(β) column is not labelled "OR". Very large test statistics are written in scientific notation.
+- **Text and table consistency:** APA lines and interpretation sentences are built from the values in the table, the selected reference test and the values actually obtained (e.g. the achieved, not the requested, number of clusters).
+- **Definition notes:** the output states the definition used, e.g. RMSR (Harman 1976), GFI/AGFI, the d_av denominator, the DEFF denominator, QIC, the averaging of precision/recall/F1, the bootstrap interval method and the covariate profile of the Cox baseline survival curve.
+- **Warnings and messages:** raw library errors were turned into translated messages (e.g. singular matrix, perfect collinearity, identical variables). Boundary estimates, non-convergence, small samples and computation limits produce clear warnings.
+- **Row numbers:** in anomaly detection, the Poisson/negative binomial diagnostics table and robust regression diagnostics, the row number is the 1-based row in the data view.
+- **New minor options:** confidence level in mixed-design ANOVA, credible level in Bayesian ANOVA, bootstrap seed in SEM, control group in Glass's Δ, number of Monte Carlo replicates and seed in Cochran's Q, DEFF denominator and missing-value rule in survey analyses, and an "Automatic" event option in probit. Defaults follow the previous behaviour or the principles above.
+- **Interface:** tooltips and descriptions were updated to match the actual behaviour of the code; labels left in English in the Turkish and Spanish interface were translated.
+
+Validation: the code of every analysis was read and its formulas were written out step by step; the results were reproduced by hand and with independent computations. Where reference definitions disagreed, the decision was based, in this order, on the definition of the method in the primary source, statistical validity, the majority of reference definitions and internal consistency. Permanent regression tests were added for the fixes.
+
+Robustness: all analyses were run on corrupted, missing and small-data variants, and the changed analyses also on option pairs; no raw exception remained in the final round. For the first time this release also checked semantic invariants: renaming levels and shuffling rows, different confidence levels, consistency between text and table values, equality of interface and script results, and the meaning of decisions on degenerate data. The deviations found were fixed and the changed analyses were scanned again.
+
+---
+
 ## [2.6.0] — 13 November 2026 · **New Analyses and Validation Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
