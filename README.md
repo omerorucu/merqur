@@ -17,7 +17,7 @@
 
 ---
 
-![Version](https://img.shields.io/badge/version-2.6.0-7C3AED?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.7.0-7C3AED?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square)
 ![Languages](https://img.shields.io/badge/i18n-TR%20%7C%20EN%20%7C%20ES-success?style=flat-square)
 ![Analyses](https://img.shields.io/badge/analyses-145%20%2B%207%20map-7C3AED?style=flat-square)
@@ -209,19 +209,19 @@ SHA-256** of every file, so each comparison can be reproduced from the original 
 
 > Pre-built binaries — no Python installation required.
 
-**Latest release: v2.6.0** — see the
-[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.6.0) and the
+**Latest release: v2.7.0** — see the
+[release notes](https://github.com/omerorucu/merqur/releases/tag/v2.7.0) and the
 full changelog in [English](CHANGELOG.en.md) or [Turkish](CHANGELOG.md).
 
-> **macOS:** the macOS build of v2.6.0 will be added to the release page shortly; until then, the macOS rows below link to v2.5.0.
+> **macOS:** the macOS build of v2.7.0 will be added later; until then, the macOS rows below link to v2.5.0.
 
 | Platform | Installer | Notes |
 |---|---|---|
-| 🪟 **Windows 10/11** | [`MerQur-2.6.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.6.0/MerQur-2.6.0-windows-x64-Setup.exe) · 350 MB | Code-signed · run the installer |
-| 🪟 **Windows portable** | [`MerQur-2.6.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.6.0/MerQur-2.6.0-windows-x64-portable.zip) · 524 MB | Extract & run `MerQur.exe` |
+| 🪟 **Windows 10/11** | [`MerQur-2.7.0-windows-x64-Setup.exe`](https://github.com/omerorucu/merqur/releases/download/v2.7.0/MerQur-2.7.0-windows-x64-Setup.exe) · 350 MB | Code-signed · run the installer |
+| 🪟 **Windows portable** | [`MerQur-2.7.0-windows-x64-portable.zip`](https://github.com/omerorucu/merqur/releases/download/v2.7.0/MerQur-2.7.0-windows-x64-portable.zip) · 524 MB | Extract & run `MerQur.exe` |
 | 🍎 **macOS (Apple Silicon)** | [`MerQur-2.5.0-macos.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.5.0/MerQur-2.5.0-macos.dmg) · 587 MB | Notarized by Apple · macOS 12.3 or later · open the DMG and drag MerQur to Applications |
 | 🍎 **macOS (Intel)** | [`MerQur-2.5.0-macos-intel.dmg`](https://github.com/omerorucu/merqur/releases/download/v2.5.0/MerQur-2.5.0-macos-intel.dmg) · 640 MB | Notarized by Apple · macOS 12 or later · for Intel Macs; the row above is for Apple Silicon |
-| 🐧 **Linux** | [`MerQur-2.6.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.6.0/MerQur-2.6.0-linux-x86_64.AppImage) · 931 MB | `chmod +x` & run |
+| 🐧 **Linux** | [`MerQur-2.7.0-linux-x86_64.AppImage`](https://github.com/omerorucu/merqur/releases/download/v2.7.0/MerQur-2.7.0-linux-x86_64.AppImage) · 931 MB | `chmod +x` & run |
 
 **Linux notes** — the AppImage is built on Ubuntu 22.04 and runs on 64-bit distributions with glibc 2.35
 or later (Ubuntu 22.04+, Debian 12+, Linux Mint 21+, Fedora 36+). If it does not start:
@@ -394,6 +394,14 @@ t(118) = 2.45, p = .016, d = 0.45 (small)
 
 - Stationarity tests (ADF, KPSS)
 - Trend & seasonal decomposition
+
+</details>
+
+<details>
+<summary><b>✅ Updated in v2.7.0</b> — validation and consistency release</summary>
+
+- Each of the 145 analyses was reviewed against its source code; formulas were re-checked against the definitions in the primary sources and against independent computations, and the errors found were fixed
+- Category order, the choice of the event category and confidence-level labels now follow the same rule in every analysis and are stated in the output; some results may differ from the previous version (listed under a separate heading in the changelog)
 
 </details>
 
@@ -628,7 +636,7 @@ For bug reports, feature requests, or translation contributions:
 
 <div align="center">
 
-**MerQur v2.6.0** · 145 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
+**MerQur v2.7.0** · 145 Analyses · 7 Map Methods · 18 Categories · Spatial Modeling · APA 7 Reports
 
 *With MerQur, your academic research stays one step ahead.*
 
