@@ -6,6 +6,29 @@
 
 ---
 
+## [2.8.0] — 21 November 2026 · **Finance and Economics Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and finally their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.8.0 adds 15 new analyses for finance and economics; the number of analyses rises from 145 to 160 and the number of categories from 18 to 20. Results of existing analyses do not change in this release.
+
+New analyses:
+- **Time series and econometrics:** causality (Granger, Toda-Yamamoto, Hatemi-J), additional unit root tests (DF-GLS, ERS, Ng-Perron, Zivot-Andrews), cointegration with structural breaks, forecast comparison (Diebold-Mariano), spillover and GFEVD, additional panel tests, robust standard error regression, Oaxaca-Blinder decomposition, trend and cycle filters, inequality and poverty measures.
+- **Finance:** event study, Fama-MacBeth, portfolio optimization, investment performance measures, value at risk and expected shortfall.
+- **The GARCH family is extended:** IGARCH, APARCH, NAGARCH, GARCH-M; GED and skewed error distributions. Numbers for the existing options are unchanged.
+
+Common improvements:
+- In most of the new analyses the confidence level (90%, 95%, 99%) is selectable. Confidence interval labels, stars and decisions follow the selected level; at 95% the output is unchanged.
+- Long computations (value at risk, causality, Oaxaca-Blinder, inequality, event study) run in the background; a progress window opens and can be cancelled.
+- The new analyses were stress-tested with extreme and corrupt data (short series, empty cells, constant columns); in every case a result or a clear warning is produced.
+- Where the literature gives different definitions of a detail, the default is the definition in the relevant paper or textbook; where no source settles it, the choice is left to the user and stated in the description.
+
+---
+
 ## [2.7.0] — 15 November 2026 · **Validation and Consistency Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and then their independence and their future."
