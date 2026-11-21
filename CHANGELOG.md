@@ -6,6 +6,29 @@
 
 ---
 
+## [2.8.0] — 21 Kasım 2026 · **Finans ve Ekonomi Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.8.0 finans ve ekonomi alanına 15 yeni analiz ekler; analiz sayısı 145'ten 160'a, kategori sayısı 18'den 20'ye çıkar. Mevcut analizlerin sonuçları bu sürümde değişmez.
+
+Yeni analizler:
+- **Zaman serisi ve ekonometri:** nedensellik (Granger, Toda-Yamamoto, Hatemi-J), ek birim kök testleri (DF-GLS, ERS, Ng-Perron, Zivot-Andrews), kırılmalı eşbütünleşme, tahmin karşılaştırma (Diebold-Mariano), yayılım ve GFEVD, panel ek testleri, dayanıklı standart hatalı regresyon, Oaxaca-Blinder ayrıştırması, trend ve döngü süzgeçleri, eşitsizlik ve yoksulluk ölçüleri.
+- **Finans:** olay çalışması, Fama-MacBeth, portföy optimizasyonu, yatırım performansı ölçüleri, riske maruz değer ve beklenen kayıp.
+- **GARCH ailesi genişledi:** IGARCH, APARCH, NAGARCH, GARCH-M; GED ve çarpık hata dağılımları. Eski seçeneklerin sayıları değişmedi.
+
+Ortak iyileştirmeler:
+- Yeni analizlerin çoğunda güven düzeyi (%90, %95, %99) seçilebilir. Güven aralığı etiketleri, yıldızlar ve kararlar seçilen düzeyi izler; %95'te çıktı değişmez.
+- Uzun süren hesaplar (riske maruz değer, nedensellik, Oaxaca-Blinder, eşitsizlik, olay çalışması) arka planda çalışır; ilerleme penceresi açılır ve İptal edilebilir.
+- Yeni analizler uç ve bozuk veriyle (kısa seri, boş hücre, sabit sütun) sınanır; her durumda sonuç ya da açık bir uyarı verilir.
+- Tanımı kaynaklarda ayrışan ayrıntılar için varsayılan, ilgili makale ya da ders kitabındaki tanımdır; kaynağın belirlemediği yerlerde seçenek kullanıcıya bırakılır ve açıklamada belirtilir.
+
+---
+
 ## [2.7.0] — 15 Kasım 2026 · **Doğrulama ve Tutarlılık Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
