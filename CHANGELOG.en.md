@@ -6,6 +6,37 @@
 
 ---
 
+## [2.9.0] — November 2026 · **Clinical and Epidemiological Reporting Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and finally their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.9.0 adds 10 analyses that journals often require in clinical research and epidemiology; the number of analyses rises from 160 to 170 and the number of categories from 20 to 21. Results of existing analyses do not change in this release.
+
+New analyses (new "Clinical Reporting" category):
+- **Table 1 (baseline characteristics):** variables summarised overall and by group, the appropriate comparison test (Welch t, Mann-Whitney, ANOVA, Kruskal-Wallis, chi-square, Fisher), the standardised difference (SMD) and missing-data counts.
+- **Trend in proportions (Cochran-Armitage):** linear trend between an ordered factor and a binary outcome; exact (permutation) p and the odds ratio per score unit.
+- **Additive interaction (RERI, AP, synergy index):** with delta and bootstrap intervals, on the logistic (OR) or modified Poisson (RR) scale.
+- **Population attributable fraction (PAF):** Levin, cohort and case-control estimators; covariate-adjusted (Greenland-Drescher) PAF.
+- **Landmark survival analysis:** the relation between a condition that arises during follow-up and subsequent survival without immortal time bias; several landmarks, log-rank and Cox.
+- **RMST difference:** restricted mean survival time difference, ratio and time-lost ratio; no proportional hazards assumption required.
+- **Peto odds ratio meta-analysis:** one-step pooling for rare events, heterogeneity and a forest plot.
+- **Cumulative meta-analysis:** studies added in an order to show how the pooled effect evolves; fixed/random effects, τ² estimators, Knapp-Hartung, Mantel-Haenszel.
+- **Calibration and decision curve analysis:** calibration intercept and slope, Brier, C statistic, Hosmer-Lemeshow, loess curve (ICI, E50, E90, Emax), net benefit and interventions avoided per 100 patients.
+- **Minimization (Pocock-Simon):** adaptive treatment allocation that balances important factors; reproducible with a seed.
+
+Common features:
+- The confidence level (90%, 95%, 99%) is selectable in the new analyses; interval labels follow the selected level.
+- Every analysis was verified against an independent computation (R and published data sets); details are in Reference Book Volume 10.
+- The new analyses were stress-tested with extreme and corrupt data (small samples, empty cells, constant columns, single level); in every case a result or a clear warning is produced.
+
+In the additional panel tests, the MacKinnon (1996) numerical distribution function is also available as an option for the p-values of the Maddala-Wu (Fisher-ADF) test ("Maddala-Wu p-value approximation" in the unit root section). The default remains the MacKinnon (1994) approximation, so existing results do not change. If 1996 is selected, p-values may differ slightly from the default; the approximation used and its source are stated in the output.
+
+---
+
 ## [2.8.0] — 21 November 2026 · **Finance and Economics Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and finally their independence and their future."
