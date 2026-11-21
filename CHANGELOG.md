@@ -6,6 +6,37 @@
 
 ---
 
+## [2.9.0] — Kasım 2026 · **Klinik ve Epidemiyolojik Raporlama Sürümü**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.9.0 klinik araştırma ve epidemiyolojide makalelerde sık istenen 10 analizi ekler; analiz sayısı 160'tan 170'e, kategori sayısı 20'den 21'e çıkar. Mevcut analizlerin sonuçları bu sürümde değişmez.
+
+Yeni analizler (yeni "Klinik Raporlama" kategorisi):
+- **Tablo 1 (temel özellikler):** değişkenlerin tüm örneklemde ve gruplara göre özeti, uygun karşılaştırma testi (Welch t, Mann-Whitney, ANOVA, Kruskal-Wallis, ki-kare, Fisher), standartlaştırılmış fark (SMD) ve eksik veri sayıları.
+- **Oranlarda eğilim (Cochran-Armitage):** sıralı etken ile ikili sonuç arasında doğrusal eğilim; kesin (permütasyon) p ve skor başına odds oranı.
+- **Toplamsal etkileşim (RERI, AP, sinerji indeksi):** delta ve bootstrap aralıklarıyla, lojistik (OR) ya da değiştirilmiş Poisson (RR) ölçeğinde.
+- **Popülasyon atfedilebilir oranı (PAF):** Levin, kohort ve olgu-kontrol kestiricileri; kovaryatla düzeltilmiş (Greenland-Drescher) PAF.
+- **Landmark sağkalım analizi:** süre içinde ortaya çıkan durumun sonraki sağkalımla ilişkisi, ölümsüzlük yanlılığı olmadan; birden çok dönüm noktası, log-rank ve Cox.
+- **RMST farkı:** kısıtlı ortalama sağkalım süresi farkı, oranı ve kayıp süre oranı; oransal tehlike varsayımı gerektirmez.
+- **Peto odds oranı meta-analizi:** nadir olaylar için tek adım birleştirme, heterojenlik ve orman grafiği.
+- **Kümülatif meta-analiz:** çalışmalar bir sıraya göre eklenerek birleşik etkinin değişimi; sabit/rastgele etki, τ² yöntemleri, Knapp-Hartung, Mantel-Haenszel.
+- **Kalibrasyon ve karar eğrisi analizi:** kalibrasyon kesişimi ve eğimi, Brier, C istatistiği, Hosmer-Lemeshow, loess eğrisi (ICI, E50, E90, Emax), net fayda ve 100 hastada kaçınılan girişim.
+- **Minimizasyon (Pocock-Simon):** önemli etmenleri dengeleyen uyarlamalı tedavi ataması; tohumla yinelenebilir.
+
+Ortak özellikler:
+- Yeni analizlerde güven düzeyi (%90, %95, %99) seçilebilir; aralık etiketleri seçilen düzeyi izler.
+- Her analiz bağımsız bir hesapla (R ve yayımlanmış veri setleri) doğrulanmıştır; ayrıntılar Başvuru Kitabı Cilt 10'dadır.
+- Yeni analizler uç ve bozuk veriyle (küçük örneklem, boş hücre, sabit sütun, tek düzey) sınanır; her durumda sonuç ya da açık bir uyarı verilir.
+
+Panel ek testlerde ayrıca Maddala-Wu (Fisher-ADF) testinin p değerleri için MacKinnon (1996) sayısal dağılım fonksiyonu seçenek olarak eklendi (Birim kök bölümünde "Maddala-Wu p değeri yaklaşımı"). Varsayılan MacKinnon (1994) yaklaşımı olarak kalır; mevcut sonuçlar değişmez. 1996 seçilirse p değerleri varsayılandan az farklı çıkabilir; seçilen yaklaşım ve kaynak çıktıda belirtilir.
+
+---
+
 ## [2.8.0] — 21 Kasım 2026 · **Finans ve Ekonomi Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
