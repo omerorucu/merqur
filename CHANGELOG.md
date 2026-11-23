@@ -6,6 +6,62 @@
 
 ---
 
+## [2.9.1] — Kasım 2026 · **Kararlı Sürüm**
+
+> "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.9.1 mevcut analizlerin tanım ve uç durum davranışlarını bağımsız hesaplarla yeniden doğrular. Zaman sütunu işleme, uç ve bozuk veri iletileri ve tanımın kaynaklarda belirli olduğu yerlerde uyum düzeltilmiştir. Mevcut bazı analizlerde sonuçlar farklı olabilir, ayrıntı aşağıda.
+
+### Sonucu değişen analizler
+
+Aşağıdaki durumlar dışında sonuçlar 2.9.0 ile aynıdır.
+
+| Analiz | Hangi durumda sonuç değişir | Önce (2.9.0) → sonra (2.9.1) örnek |
+|---|---|---|
+| Dayanıklı standart hatalı regresyon | Zaman sütunu metin ya da tarih ise ve alfabetik sıra kronolojik değilse; Newey-West, Andrews, Driscoll-Kraay, kümeli | Grunfeld firma 1, Newey-West gecikme 2, "1".."20" metin: (90,953; 0,023837; 0,056951) → (108,890; 0,027945; 0,048079) |
+| Nedensellik | Tarih sütunu "Ocak 2000" ya da "Q1-2000" biçiminde ve dosya sırasız ise; ayrıca ADF testinin en büyük bütünleşme derecesi (d_max) tanımı | Granger ve Toda-Yamamoto p: (0,6707; 0,0058; 0,7204; 0,0038) → (0,0000; 0,5848; 0,0000; 0,2137). ADF t = -6,825 (tüm örneklem) → -6,394 (yaygın başvuru tanımı); %5 ADF kararı 200 benzetim serisinin 11-29'unda ayrışabilir (d_max, Toda-Yamamoto, Hatemi-J) |
+| Ek birim kök testleri | Zivot-Andrews, alfa 0,01 ya da 0,05 ve istatistik yalnız %10 düzeyinde reddediyorsa | alfa 0,05: "-5,06 (kritik -5,08, H0 reddedilir)" çelişkisi → reddedilemez |
+| Kırılmalı eşbütünleşme, tahmin karşılaştırma, yayılım ve GFEVD | Tarih gg.aa.yyyy ya da gg/aa/yyyy biçiminde ve satırlar sırasız ise | 40 karışık dizilimde doğru sıra: 24 → 40 (kırılmalı), 25 → 40 (tahmin), 15 → 40 (yayılım) |
+| Panel ek testleri | Zaman sütunu "t1", gg.aa.yyyy ya da ay adı ise; sıra alfabetik | "GG.AA.YYYY": LLC -23,229 → -2,660; Hadri 3,249 → 60,920; "Jan 2000": Hadri -1,566 → 60,920 (durağanlık kararı değişir) |
+| Trend ve döngü süzgeçleri | Satırlar zaman sırasında değilse; seri düzeyi 1e9 ve üstü, dönüşümsüz ise | HP döngü SS 45,17 → 1,5439; Hamilton (x 1e9) 1,0912 → 1,0000 |
+| Yatırım performansı, riske maruz değer ve beklenen kayıp, portföy optimizasyonu | Tarih sütunu seçilmiş ve satırlar sırasız ise; kısa satışa açık en küçük varyanslı portföy; pencere gözlem sayısından büyükse | Risk normal VaR %99 0,048334 → 0,029022; EWMA 0,063248 → 0,030893. Yatırım aylık en büyük çekilme -0,7670 → -0,8291. Portföy sınır tablosu 1 nokta → 40 nokta |
+| Fama-MacBeth | Sabit ya da faktörle tam uyumlu varlık varsa | GRS F 3,4e29, p 0 → F 1,1082, p 0,3007; CAPM+MKT F 1,1037 → 1,1219 |
+| Kümülatif meta-analiz | Hunter-Schmidt seçilmişse; eşit sıralama değeri ile etiket sütunu varsa | Hunter-Schmidt son adım -0,71453 → -0,70454, τ² 0,31324 → 0,22836; eşit yıl: ilk iki adım 0,1000 ve 0,3275 → 0,9000 ve 0,5000 |
+| Landmark sağkalım, RMST farkı | Kovaryat grup değişkeninin kopyası ya da sabit ise; olay kodu ondalıklı sütunda ise | Landmark HR(B) 1,159 (p 0,3484) → yazılmaz, tekil tasarım uyarısı; RMST olay 0/0 fark 0 → olay 46/53, fark -3,055 |
+| Araç değişkenli regresyon | Kümelenmiş standart hata ve aşırı tanımlı model | Hansen J 0,07196 (p 0,7885) → 0,07041 (p 0,7907); küme SH p 5,17e-05 → 1,54e-03 |
+| Atfedilebilir oran (PAF) | Kohort ya da kesitsel tasarımda kovaryatla düzeltilmiş PAF | birthwt 0,2485 → 0,1809 (bağımsız GLM ve gradyan hesabı 0,1809087) |
+| Toplamsal etkileşim, PAF, Tablo 1, oranlarda eğilim | Metin biçimli ondalık kovaryat; metin düzey sırası; RR ölçeğinde olaysız hücre | Tablo 1: düzey sayısı hatası → sürekli özet; eğilim "10 < 2" sırası → değer sırası; RR olaysız hücre: sayı → hata |
+| Regresyon (Durbin-Watson) | Yeni "DW zaman sütunu" seçilirse | AR(1) karışık sıralı: DW 1,70 → 0,589 |
+| Oaxaca-Blinder | Neredeyse eşdoğrusal açıklayıcı (gürültü 1e-6 ve altı) ya da çok büyük/küçük ölçekli değişken | E\|a -0,0027777 → -0,0208396 (1e-8 gürültü); x1e12: "eşdoğrusal" hatası → -0,0133087 |
+| Eşitsizlik ve yoksulluk | Eşit ya da ondalık ağırlıklı küçük örneklem; tohum 0 | x = 100..1000, ağırlık 0,1: medyan 500 → 550; ARPR 0,2 → 0,3; tohum 0: iki koşu farklı → aynı |
+| Korelasyon | Spearman ve Kendall güven aralığı | Spearman r 0,5705: [0,3150; 0,7489] → [0,2921; 0,7598] |
+| Sayım regresyonu | Poisson aşırı yayılım uyarısı sınırda ise | seed3: uyarı var → yok; seed4: yok → var (katsayılar aynı) |
+| Kalibrasyon ve karar eğrisi | Öngörülerde tam 0 ya da 1 varsa | CITL -0,255 / eğim 0,051 (anlamsız) → 0/1 satırlar kalibrasyon kesişimi ve eğiminden çıkarılır; hepsi 0/1 ise "-" |
+| Ki-kare bağımsızlık | R×C tabloda "kesin/Monte Carlo p" için Fisher seçilmişse | p = 22/10001 (Monte Carlo) → 0,002646 (kesin) |
+| GAM | Panelden yeni analiz, varsayılan düzgünleştirme | Sabit λ = 0,6 → otomatik GCV/UBRE (edf 4,98 → 6,77; sabit λ AIC bakımından 6,4 birim kötüydü) |
+| Doğrusal karma model | Eğim çıkarma olabilirlik oranı sınaması | Yalnız tutucu p → ek "p (½χ²)" sütunu (6,89e-15 → 3,78e-15) |
+
+### Düzeltmeler
+
+- **Zaman sütunu:** Tarih, ay adı, çeyrek ve gg.aa.yyyy biçimleri kronolojik sıralanır. "AA.YYYY" biçimindeki nokta ayraçlı ay-yıl etiketleri ondalık sayıdan ayırt edilemediğinden sayı sayılmaz; satır sırası korunur ve çıktıya not düşülür (YYYY-AA ya da AA/YYYY önerilir). Belirsiz gg-aa sırası gün-önce okunur. Bu işleme zaman sütunu kullanan tüm analizlerde aynıdır.
+- **Regresyon:** Durbin-Watson için isteğe bağlı zaman sütunu eklendi.
+- **MDS:** Eksik değer nedeniyle çıkarılan satır sayısı ve N > 300'de gevşek durma ölçütü kullanıldığı sonuç metnine not olarak eklendi; sayılar değişmedi.
+- **Ayırma analizi:** Çapraz geçerlemede katları karıştırma seçeneği ve kat tanımı notu eklendi (varsayılan aynı); geçersiz kat sayısı anlaşılır hata verir.
+- **Karmaşık örneklem regresyonu ve lojistiği:** Büyük ölçekli yordayıcıda standart hata ölçekten bağımsızdır; tanımsız standart hata "—" yazılır; sıfır ağırlık ve sonsuz değer için çevrilmiş hata iletisi verilir.
+- **Peto odds oranı:** Tek çalışma, geçerli çalışma yokluğu ve varyansı sıfır çalışmalar için ileti ve APA cümlesi düzeltildi; sayılar değişmedi.
+- **Landmark sağkalım:** Ayrışan ya da kopya düzeltme sütunu için uyarı eklendi.
+- **Cochran-Mantel-Haenszel:** Ortak RR ve RD için olay düzeyi seçeneği eklendi; boş bırakılırsa sonuç değişmez.
+- **Minimizasyon:** Tüm etmen ağırlıkları 0 ise "dengeleme uygulanmamıştır" uyarısı verilir; eşitlikte ilk kolun öne çıktığı durum uyarıda açıkça yazılır. Atamalar aynıdır.
+- **Olay çalışması:** Getirinin yüzde ölçeğinde olması, olay gününün işlem günü olmaması (en büyük kaydırma) ve olay penceresinde eksik işlem günü için uyarılar eklendi; sayılar değişmedi.
+- **GARCH:** Kök iptali ve model notları eklendi.
+- **Uç veri iletileri:** Sabit bağımlı değişken, sabit düzgünleştirilen değişken, geçersiz düzgünleştirme parametreleri, sabit Y ve tek düzeyli değişken gibi bozuk girdilerde anlamsız sayı yerine çevrilmiş açık ileti ya da uyarı verilir (GAM, regresyon, Tablo 1, toplamsal etkileşim, kalibrasyon ve diğerleri).
+
+---
+
 ## [2.9.0] — Kasım 2026 · **Klinik ve Epidemiyolojik Raporlama Sürümü**
 
 > "Çalışmadan, yorulmadan, üretmeden rahat yaşamak isteyen toplumlar; önce haysiyetlerini sonra hürriyetlerini ve daha sonra da istiklal ve istikballerini kaybetmeye mahkûmdurlar."
