@@ -6,6 +6,62 @@
 
 ---
 
+## [2.9.1] — November 2026 · **Stable Release**
+
+> "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and finally their independence and their future."
+> — Mustafa Kemal Atatürk
+
+> "Las sociedades que quieren vivir cómodamente sin trabajar, sin cansarse y sin producir están condenadas a perder primero su dignidad, luego su libertad y después su independencia y su porvenir."
+> — Mustafa Kemal Atatürk
+
+MerQur 2.9.1 re-verifies the definitions and edge-case behavior of existing analyses against independent computations. Time column handling, edge and malformed data messages, and agreement with the definitions fixed in the literature have been corrected. Results of some existing analyses may differ; details are below.
+
+### Analyses with changed results
+
+Results are identical to 2.9.0 except in the cases below.
+
+| Analysis | When the result changes | Example, before (2.9.0) → after (2.9.1) |
+|---|---|---|
+| Robust standard error regression | Time column is text or date and the alphabetical order is not chronological; Newey-West, Andrews, Driscoll-Kraay, clustered | Grunfeld firm 1, Newey-West lag 2, text "1".."20": (90.953; 0.023837; 0.056951) → (108.890; 0.027945; 0.048079) |
+| Causality | Date column such as "January 2000" or "Q1-2000" and the file is unsorted; also the definition of the ADF maximum integration order (d_max) | Granger and Toda-Yamamoto p: (0.6707; 0.0058; 0.7204; 0.0038) → (0.0000; 0.5848; 0.0000; 0.2137). ADF t = -6.825 (full sample) → -6.394 (common reference definition); the 5% ADF decision can differ in 11-29 of 200 simulated series (d_max, Toda-Yamamoto, Hatemi-J) |
+| Additional unit root tests | Zivot-Andrews, alpha 0.01 or 0.05, and the statistic rejects only at the 10% level | alpha 0.05: contradiction "-5.06 (critical -5.08, H0 rejected)" → not rejected |
+| Cointegration with breaks, forecast comparison, spillover and GFEVD | Date in dd.mm.yyyy or dd/mm/yyyy format and rows unsorted | Correct order in 40 mixed arrangements: 24 → 40 (breaks), 25 → 40 (forecast), 15 → 40 (spillover) |
+| Additional panel tests | Time column "t1", dd.mm.yyyy or month name; order alphabetical | "DD.MM.YYYY": LLC -23.229 → -2.660; Hadri 3.249 → 60.920; "Jan 2000": Hadri -1.566 → 60.920 (stationarity decision changes) |
+| Trend and cycle filters | Rows not in time order; series level 1e9 or above, untransformed | HP cycle SD 45.17 → 1.5439; Hamilton (x 1e9) 1.0912 → 1.0000 |
+| Investment performance, value at risk and expected shortfall, portfolio optimization | Date column selected and rows unsorted; short-selling global minimum variance portfolio; window larger than the number of observations | Risk normal VaR 99% 0.048334 → 0.029022; EWMA 0.063248 → 0.030893. Investment monthly maximum drawdown -0.7670 → -0.8291. Portfolio frontier table 1 point → 40 points |
+| Fama-MacBeth | Asset that is constant or exactly spanned by the factors | GRS F 3.4e29, p 0 → F 1.1082, p 0.3007; CAPM+MKT F 1.1037 → 1.1219 |
+| Cumulative meta-analysis | Hunter-Schmidt selected; tied ordering values with a label column | Hunter-Schmidt last step -0.71453 → -0.70454, τ² 0.31324 → 0.22836; tied years: first two steps 0.1000 and 0.3275 → 0.9000 and 0.5000 |
+| Landmark survival, RMST difference | Covariate is a copy of the group variable or constant; event code in a decimal column | Landmark HR(B) 1.159 (p 0.3484) → not reported, singular design warning; RMST events 0/0 difference 0 → events 46/53, difference -3.055 |
+| Instrumental variable regression | Clustered standard errors and an overidentified model | Hansen J 0.07196 (p 0.7885) → 0.07041 (p 0.7907); cluster SE p 5.17e-05 → 1.54e-03 |
+| Population attributable fraction (PAF) | Covariate-adjusted PAF in cohort or cross-sectional design | birthwt 0.2485 → 0.1809 (independent GLM and gradient computation 0.1809087) |
+| Additive interaction, PAF, Table 1, trend in proportions | Decimal covariate stored as text; text level order; cell without events on the RR scale | Table 1: level count error → continuous summary; trend "10 < 2" order → value order; RR cell without events: number → error |
+| Regression (Durbin-Watson) | New "DW time column" selected | AR(1) mixed order: DW 1.70 → 0.589 |
+| Oaxaca-Blinder | Nearly collinear regressor (noise 1e-6 or below) or a variable of very large or small scale | E\|a -0.0027777 → -0.0208396 (1e-8 noise); x1e12: "collinear" error → -0.0133087 |
+| Inequality and poverty | Small sample with equal or decimal weights; seed 0 | x = 100..1000, weight 0.1: median 500 → 550; ARPR 0.2 → 0.3; seed 0: two runs differ → identical |
+| Correlation | Spearman and Kendall confidence interval | Spearman r 0.5705: [0.3150; 0.7489] → [0.2921; 0.7598] |
+| Count regression | Poisson overdispersion warning at the threshold | seed3: warning present → absent; seed4: absent → present (coefficients identical) |
+| Calibration and decision curve | Predictions of exactly 0 or 1 | CITL -0.255 / slope 0.051 (meaningless) → 0/1 rows excluded from calibration intercept and slope; "-" if all are 0/1 |
+| Chi-square independence | R×C table with Fisher selected for "exact/Monte Carlo p" | p = 22/10001 (Monte Carlo) → 0.002646 (exact) |
+| GAM | New analysis from the panel, default smoothing | Fixed λ = 0.6 → automatic GCV/UBRE (edf 4.98 → 6.77; fixed λ was 6.4 AIC units worse) |
+| Linear mixed model | Likelihood ratio test for dropping a slope | Conservative p only → additional "p (½χ²)" column (6.89e-15 → 3.78e-15) |
+
+### Fixes
+
+- **Time column:** Date, month name, quarter and dd.mm.yyyy formats are sorted chronologically. Dot-separated month-year labels in the "MM.YYYY" form cannot be told apart from decimal numbers, so they are not treated as numbers; the row order is kept and a note is added to the output (YYYY-MM or MM/YYYY is recommended). An ambiguous dd-mm order is read day-first. This handling is the same in every analysis that uses a time column.
+- **Regression:** An optional time column was added for Durbin-Watson.
+- **MDS:** The result text now notes the number of rows removed for missing values and the use of a loose stopping criterion when N > 300; the numbers are unchanged.
+- **Discriminant analysis:** An option to shuffle the cross-validation folds and a note on the fold definition were added (default unchanged); an invalid fold count gives a clear error.
+- **Complex survey regression and logistic regression:** With large-scale predictors the standard errors are scale-independent; undefined standard errors are written as "—"; a translated error message is given for zero weights and infinite values.
+- **Peto odds ratio:** The message and APA sentence were corrected for a single study, no valid study and zero-variance studies; the numbers are unchanged.
+- **Landmark survival:** A warning was added for separated or duplicated adjustment columns.
+- **Cochran-Mantel-Haenszel:** An event level option was added for the common RR and RD; the result is unchanged when it is left empty.
+- **Minimization:** A "balancing was not applied" warning is given when all factor weights are 0; the case in which the first arm is systematically favored on ties is stated in the warning. Allocations are unchanged.
+- **Event study:** Warnings were added for returns on a percentage scale, for event dates that are not trading days (largest shift), and for missing trading days in the event window; the numbers are unchanged.
+- **GARCH:** Notes on root cancellation and on the model were added.
+- **Edge data messages:** For malformed input such as a constant dependent variable, a constant smoothed variable, invalid smoothing parameters, a constant Y and a single-level variable, a translated clear message or warning is given instead of a meaningless number (GAM, regression, Table 1, additive interaction, calibration and others).
+
+---
+
 ## [2.9.0] — November 2026 · **Clinical and Epidemiological Reporting Release**
 
 > "Societies that wish to live in comfort without working, without tiring and without producing are doomed to lose first their dignity, then their freedom, and finally their independence and their future."
